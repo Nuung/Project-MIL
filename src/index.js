@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+/* huub's part (origin)
 // import logoImg from "./assets/logo.png";
 // import woodBack from "./assets/woodTexture.jpg"
 
@@ -42,12 +43,34 @@ import Phaser from "phaser";
 // };
 
 // const game = new Phaser.Game(config);
+*/
 
-import playerImg from "./assets/playerTestImg44.png";
-import platformImg from "./assets/platformTestImg6422.png"
+// import playerImg from "./assets/playerTestImg44.png";
+// import platformImg from "./assets/platformTestImg6422.png"
 
-let game;
- 
+import {LoadScene} from "./scenes/LoadScene";
+import {MenuScene} from "./scenes/MenuScene"
+import {PlayScene} from "./scenes/PlayScene";
+
+let game = new Phaser.Game({
+  width: 800,
+  height: 600,
+  scene:[
+      LoadScene,MenuScene,PlayScene
+  ],
+  render:{
+      pixelArt: true
+  },
+  
+  physics: {
+      default: "arcade",
+      arcade:{
+          debug: true
+      }
+  }
+});
+
+/*
 // global game options
 let gameOptions = {
     platformStartSpeed: 350,
@@ -199,3 +222,4 @@ function resize(){
         canvas.style.height = windowHeight + "px";
     }
 }
+*/

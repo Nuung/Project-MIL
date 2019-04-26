@@ -3,10 +3,11 @@ class TitleScene extends Phaser.Scene {
         super({
             key: 'TitleScene'
         });
+        console.log("TitleScene Constructor Data : RECIEVED data ; "+test);
     }
     init(data){
+        console.log("TitleScene Init Data : RECIEVED");
         console.log(data);
-        console.log("RECIEVED");
     }
     create(){
 
@@ -14,13 +15,11 @@ class TitleScene extends Phaser.Scene {
 
         //CREATE IMAGES
         this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.20, "logo").setDepth(1);
-
         this.add.image(0, 0, "title_bg").setOrigin(0).setDepth(0);
 
+        //btn setting
         let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, "play_button").setDepth(1);
-
         let OptionButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 100, "options_button").setDepth(1);
-
         let MusicButton = this.add.image(730,530,"on").setScale(0.15).setDepth(1);
 
         //SPRITES
@@ -71,8 +70,9 @@ class TitleScene extends Phaser.Scene {
             console.log("out of here")
         })
 
-        playButton.on("pointerup", ()=>{
+        playButton.on("pointerup", ()=>{ // starting the game -> to GameScene
             console.log("open the gates please")
+            this.scene.start('GameScene');
         })
 
         OptionButton.on("pointerover", ()=>{

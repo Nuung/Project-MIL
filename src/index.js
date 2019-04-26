@@ -217,14 +217,15 @@ const config = {
     parent: 'content',
     width: 800,
     height: 600,
+    backgroundColor: 0x444444,
     physics: {
         default: 'arcade',
-        arcade: {
-            gravity: {
-                y: 800
-            },
-            debug: false
-        }
+        // arcade: {
+        //     gravity: {
+        //         y: 800
+        //     },
+        //     debug: false
+        // }
     },
     scene: [
         BootScene,

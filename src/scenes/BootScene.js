@@ -4,6 +4,7 @@ class BootScene extends Phaser.Scene {
         super({
             key: 'BootScene'
         });
+        console.log("BootScene Constructor Data : RECIEVED"+test);
     }
     init() {
         // init
@@ -39,6 +40,7 @@ class BootScene extends Phaser.Scene {
         });
         percentText.setOrigin(0.5, 0.5);
 
+        // loading the menu img
         this.load.image("title_bg", "assets/title_bg.jpg");
         this.load.image("options_button", "assets/options_button.png");
         this.load.image("play_button", "assets/play_button.png");
@@ -79,7 +81,7 @@ class BootScene extends Phaser.Scene {
         })
     }
     create(){
-        this.scene.start('TitleScene', "hello from LoadScene");
+        this.scene.start('TitleScene', "from the BootScene");
     }
 }
 

@@ -1,24 +1,12 @@
-import Phaser from "phaser";
-import {CST} from "../CST"; 
 
-// img loading
-import title_bgImg from "./assets/title_bg.png";
-// import options_buttonImg from "./assets/options_button.png";
-// import play_buttonImg from "./assets/play_button.png";
-// import logoImg from "./assets/logo.png";
-// import icon_nofreeImg from "./assets/icon_nofree.png";
-// import icon_nofree2Img from "assets/icon_nofree2.png";
-// import catImg from "assets/cat.png";
-// import titleMusic from "assets/shuinvy-childhood.mp3"
-
-export class LoadScene extends Phaser.Scene{
-    constructor(){
+class BootScene extends Phaser.Scene {
+    constructor(test) {
         super({
-            key: CST.SCENES.LOAD
-        })
+            key: 'BootScene'
+        });
     }
-    init(){
-
+    init() {
+        // init
     }
     preload(){
 
@@ -51,20 +39,17 @@ export class LoadScene extends Phaser.Scene{
         });
         percentText.setOrigin(0.5, 0.5);
 
-        // load image assets
-        this.load.image("title_bg", title_bgImg);
-        // this.load.image("options_button", options_buttonImg);
-        // this.load.image("play_button", play_buttonImg);
-        // this.load.image("logo", logoImg);
-        // this.load.image("on", icon_nofreeImg);
-        // this.load.image("off", icon_nofree2Img);
-        // this.load.spritesheet("cat", catImg, {
-        //     frameHeight: 32,
-        //     frameWidth: 32
-        // });
-
-        // load music assets
-        // this.load.audio("title_music", titleMusic);
+        this.load.image("title_bg", "assets/title_bg.jpg");
+        this.load.image("options_button", "assets/options_button.png");
+        this.load.image("play_button", "assets/play_button.png");
+        this.load.image("logo", "assets/logo.png");
+        this.load.image("on", "assets/icon_nofree.png");
+        this.load.image("off", "assets/icon_nofree2.png");
+        this.load.spritesheet("cat", "assets/cat.png", {
+            frameHeight: 32,
+            frameWidth: 32
+        });
+        this.load.audio("title_music", "assets/shuinvy-childhood.mp3");
 
         let loadingBar = this.add.graphics({
             fillStyle: {
@@ -72,7 +57,6 @@ export class LoadScene extends Phaser.Scene{
             }
         })
 
-        // loading scene
         this.load.on("progress", (percent)=>{
             //loadingBar.fillRect(0, this.game.renderer.height / 2, this.game.renderer.width * percent, 50);
             console.log(percent);
@@ -86,7 +70,7 @@ export class LoadScene extends Phaser.Scene{
             console.log(file.src);
         })
 
-        this.load.on("complete", ()=>{ // end of the loading
+        this.load.on("complete", ()=>{
             progressBar.destroy();
             progressBox.destroy();
             loadingText.destroy();
@@ -95,6 +79,8 @@ export class LoadScene extends Phaser.Scene{
         })
     }
     create(){
-        this.scene.start(CST.SCENES.MENU, "hello from LoadScene");
+        this.scene.start('TitleScene', "hello from LoadScene");
     }
 }
+
+export default BootScene;

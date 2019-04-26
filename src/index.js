@@ -45,9 +45,10 @@ const config = {
 const game = new Phaser.Game(config);
 */
 
-/* hyeon's endless running game ex
-import playerImg from "./assets/image/playerTestImg44.png";
-import platformImg from "./assets/image/platformTestImg6422.png"
+// hyeon's endless running game ex
+/*
+import playerImg from "./assets/options_button.png";
+import platformImg from "./assets/play_button.png"
 
 let game;
 
@@ -204,17 +205,32 @@ function resize(){
 }
 */
 
+import BootScene from './scenes/BootScene';
+import GameScene from './scenes/GameScene';
+import TitleScene from './scenes/TitleScene';
 
-import {LoadScene} from "./scenes/LoadScene";
-import {MenuScene} from "./scenes/MenuScene";
-
-let game = new Phaser.Game({
+const config = {
+    // For more settings see <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
+    type: Phaser.WEBGL,
+    pixelArt: true,
+    roundPixels: true,
+    parent: 'content',
     width: 800,
     height: 600,
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: {
+                y: 800
+            },
+            debug: false
+        }
+    },
     scene: [
-        LoadScene, MenuScene
-    ],
-    render:{
-        pixelArt: true
-    }
-});
+        BootScene,
+        TitleScene,
+        GameScene
+    ]
+};
+
+const game = new Phaser.Game(config); // eslint-disable-line no-unused-vars

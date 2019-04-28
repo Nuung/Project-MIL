@@ -11,8 +11,10 @@ Use npm to install and run the game, in order to play it open a browser on <http
 2. Open a terminal
 3. `git clone https://github.com/hwpvanholsteijn/hhs_cyberbullying.git` - For cloning the repository
 4. `cd hhs_cyberbullying` - Change the directory to the game folder
-5. `npm install` - Update to the latest packages
-6. `npm start` - To run program
+5. Create a 'dist' folder in the root folder, when it is unavailable.
+6. `npm run build` - updates the to the latest build files
+7. `npm install` - Update to the latest packages
+8. `npm start` - To run program
 
 ## Usage
 

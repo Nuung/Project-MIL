@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import Phaser from "phaser";
 /* huub's part (origin)
 import logoImg from "./assets/logo.png";
@@ -211,10 +212,10 @@ import TitleScene from './js/scenes/TitleScene';
 
 const config = {
     // For more settings see <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
-    type: Phaser.WEBGL,
+    type: Phaser.AUTO,
     pixelArt: true,
     roundPixels: true,
-    parent: 'content',
+    parent: 'game_content',
     width: 800,
     height: 600,
     backgroundColor: 0x444444,

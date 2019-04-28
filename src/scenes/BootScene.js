@@ -51,7 +51,7 @@ class BootScene extends Phaser.Scene {
             frameHeight: 32,
             frameWidth: 32
         });
-        this.load.audio("title_music", "assets/shuinvy-childhood.mp3");
+        this.load.audio("title_music", "./src/sounds/shuinvy-childhood.mp3");
 
         let loadingBar = this.add.graphics({
             fillStyle: {

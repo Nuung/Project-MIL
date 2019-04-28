@@ -211,10 +211,10 @@ import TitleScene from './js/scenes/TitleScene';
 
 const config = {
     // For more settings see <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
-    type: Phaser.AUTO,
+    type: Phaser.WEBGL,
     pixelArt: true,
     roundPixels: true,
-    parent: 'game_content',
+    parent: 'content',
     width: 800,
     height: 600,
     backgroundColor: 0x444444,

@@ -1,5 +1,6 @@
+import BaseScene from "./BaseScene";
 
-class BootScene extends Phaser.Scene {
+class BootScene extends BaseScene {
     constructor(test) {
         super({
             key: 'BootScene'
@@ -81,7 +82,7 @@ class BootScene extends Phaser.Scene {
         })
     }
     create(){
-        this.scene.start('TitleScene', "from the BootScene");
+        super.changeScene('TitleScene', "from the BootScene");
     }
 }
 

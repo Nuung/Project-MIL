@@ -1,4 +1,6 @@
-class TitleScene extends Phaser.Scene {
+import BaseScene from "./BaseScene";
+
+class TitleScene extends BaseScene {
     constructor(test) {
         super({
             key: 'TitleScene'
@@ -72,7 +74,7 @@ class TitleScene extends Phaser.Scene {
 
         playButton.on("pointerup", ()=>{ // starting the game -> to GameScene
             console.log("open the gates please")
-            this.scene.start('GameScene');
+            super.changeScene('GameScene');
         })
 
         OptionButton.on("pointerover", ()=>{

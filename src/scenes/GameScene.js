@@ -7,9 +7,14 @@ let gameOptions = {
     playerGravity: 900,
     jumpForce: 400,
     playerStartPosition: 200,
-    jumps: 2
+    enemyStartPosition: 400,
+    jumps: 2,
+
+    // just for testing
+    testCounter: 0,
+    testBool: true
 }
- 
+
 // playGame scene
 class GameScene extends Phaser.Scene {
     constructor(test) {
@@ -25,7 +30,9 @@ class GameScene extends Phaser.Scene {
     preload(){
         this.load.image("platform", "assets/testPlatform6432.png");
         this.load.image("player", "assets/testPlayer3232.png");
+        this.load.image("enemyBox","assets/testEnemy3232.png")
     }
+
     create(){
  
         // group with all active platforms.
@@ -52,13 +59,21 @@ class GameScene extends Phaser.Scene {
         // adding a platform to the game, the arguments are platform width and x position
         this.addPlatform(this.game.config.width, this.game.config.width / 2);
  
-        // adding the player;
+        // adding the player
         this.player = this.physics.add.sprite(gameOptions.playerStartPosition, this.game.config.height / 2, "player");
         this.player.setGravityY(gameOptions.playerGravity);
  
+        // adding the enemyBox
+        this.enemyBox = this.physics.add.sprite(gameOptions.playerStartPosition + 320, this.game.config.height / 2, "enemyBox");
+        this.enemyBox.setGravityX(-20);
+
         // setting collisions between the player and the platform group
         this.physics.add.collider(this.player, this.platformGroup);
- 
+        this.physics.add.collider(this.player, this.enemyBox, function(){
+            console.log("collision event");
+        });
+        this.enemyBox.setBounce(3.0);
+        
         // checking for input
         this.input.on("pointerdown", this.jump, this);
     }
@@ -97,7 +112,7 @@ class GameScene extends Phaser.Scene {
  
         // game over
         if(this.player.y > this.game.config.height){
-            this.scene.start('GameScene');
+            this.scene.start('GameScene'); // restart to GameScene
         }
         this.player.x = gameOptions.playerStartPosition;
  
@@ -117,6 +132,25 @@ class GameScene extends Phaser.Scene {
             var nextPlatformWidth = Phaser.Math.Between(gameOptions.platformSizeRange[0], gameOptions.platformSizeRange[1]);
             this.addPlatform(nextPlatformWidth, this.game.config.width + nextPlatformWidth / 2);
         }
+
+        // Enemy Actions
+        if(gameOptions.testCounter == 52){
+            gameOptions.testBool = false;
+        } else if(gameOptions.testCounter == 0){
+            gameOptions.testBool = true;
+        }
+
+        if(gameOptions.testBool == true){
+            this.enemyBox.y--;
+            gameOptions.testCounter++;
+        } else {
+            this.enemyBox.y++;
+            gameOptions.testCounter--;
+        }
+
+        // if(this.enemyBox.x < this.player.x){
+        //     this.enemyBox.x += 256;
+        // }
     }
 };
 

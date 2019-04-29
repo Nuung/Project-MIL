@@ -220,12 +220,12 @@ const config = {
     backgroundColor: 0x444444,
     physics: {
         default: 'arcade',
-        // arcade: {
+        arcade: {
         //     gravity: {
         //         y: 800
         //     },
-        //     debug: false
-        // }
+            debug: true
+        }
     },
     scene: [
         BootScene,

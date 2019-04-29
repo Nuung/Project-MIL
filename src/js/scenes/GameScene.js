@@ -31,7 +31,6 @@ class GameScene extends Phaser.Scene {
         this.load.image("platform", "assets/testPlatform6432.png");
         this.load.image("player", "assets/testPlayer3232.png");
         this.load.image("enemyBox","assets/testEnemy3232.png")
-    }
 
     create(){
  

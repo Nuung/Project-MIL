@@ -1,5 +1,6 @@
+import BaseScene from "./BaseScene";
 
-class BootScene extends Phaser.Scene {
+class BootScene extends BaseScene {
     constructor(test) {
         super({
             key: 'BootScene'
@@ -41,17 +42,17 @@ class BootScene extends Phaser.Scene {
         percentText.setOrigin(0.5, 0.5);
 
         // loading the menu img
-        this.load.image("title_bg", "assets/title_bg.jpg");
-        this.load.image("options_button", "assets/options_button.png");
-        this.load.image("play_button", "assets/play_button.png");
-        this.load.image("logo", "assets/logo.png");
-        this.load.image("on", "assets/icon_nofree.png");
-        this.load.image("off", "assets/icon_nofree2.png");
-        this.load.spritesheet("cat", "assets/cat.png", {
+        this.load.image("title_bg", "./src/img/title_bg.jpg");
+        this.load.image("options_button", "./src/img/options_button.png");
+        this.load.image("play_button", "./src/img/play_button.png");
+        this.load.image("logo", "./src/img/logo.png");
+        this.load.image("on", "./src/img/icon_nofree.png");
+        this.load.image("off", "./src/img/icon_nofree2.png");
+        this.load.spritesheet("cat", "./src/img/cat.png", {
             frameHeight: 32,
             frameWidth: 32
         });
-        this.load.audio("title_music", "assets/shuinvy-childhood.mp3");
+        this.load.audio("title_music", "./src/sounds/shuinvy-childhood.mp3");
 
         let loadingBar = this.add.graphics({
             fillStyle: {
@@ -81,7 +82,7 @@ class BootScene extends Phaser.Scene {
         })
     }
     create(){
-        this.scene.start('TitleScene', "from the BootScene");
+        super.changeScene('TitleScene', "from the BootScene");
     }
 }
 

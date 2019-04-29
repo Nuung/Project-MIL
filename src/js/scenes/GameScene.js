@@ -28,9 +28,10 @@ class GameScene extends Phaser.Scene {
     }
 
     preload(){
-        this.load.image("platform", "assets/testPlatform6432.png");
-        this.load.image("player", "assets/testPlayer3232.png");
-        this.load.image("enemyBox","assets/testEnemy3232.png")
+        this.load.image("platform", "./src/img/testPlatform6432.png");
+        this.load.image("player", "./src/img/testPlayer3232.png");
+        this.load.image("enemyBox","./src/img/testEnemy3232.png");
+    }
 
     create(){
  
@@ -39,7 +40,7 @@ class GameScene extends Phaser.Scene {
  
             // once a platform is removed, it's added to the pool
             removeCallback: function(platform){
-                platform.scene.platformPool.add(platform)
+                platform.scene.platformPool.add(platform);
             }
         });
  
@@ -48,7 +49,7 @@ class GameScene extends Phaser.Scene {
  
             // once a platform is removed from the pool, it's added to the active platforms group
             removeCallback: function(platform){
-                platform.scene.platformGroup.add(platform)
+                platform.scene.platformGroup.add(platform);
             }
         });
  

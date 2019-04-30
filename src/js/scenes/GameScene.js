@@ -2,7 +2,7 @@
 // global game options
 let gameOptions = {
     platformStartSpeed: 350,
-    spawnRange: [100, 350],
+    spawnRange: [100, 150],
     platformSizeRange: [50, 250],
     playerGravity: 900,
     jumpForce: 400,
@@ -13,7 +13,7 @@ let gameOptions = {
     // just for testing
     testCounter: 0,
     testBool: true
-}
+};
 
 // playGame scene
 class GameScene extends Phaser.Scene {
@@ -28,13 +28,21 @@ class GameScene extends Phaser.Scene {
     }
 
     preload(){
+        // for img
         this.load.image("platform", "./src/img/testPlatform6432.png");
         this.load.image("player", "./src/img/testPlayer3232.png");
         this.load.image("enemyBox","./src/img/testEnemy3232.png");
+
+        // for plugin
+        this.load.plugin('DialogModalPlugin', './src/js/plug_in/DialogModalPlugin.js');
     }
 
     create(){
  
+        let OptionButton = this.add.image(this.game.renderer.width - 100, this.game.renderer.height - 50, "options_button").setDepth(1);
+        this.sys.install('DialogModalPlugin');
+        console.log(this.sys.dialogModal);
+
         // group with all active platforms.
         this.platformGroup = this.add.group({
  

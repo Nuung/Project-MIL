@@ -2,7 +2,7 @@
 // global game options
 let gameOptions = {
     platformStartSpeed: 350,
-    spawnRange: [100, 150],
+    spawnRange: [10, 50],
     platformSizeRange: [50, 250],
     playerGravity: 900,
     jumpForce: 400,
@@ -32,20 +32,13 @@ class GameScene extends Phaser.Scene {
         this.load.image("platform", "./src/img/testPlatform6432.png");
         this.load.image("player", "./src/img/testPlayer3232.png");
         this.load.image("enemyBox","./src/img/testEnemy3232.png");
-
-        // for plugin
-        this.load.plugin('DialogModalPlugin', './src/js/plug_in/DialogModalPlugin.js');
+        this.load.image("invisible_wall","./src/img/invisible_wall.png")
     }
 
     create(){
- 
-        let OptionButton = this.add.image(this.game.renderer.width - 100, this.game.renderer.height - 50, "options_button").setDepth(1);
-        this.sys.install('DialogModalPlugin');
-        console.log(this.sys.dialogModal);
 
         // group with all active platforms.
         this.platformGroup = this.add.group({
- 
             // once a platform is removed, it's added to the pool
             removeCallback: function(platform){
                 platform.scene.platformPool.add(platform);
@@ -54,7 +47,6 @@ class GameScene extends Phaser.Scene {
  
         // pool
         this.platformPool = this.add.group({
- 
             // once a platform is removed from the pool, it's added to the active platforms group
             removeCallback: function(platform){
                 platform.scene.platformGroup.add(platform);
@@ -75,13 +67,29 @@ class GameScene extends Phaser.Scene {
         this.enemyBox = this.physics.add.sprite(gameOptions.playerStartPosition + 320, this.game.config.height / 2, "enemyBox");
         this.enemyBox.setGravityX(-20);
 
+        // for limit enemyBox area -> using invisible wall
+        {
+        this.invisible_wallTop = this.physics.add.sprite(0, 100, 'invisible_wall');
+        this.invisible_wallDown = this.physics.add.sprite(0, this.game.config.height - 100, 'invisible_wall');
+        this.invisible_wallTop.setDisplaySize(this.game.config.width * 2, 30);
+        this.invisible_wallDown.setDisplaySize(this.game.config.width * 2, 30);
+        this.invisible_wallTop.fixedToCamera = true;
+        this.invisible_wallTop.body.immovable = true;
+        this.invisible_wallTop.body.allowGravity = false;
+        this.invisible_wallDown.fixedToCamera = true;
+        this.invisible_wallDown.body.immovable = true;
+        this.invisible_wallDown.body.allowGravity = false;
+        }
+
         // setting collisions between the player and the platform group
         this.physics.add.collider(this.player, this.platformGroup);
         this.physics.add.collider(this.player, this.enemyBox, function(){
             console.log("collision event");
         });
-        this.enemyBox.setBounce(3.0);
-        
+        this.enemyBox.setBounce(1.0);
+        this.physics.add.collider(this.enemyBox, this.invisible_wallTop);
+        this.physics.add.collider(this.enemyBox, this.invisible_wallDown);
+
         // checking for input
         this.input.on("pointerdown", this.jump, this);
     }
@@ -141,13 +149,12 @@ class GameScene extends Phaser.Scene {
             this.addPlatform(nextPlatformWidth, this.game.config.width + nextPlatformWidth / 2);
         }
 
-        // Enemy Actions
+        // Enemy Actions ~ first, move top to down
         if(gameOptions.testCounter == 52){
             gameOptions.testBool = false;
         } else if(gameOptions.testCounter == 0){
             gameOptions.testBool = true;
         }
-
         if(gameOptions.testBool == true){
             this.enemyBox.y--;
             gameOptions.testCounter++;
@@ -155,10 +162,10 @@ class GameScene extends Phaser.Scene {
             this.enemyBox.y++;
             gameOptions.testCounter--;
         }
-
-        // if(this.enemyBox.x < this.player.x){
-        //     this.enemyBox.x += 256;
-        // }
+        // Limit minmun of Enemy's X position 
+        if(this.enemyBox.x < 0){
+            this.enemyBox.x += this.game.config.width;
+        }
     }
 };
 

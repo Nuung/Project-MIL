@@ -22,7 +22,6 @@ const config = {
             debug: true
         }
     },
-    plugins: [ 'DialogModalPlugin' ],
     scene: [
         BootScene,
         TitleScene,

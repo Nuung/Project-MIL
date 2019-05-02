@@ -1,5 +1,12 @@
 
 // global game options
+
+var timedEvent;
+var text;
+var scoreText;
+var score = 0;
+var primeravez=0;
+
 let gameOptions = {
     platformStartSpeed: 350,
     spawnRange: [10, 50],
@@ -32,6 +39,7 @@ class GameScene extends Phaser.Scene {
         this.load.image("platform", "./src/img/testPlatform6432.png");
         this.load.image("player", "./src/img/testPlayer3232.png");
         this.load.image("enemyBox","./src/img/testEnemy3232.png");
+        this.load.image("pause", "./src/img/pause.png");
         this.load.image("invisible_wall","./src/img/invisible_wall.png")
         this.load.image("background", "./src/img/Background_Level_1.bmp")
     }
@@ -44,6 +52,17 @@ class GameScene extends Phaser.Scene {
         let scaleY = this.cameras.main.height / this.background.height;
         let scale = Math.max(scaleX, scaleY);
         this.background.setScale(scale).setScrollFactor(0);
+
+        // Ading pause btn and pause scene
+        let PauseButton = this.add.image(750,75,"pause").setScale(0.5).setDepth(1);
+        scoreText = this.add.text(50, 50, 'Score: 0').setScale(2);
+        timedEvent = this.time.addEvent({ delay: 100000, loop: true });
+        text = this.add.text(this.game.config.width / 2, 50);
+
+        //this.timer = 0; // time elapsed in the current level
+        //this.totalTimer = 0; // time elapsed in the whole game
+
+        //this.timerText = this.game.add.text(15, 15, "Time: "+ timedEvent.getProgress().toString().substr(0, 4), this.fontBig);
 
         // group with all active platforms.
         this.platformGroup = this.add.group({
@@ -60,6 +79,23 @@ class GameScene extends Phaser.Scene {
                 platform.scene.platformGroup.add(platform);
             }
         });
+
+        PauseButton.setInteractive();
+
+        PauseButton.on("pointerup", ()=>{ 
+            if(primeravez==0){
+                console.log("Lets See");
+                this.scene.pause();
+                this.scene.launch('sceneP');
+            }
+            
+        })
+
+       /* PauseButton.on('pointerdown', function() {
+            
+            
+            //this.scene.stop();
+        })*/
  
         // number of consecutive jumps made by the player
         this.playerJumps = 0;
@@ -93,6 +129,8 @@ class GameScene extends Phaser.Scene {
         this.physics.add.collider(this.player, this.platformGroup);
         this.physics.add.collider(this.player, this.enemyBox, function(){
             console.log("collision event");
+            score += 10;
+            scoreText.setText('Points: '+score);
         });
         this.enemyBox.setBounce(1.0);
         this.physics.add.collider(this.enemyBox, this.invisible_wallTop);
@@ -101,6 +139,7 @@ class GameScene extends Phaser.Scene {
         // checking for input
         this.input.on("pointerdown", this.jump, this);
     }
+
  
     // the core of the script: platform are added from the pool or created on the fly
     addPlatform(platformWidth, posX){
@@ -132,7 +171,10 @@ class GameScene extends Phaser.Scene {
             this.playerJumps ++;
         }
     }
+
     update(){
+
+        text.setText(timedEvent.getProgress().toString().substr(0, 4)*100).setScale(2);
  
         // game over
         if(this.player.y > this.game.config.height){
@@ -177,6 +219,8 @@ class GameScene extends Phaser.Scene {
     }
 };
 
+
+
 // resize the canvas's size to fit any user
 /*
 function resize(){
@@ -195,5 +239,6 @@ function resize(){
     }
 }
 */
+
 
 export default GameScene;

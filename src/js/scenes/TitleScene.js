@@ -24,7 +24,6 @@ class TitleScene extends BaseScene {
         //btn setting
         let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, "play_button").setDepth(1);
         let OptionButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 100, "options_button").setDepth(1);
-        let MusicButton = this.add.image(730,530,"on").setScale(0.15).setDepth(1);
 
         //SPRITES
         let hoverSprite = this.add.sprite(100, 100, "cat");
@@ -45,7 +44,6 @@ class TitleScene extends BaseScene {
         })
 
         music.play();
-        console.log(music);
 
         //ANIMATION
         this.anims.create({
@@ -60,7 +58,6 @@ class TitleScene extends BaseScene {
         //POINTEREVENTS
         playButton.setInteractive();
         OptionButton.setInteractive();
-        MusicButton.setInteractive();
 
         playButton.on("pointerover", ()=>{
             hoverSprite.setVisible(true);
@@ -93,42 +90,8 @@ class TitleScene extends BaseScene {
 
         OptionButton.on("pointerup", ()=>{
             console.log("give me the options please")
+            this.scene.switch('OptionScene');
         })
-
-        MusicButton.on("pointerover", ()=>{
-            console.log("want listen to music?")
-        })
-
-        MusicButton.on("pointerout", ()=>{
-            console.log("maybe not")
-        })
-
-        MusicButton.on("pointerup", ()=>{
-            if(prueba==0){
-                console.log("turn off")
-                music.pause();
-                prueba=1;
-            }else{
-                console.log("turn on")
-                music.resume();
-                prueba=0;
-            }
-        })
-    }
-}
-
-class OptionScene extends BaseScene {
-    constructor(test) {
-        super({
-            key: 'OptionScene'
-        });
-        console.log("OptionScene Constructor Data : RECIEVED data ; "+test);
-    }
-    init(data){
-
-    }
-    create(){
-
     }
 }
 

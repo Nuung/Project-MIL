@@ -48,6 +48,7 @@ class BootScene extends BaseScene {
         this.load.image("logo", "./src/img/logo.png");
         this.load.image("on", "./src/img/icon_nofree.png");
         this.load.image("off", "./src/img/icon_nofree2.png");
+        this.load.image("back", "./src/img/Back_b.png");
         this.load.spritesheet("cat", "./src/img/cat.png", {
             frameHeight: 32,
             frameWidth: 32

@@ -33,9 +33,17 @@ class GameScene extends Phaser.Scene {
         this.load.image("player", "./src/img/testPlayer3232.png");
         this.load.image("enemyBox","./src/img/testEnemy3232.png");
         this.load.image("invisible_wall","./src/img/invisible_wall.png")
+        this.load.image("background", "./src/img/Background_Level_1.bmp")
     }
 
     create(){
+
+        // setting the back ground
+        this.background = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, "background");
+        let scaleX = this.cameras.main.width / this.background.width;
+        let scaleY = this.cameras.main.height / this.background.height;
+        let scale = Math.max(scaleX, scaleY);
+        this.background.setScale(scale).setScrollFactor(0);
 
         // group with all active platforms.
         this.platformGroup = this.add.group({

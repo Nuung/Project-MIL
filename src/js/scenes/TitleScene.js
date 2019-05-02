@@ -1,5 +1,7 @@
 import BaseScene from "./BaseScene";
 
+let music;
+
 class TitleScene extends BaseScene {
     constructor(test) {
         super({
@@ -31,7 +33,7 @@ class TitleScene extends BaseScene {
 
         //SOUND!
         //this.sound.pauseOnBlur = false; //only to keep playing music
-        let music = this.sound.add("title_music", {
+        music = this.sound.add("title_music", {
             mute: false,
             volume: 1,
             rate: 1,
@@ -42,8 +44,8 @@ class TitleScene extends BaseScene {
             //loop: true
         })
 
-        music.play();        
-
+        music.play();
+        console.log(music);
 
         //ANIMATION
         this.anims.create({
@@ -112,6 +114,21 @@ class TitleScene extends BaseScene {
                 prueba=0;
             }
         })
+    }
+}
+
+class OptionScene extends BaseScene {
+    constructor(test) {
+        super({
+            key: 'OptionScene'
+        });
+        console.log("OptionScene Constructor Data : RECIEVED data ; "+test);
+    }
+    init(data){
+
+    }
+    create(){
+
     }
 }
 

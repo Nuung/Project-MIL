@@ -41,9 +41,17 @@ class GameScene extends Phaser.Scene {
         this.load.image("enemyBox","./src/img/testEnemy3232.png");
         this.load.image("pause", "./src/img/pause.png");
         this.load.image("invisible_wall","./src/img/invisible_wall.png")
+        this.load.image("background", "./src/img/Background_Level_1.bmp")
     }
 
     create(){
+
+        // setting the back ground
+        this.background = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, "background");
+        let scaleX = this.cameras.main.width / this.background.width;
+        let scaleY = this.cameras.main.height / this.background.height;
+        let scale = Math.max(scaleX, scaleY);
+        this.background.setScale(scale).setScrollFactor(0);
 
         // Ading pause btn and pause scene
         let PauseButton = this.add.image(750,75,"pause").setScale(0.5).setDepth(1);

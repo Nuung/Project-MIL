@@ -5,6 +5,7 @@ import GameScene from './js/scenes/GameScene';
 import TitleScene from './js/scenes/TitleScene';
 import ScenePause from './js/scenes/ScenePause';
 import OptionScene from './js/scenes/OptionScene';
+import WorldMap from './js/scenes/WorldMap';
 
 const config = {
     // For more settings see <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
@@ -29,7 +30,8 @@ const config = {
         TitleScene,
         GameScene,
         ScenePause,
-        OptionScene
+        OptionScene,
+        WorldMap
     ]
 };
 

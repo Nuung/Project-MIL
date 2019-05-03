@@ -1,6 +1,8 @@
 import BaseScene from "./BaseScene";
+import TitleScene from "./TitleScene";
 
-class OptionScene extends BaseScene {
+class OptionScene extends Phaser.Scene{
+    
     constructor(test) {
         super({
             key: 'OptionScene'
@@ -30,15 +32,7 @@ class OptionScene extends BaseScene {
         })
 
         MusicButton.on("pointerup", ()=>{
-            if(prueba==0){
-                console.log("turn off")
-                music.pause();
-                prueba=1;
-            }else{
-                console.log("turn on")
-                music.resume();
-                prueba=0;
-            }
+
         })
     }
 }

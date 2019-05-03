@@ -1,17 +1,15 @@
-import BaseScene from "./BaseScene";
-
 let music;
 
-class TitleScene extends BaseScene {
+class TitleScene extends Phaser.Scene {
     constructor(test) {
         super({
             key: 'TitleScene'
         });
-        console.log("TitleScene Constructor Data : RECIEVED data ; "+test);
+      //  console.log("TitleScene Constructor Data : RECIEVED data ; "+test);
     }
     init(data){
-        console.log("TitleScene Init Data : RECIEVED");
-        console.log(data);
+       // console.log("TitleScene Init Data : RECIEVED");
+       // console.log(data);
     }
     create(){
 
@@ -39,12 +37,10 @@ class TitleScene extends BaseScene {
             detune: 0,
             seek: 0,
             loop: true,
-            delay: 0
+            delay: 0,
             //loop: true
         })
-
         music.play();
-
         //ANIMATION
         this.anims.create({
             key: "walk",
@@ -73,7 +69,7 @@ class TitleScene extends BaseScene {
 
         playButton.on("pointerup", ()=>{ // starting the game -> to GameScene
             console.log("open the gates please")
-            super.changeScene('GameScene');
+            this.scene.start('WorldMap');    
         })
 
         OptionButton.on("pointerover", ()=>{
@@ -90,6 +86,7 @@ class TitleScene extends BaseScene {
 
         OptionButton.on("pointerup", ()=>{
             console.log("give me the options please")
+        //   music.pause();
             this.scene.switch('OptionScene');
         })
     }

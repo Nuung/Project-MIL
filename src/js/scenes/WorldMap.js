@@ -18,8 +18,12 @@ class WorldMap extends Phaser.Scene{
         FranceFlag.setInteractive();
         Text = this.add.text(80, 100, 'Choose the country you want to go').setScale(2);
 
+        
         KoreaFlag.on("pointerup", ()=>{
             this.scene.switch('GameScene');
+        })
+        UsaFlag.on("pointerup", ()=>{
+            this.scene.switch('Ch2GameScene');
         })
     }
 }

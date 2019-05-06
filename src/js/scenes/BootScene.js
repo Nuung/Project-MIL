@@ -83,7 +83,7 @@ class BootScene extends BaseScene {
         })
     }
     create(){
-        super.changeScene('TitleScene', "from the BootScene");
+        super.changeScene('SimulationScene', "from the BootScene");
     }
 }
 

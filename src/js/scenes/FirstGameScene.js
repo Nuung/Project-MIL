@@ -1,3 +1,4 @@
+import BaseScene from "./BaseScene";
 
 // global game options
 
@@ -9,7 +10,7 @@ var primeravez=0;
 
 let gameOptions = {
     platformStartSpeed: 350,
-    spawnRange: [10, 50],
+    spawnRange: [100, 150], // Range of blocks (platform group)
     platformSizeRange: [50, 250],
     playerGravity: 900,
     jumpForce: 400,
@@ -23,27 +24,12 @@ let gameOptions = {
 };
 
 // playGame scene
-class GameScene extends Phaser.Scene {
+class FirstGameScene extends BaseScene {
     constructor(test) {
         super({
-            key: 'GameScene'
+            key: 'FirstGameScene'
         });
     }
-    init(data){
-        console.log(data);
-        console.log("RECIEVED in GameScene ~ Data");
-    }
-
-    preload(){
-        // for img
-        this.load.image("platform", "./src/img/testPlatform6432.png");
-        this.load.image("player", "./src/img/testPlayer3232.png");
-        this.load.image("enemyBox","./src/img/testEnemy3232.png");
-        this.load.image("pause", "./src/img/pause.png");
-        this.load.image("invisible_wall","./src/img/invisible_wall.png")
-        this.load.image("background", "./src/img/Background_Level_1.bmp")
-    }
-
     create(){
 
         // setting the back ground
@@ -178,7 +164,7 @@ class GameScene extends Phaser.Scene {
  
         // game over
         if(this.player.y > this.game.config.height){
-            this.scene.start('GameScene'); // restart to GameScene
+            this.scene.start('FirstGameScene'); // restart to GameScene
         }
         this.player.x = gameOptions.playerStartPosition;
  
@@ -241,4 +227,4 @@ function resize(){
 */
 
 
-export default GameScene;
+export default FirstGameScene;

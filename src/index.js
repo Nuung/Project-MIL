@@ -1,10 +1,13 @@
 import _ from 'lodash';
 import Phaser from "phaser";
 import BootScene from './js/scenes/BootScene';
-import GameScene from './js/scenes/GameScene';
 import TitleScene from './js/scenes/TitleScene';
 import ScenePause from './js/scenes/ScenePause';
-import OptionScene from './js/scenes/OptionScene';
+
+// For Mini Game Scenes
+import FirstGameScene from './js/scenes/FirstGameScene';
+import SecondGameScene from './js/scenes/SecondGameScene';
+
 
 const config = {
     // For more settings see <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
@@ -27,9 +30,9 @@ const config = {
     scene: [
         BootScene,
         TitleScene,
-        GameScene,
-        ScenePause,
-        OptionScene
+        FirstGameScene,
+        SecondGameScene,
+        ScenePause
     ]
 };
 

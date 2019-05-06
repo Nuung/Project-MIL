@@ -81,6 +81,15 @@ class BootScene extends BaseScene {
             percentText.destroy();
             //this.scene.start(CST.SCENES.MENU, "hello from LoadScene");
         })
+
+        // for FirstGameScene img
+        this.load.image("platform", "./src/img/testPlatform6432.png");
+        this.load.image("player", "./src/img/testPlayer3232.png");
+        this.load.image("enemyBox","./src/img/testEnemy3232.png");
+        this.load.image("pause", "./src/img/pause.png");
+        this.load.image("invisible_wall","./src/img/invisible_wall.png")
+        this.load.image("background", "./src/img/Background_Level_1.bmp")
+        
     }
     create(){
         super.changeScene('TitleScene', "from the BootScene");

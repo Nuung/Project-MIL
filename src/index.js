@@ -1,10 +1,12 @@
 import _ from 'lodash';
 import Phaser from "phaser";
 import BootScene from './js/scenes/BootScene';
-import GameScene from './js/scenes/GameScene';
 import TitleScene from './js/scenes/TitleScene';
 import ScenePause from './js/scenes/ScenePause';
-import OptionScene from './js/scenes/OptionScene';
+
+// For Mini Game Scenes
+import FirstGameScene from './js/scenes/FirstGameScene';
+import SecondGameScene from './js/scenes/SecondGameScene';
 import WorldMap from './js/scenes/WorldMap';
 import Ch2GameScene from './js/scenes/Ch2GameScene';
 
@@ -20,19 +22,16 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-        //     gravity: {
-        //         y: 800
-        //     },
             debug: true
         }
     },
     scene: [
         BootScene,
         TitleScene,
-        GameScene,
-        ScenePause,
-        OptionScene,
         WorldMap,
+        ScenePause,
+        FirstGameScene,
+        SecondGameScene,
         Ch2GameScene
     ]
 };

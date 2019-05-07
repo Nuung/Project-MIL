@@ -1,3 +1,4 @@
+import BaseScene from "./BaseScene";
 
 // global game options
 
@@ -5,11 +6,11 @@ var timedEvent;
 var text;
 var scoreText;
 var score = 0;
-var primeravez=0;
+var primeravez=0; 
 
 let gameOptions = {
     platformStartSpeed: 350,
-    spawnRange: [10, 50],
+    spawnRange: [100, 150], // Range of blocks (platform group)
     platformSizeRange: [50, 250],
     playerGravity: 900,
     jumpForce: 400,
@@ -23,35 +24,16 @@ let gameOptions = {
 };
 
 // playGame scene
-class GameScene extends Phaser.Scene {
+class FirstGameScene extends BaseScene {
     constructor(test) {
         super({
-            key: 'GameScene'
+            key: 'FirstGameScene'
         });
     }
-    init(data){
-        console.log(data);
-        console.log("RECIEVED in GameScene ~ Data");
-    }
-
-    preload(){
-        // for img
-        this.load.image("platform", "./src/img/testPlatform6432.png");
-        this.load.image("player", "./src/img/testPlayer3232.png");
-        this.load.image("enemyBox","./src/img/testEnemy3232.png");
-        this.load.image("pause", "./src/img/pause.png");
-        this.load.image("invisible_wall","./src/img/invisible_wall.png")
-        this.load.image("background", "./src/img/Background_Level_1.bmp")
-    }
-
     create(){
 
         // setting the back ground
-        this.background = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, "background");
-        let scaleX = this.cameras.main.width / this.background.width;
-        let scaleY = this.cameras.main.height / this.background.height;
-        let scale = Math.max(scaleX, scaleY);
-        this.background.setScale(scale).setScrollFactor(0);
+        this.background = this.add.tileSprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 800, 600, "background");
 
         // Ading pause btn and pause scene
         let PauseButton = this.add.image(750,75,"pause").setScale(0.5).setDepth(1);
@@ -80,8 +62,8 @@ class GameScene extends Phaser.Scene {
             }
         });
 
+        // to pause the game
         PauseButton.setInteractive();
-
         PauseButton.on("pointerup", ()=>{ 
             if(primeravez==0){
                 console.log("Lets See");
@@ -90,12 +72,6 @@ class GameScene extends Phaser.Scene {
             }
             
         })
-
-       /* PauseButton.on('pointerdown', function() {
-            
-            
-            //this.scene.stop();
-        })*/
  
         // number of consecutive jumps made by the player
         this.playerJumps = 0;
@@ -152,7 +128,7 @@ class GameScene extends Phaser.Scene {
             this.platformPool.remove(platform);
         }
         else{
-            platform = this.physics.add.sprite(posX, this.game.config.height * 0.8, "platform");
+            platform = this.physics.add.sprite(posX, this.game.config.height * 0.93, "platform");
             platform.setImmovable(true);
             platform.setVelocityX(gameOptions.platformStartSpeed * -1);
             this.platformGroup.add(platform);
@@ -178,7 +154,7 @@ class GameScene extends Phaser.Scene {
  
         // game over
         if(this.player.y > this.game.config.height){
-            this.scene.start('GameScene'); // restart to GameScene
+            this.scene.start('FirstGameScene'); // restart to GameScene
         }
         this.player.x = gameOptions.playerStartPosition;
  
@@ -216,6 +192,9 @@ class GameScene extends Phaser.Scene {
         if(this.enemyBox.x < 0){
             this.enemyBox.x += this.game.config.width;
         }
+
+        // endless setting of Background Img
+        this.background.tilePositionX += 0.9;
     }
 };
 
@@ -241,4 +220,4 @@ function resize(){
 */
 
 
-export default GameScene;
+export default FirstGameScene;

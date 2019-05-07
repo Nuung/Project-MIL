@@ -1,30 +1,22 @@
 import BaseScene from "./BaseScene";
-//import SimulationGame from "../simulationGame/SimulationGameController";
+import SimGameController from "../simulationGame/SimGameController";
 
 class SimulationScene extends BaseScene{
     constructor() {
         super({
             key: 'SimulationScene'
         });
-        this.simctrl;
+        //this.simctrl = null;
     }
 
     preload(){
-        this.load.json('jsonData', './src/data/story.json');
+        //this.load.json('descriptions', './src/data/descriptions.json');
     }
 
     create(){
-       // var sim = new SimulationGame();
-       // sim.playStory(this);
-
-        /*
-        let singlePlayerButton = new Button(this, 10, 10, 'PLAY SINGLE PLAYER');
-        singlePlayerButton.buttonDown(() => {
-            console.log("Coolio!");
-        // this.changeToScene('CharacterSelectionScene', {type: 'single_player'});
-        });
-        var q = new Question("What is the home varient of a tiger?", "cat");
-        q.display();*/
+       //this.simctrl = new SimGameController(this);
+       //this.simctrl.index();
+       this.changeScene("DescriptionScene");
     }
 }
 export default SimulationScene;

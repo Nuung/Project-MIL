@@ -49,6 +49,9 @@ class BootScene extends BaseScene {
         this.load.image("on", "./src/img/icon_nofree.png");
         this.load.image("off", "./src/img/icon_nofree2.png");
         this.load.image("back", "./src/img/Back_b.png");
+        this.load.image("korea","./src/img/koreaflag.png");
+        this.load.image("usa","./src/img/usaflag.png");
+        this.load.image("france","./src/img/franceflag.png");
         this.load.spritesheet("cat", "./src/img/cat.png", {
             frameHeight: 32,
             frameWidth: 32
@@ -92,7 +95,7 @@ class BootScene extends BaseScene {
         
     }
     create(){
-        super.changeScene('TitleScene', "from the BootScene");
+        this.scene.start('TitleScene');
     }
 }
 

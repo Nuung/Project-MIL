@@ -7,7 +7,8 @@ import ScenePause from './js/scenes/ScenePause';
 // For Mini Game Scenes
 import FirstGameScene from './js/scenes/FirstGameScene';
 import SecondGameScene from './js/scenes/SecondGameScene';
-
+import WorldMap from './js/scenes/WorldMap';
+import Ch2GameScene from './js/scenes/Ch2GameScene';
 
 const config = {
     // For more settings see <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
@@ -21,18 +22,17 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-        //     gravity: {
-        //         y: 800
-        //     },
             debug: true
         }
     },
     scene: [
         BootScene,
         TitleScene,
+        WorldMap,
+        ScenePause,
         FirstGameScene,
         SecondGameScene,
-        ScenePause
+        Ch2GameScene
     ]
 };
 

@@ -6,7 +6,7 @@ var timedEvent;
 var text;
 var scoreText;
 var score = 0;
-var primeravez=0;
+var primeravez=0; 
 
 let gameOptions = {
     platformStartSpeed: 350,
@@ -33,11 +33,7 @@ class FirstGameScene extends BaseScene {
     create(){
 
         // setting the back ground
-        this.background = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 2, "background");
-        let scaleX = this.cameras.main.width / this.background.width;
-        let scaleY = this.cameras.main.height / this.background.height;
-        let scale = Math.max(scaleX, scaleY);
-        this.background.setScale(scale).setScrollFactor(0);
+        this.background = this.add.tileSprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 800, 600, "background");
 
         // Ading pause btn and pause scene
         let PauseButton = this.add.image(750,75,"pause").setScale(0.5).setDepth(1);
@@ -66,8 +62,8 @@ class FirstGameScene extends BaseScene {
             }
         });
 
+        // to pause the game
         PauseButton.setInteractive();
-
         PauseButton.on("pointerup", ()=>{ 
             if(primeravez==0){
                 console.log("Lets See");
@@ -76,12 +72,6 @@ class FirstGameScene extends BaseScene {
             }
             
         })
-
-       /* PauseButton.on('pointerdown', function() {
-            
-            
-            //this.scene.stop();
-        })*/
  
         // number of consecutive jumps made by the player
         this.playerJumps = 0;
@@ -138,7 +128,7 @@ class FirstGameScene extends BaseScene {
             this.platformPool.remove(platform);
         }
         else{
-            platform = this.physics.add.sprite(posX, this.game.config.height * 0.8, "platform");
+            platform = this.physics.add.sprite(posX, this.game.config.height * 0.93, "platform");
             platform.setImmovable(true);
             platform.setVelocityX(gameOptions.platformStartSpeed * -1);
             this.platformGroup.add(platform);
@@ -202,6 +192,9 @@ class FirstGameScene extends BaseScene {
         if(this.enemyBox.x < 0){
             this.enemyBox.x += this.game.config.width;
         }
+
+        // endless setting of Background Img
+        this.background.tilePositionX += 0.9;
     }
 };
 

@@ -1,10 +1,14 @@
 import _ from 'lodash';
 import Phaser from "phaser";
 import BootScene from './js/scenes/BootScene';
-import GameScene from './js/scenes/GameScene';
 import TitleScene from './js/scenes/TitleScene';
 import ScenePause from './js/scenes/ScenePause';
-import OptionScene from './js/scenes/OptionScene';
+
+// For Mini Game Scenes
+import WorldMap from './js/scenes/WorldMap';
+import FirstGameScene from './js/scenes/FirstGameScene';
+import SecondGameScene from './js/scenes/SecondGameScene';
+
 
 const config = {
     // For more settings see <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
@@ -18,18 +22,16 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-        //     gravity: {
-        //         y: 800
-        //     },
             debug: true
         }
     },
     scene: [
         BootScene,
         TitleScene,
-        GameScene,
+        WorldMap,
         ScenePause,
-        OptionScene
+        FirstGameScene,
+        SecondGameScene
     ]
 };
 

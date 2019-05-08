@@ -13,7 +13,8 @@ class SecondGameScene extends BaseScene {
     }
 
     create(){
-
+        // setting the back ground
+        this.background = this.add.tileSprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 800, 600, "secondBackground");
     }
 
     update(){

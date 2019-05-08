@@ -70,16 +70,16 @@ class TitleScene extends Phaser.Scene {
         })
 
         playButton.on("pointerup", ()=>{ // starting the game -> to GameScene
-            super.changeScene('FirstGameScene');
+            // super.changeScene('FirstGameScene');
             // console.log("open the gates please")
-            // this.scene.start('WorldMap');    
+            this.scene.start('FirstGameScene');    
         })
 
         OptionButton.on("pointerover", ()=>{
             hoverSprite.setVisible(true);
             hoverSprite.play("walk");
             hoverSprite.x = playButton.x - playButton.width;
-            hoverSprite.y = playButton.y+100;
+            hoverSprite.y = playButton.y + 100;
         })
 
         OptionButton.on("pointerout", ()=>{

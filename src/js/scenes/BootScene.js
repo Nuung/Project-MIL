@@ -91,7 +91,8 @@ class BootScene extends BaseScene {
         this.load.image("enemyBox","./src/img/testEnemy3232.png");
         this.load.image("pause", "./src/img/pause.png");
         this.load.image("invisible_wall","./src/img/invisible_wall.png")
-        this.load.image("background", "./src/img/Background_Level_1.bmp")
+        this.load.image("firstBackground", "./src/img/Background_Level_1.bmp")
+        this.load.image("secondBackground", "./src/img/Background_Level_2.bmp")
         
     }
     create(){

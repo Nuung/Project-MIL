@@ -42,13 +42,17 @@ class BootScene extends BaseScene {
         percentText.setOrigin(0.5, 0.5);
 
         // loading the menu img
-        this.load.image("title_bg", "./src/img/title_bg.jpg");
+        //this.load.image("title_bg", "./src/img/title_bg.jpg");
+        this.load.image("title_bg", "./src/img/urban8.jpg");
         this.load.image("options_button", "./src/img/options_button.png");
         this.load.image("play_button", "./src/img/play_button.png");
         this.load.image("logo", "./src/img/logo.png");
         this.load.image("on", "./src/img/icon_nofree.png");
         this.load.image("off", "./src/img/icon_nofree2.png");
         this.load.image("back", "./src/img/Back_b.png");
+        this.load.image("korea","./src/img/koreaflag.png");
+        this.load.image("usa","./src/img/usaflag.png");
+        this.load.image("france","./src/img/franceflag.png");
         this.load.spritesheet("cat", "./src/img/cat.png", {
             frameHeight: 32,
             frameWidth: 32
@@ -81,9 +85,20 @@ class BootScene extends BaseScene {
             percentText.destroy();
             //this.scene.start(CST.SCENES.MENU, "hello from LoadScene");
         })
+
+        // for FirstGameScene img
+        this.load.image("platform", "./src/img/testPlatform6432.png");
+        this.load.image("player", "./src/img/testPlayer3232.png");
+        this.load.image("enemyBox","./src/img/testEnemy3232.png");
+        this.load.image("pause", "./src/img/pause.png");
+        this.load.image("invisible_wall","./src/img/invisible_wall.png")
+        this.load.image("firstBackground", "./src/img/Background_Level_1.bmp")
+        this.load.image("secondBackground", "./src/img/Background_Level_2.bmp")
+        
     }
     create(){
-        super.changeScene('SimulationScene', "from the BootScene");
+        // super.changeScene('SimulationScene', "from the BootScene");
+        this.scene.start('TitleScene');
     }
 }
 

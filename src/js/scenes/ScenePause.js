@@ -2,7 +2,6 @@ var ResumeText;
 
 var ScenePause = new Phaser.Class({
 
-
     Extends: Phaser.Scene,
 
     initialize:
@@ -24,7 +23,7 @@ var ScenePause = new Phaser.Class({
         ResumeText = this.add.text(this.game.config.width / 2 - 250, this.game.config.height / 2, 'Pulse anywhere to continue').setScale(2);
 
         this.input.once('pointerdown', function () {
-            this.scene.resume('GameScene');
+            this.scene.resume('FirstGameScene');
             this.scene.stop();
         }, this);
     }

@@ -33,7 +33,7 @@ class FirstGameScene extends BaseScene {
     create(){
 
         // setting the back ground
-        this.background = this.add.tileSprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 800, 600, "background");
+        this.background = this.add.tileSprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 800, 600, "firstBackground");
 
         // Ading pause btn and pause scene
         let PauseButton = this.add.image(750,75,"pause").setScale(0.5).setDepth(1);

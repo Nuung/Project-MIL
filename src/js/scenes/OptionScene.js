@@ -11,6 +11,8 @@ class OptionScene extends BaseScene {
     }
     create(){
 
+        var prueba=0;
+
         let MusicButton = this.add.image(730,530,"on").setScale(0.15).setDepth(1);
         let BackButton = this.add.image(50,530,"back").setScale(0.2).setDepth(1);
 

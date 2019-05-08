@@ -53,16 +53,11 @@ class GameScene extends Phaser.Scene {
         let scale = Math.max(scaleX, scaleY);
         this.background.setScale(scale).setScrollFactor(0);
 
-        // Ading pause btn and pause scene
-        let PauseButton = this.add.image(750,75,"pause").setScale(0.5).setDepth(1);
+        // Ading pause btn and pause scene and score and Time
+        let PauseButton = this.add.image(750,65,"pause").setScale(0.5).setDepth(1);
         scoreText = this.add.text(50, 50, 'Score: 0').setScale(2);
         timedEvent = this.time.addEvent({ delay: 100000, loop: true });
         text = this.add.text(this.game.config.width / 2, 50);
-
-        //this.timer = 0; // time elapsed in the current level
-        //this.totalTimer = 0; // time elapsed in the whole game
-
-        //this.timerText = this.game.add.text(15, 15, "Time: "+ timedEvent.getProgress().toString().substr(0, 4), this.fontBig);
 
         // group with all active platforms.
         this.platformGroup = this.add.group({
@@ -174,11 +169,13 @@ class GameScene extends Phaser.Scene {
 
     update(){
 
-        text.setText(timedEvent.getProgress().toString().substr(0, 4)*100).setScale(2);
+        //Time elapsed
+        text.setText(Math.trunc(timedEvent.getProgress().toString().substr(0, 4)*100)).setScale(2);
  
         // game over
         if(this.player.y > this.game.config.height){
             this.scene.start('GameScene'); // restart to GameScene
+            score=0;
         }
         this.player.x = gameOptions.playerStartPosition;
  

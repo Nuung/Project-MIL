@@ -42,7 +42,8 @@ class BootScene extends BaseScene {
         percentText.setOrigin(0.5, 0.5);
 
         // loading the menu img
-        this.load.image("title_bg", "./src/img/title_bg.jpg");
+        //this.load.image("title_bg", "./src/img/title_bg.jpg");
+        this.load.image("title_bg", "./src/img/urban8.jpg");
         this.load.image("options_button", "./src/img/options_button.png");
         this.load.image("play_button", "./src/img/play_button.png");
         this.load.image("logo", "./src/img/logo.png");

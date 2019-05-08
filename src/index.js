@@ -17,7 +17,7 @@ const config = {
     roundPixels: true,
     parent: 'game_content',
     width: 800,
-    height: 600,
+    height: 595,
     backgroundColor: 0x444444,
     physics: {
         default: 'arcade',

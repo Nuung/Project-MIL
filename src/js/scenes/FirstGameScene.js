@@ -150,12 +150,7 @@ class FirstGameScene extends BaseScene {
  
         // game over
         if(this.player.y > this.game.config.height){
-<<<<<<< HEAD:src/js/scenes/GameScene.js
-            this.scene.start('GameScene'); // restart to GameScene
-            score=0;
-=======
             this.scene.start('FirstGameScene'); // restart to GameScene
->>>>>>> 38a93ecffc9d7d401b9a049aa7378ef9c681572d:src/js/scenes/FirstGameScene.js
         }
         this.player.x = gameOptions.playerStartPosition;
  

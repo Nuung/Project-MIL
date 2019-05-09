@@ -1,7 +1,6 @@
 import BaseScene from "./BaseScene";
 
 // global game options
-
 var timedEvent;
 var text;
 var scoreText;
@@ -84,7 +83,7 @@ class FirstGameScene extends BaseScene {
         this.player.setGravityY(gameOptions.playerGravity);
  
         // adding the enemyBox
-        this.enemyBox = this.physics.add.sprite(gameOptions.playerStartPosition + 320, this.game.config.height / 2, "enemyBox");
+        this.enemyBox = this.physics.add.sprite(gameOptions.playerStartPosition + 320, this.game.config.height / 2 + 150, "enemyBox");
         this.enemyBox.setGravityX(-20);
 
         // for limit enemyBox area -> using invisible wall

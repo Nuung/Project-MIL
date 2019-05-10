@@ -3,6 +3,9 @@ import Phaser from "phaser";
 import BootScene from './js/scenes/BootScene';
 import TitleScene from './js/scenes/TitleScene';
 import ScenePause from './js/scenes/ScenePause';
+import SimulationScene from './js/scenes/SimulationScene';
+import DiscussionScene from './js/scenes/DiscussionScene';
+import DescriptionScene from './js/scenes/DescriptionScene';
 
 // For Mini Game Scenes
 import WorldMap from './js/scenes/WorldMap';
@@ -30,6 +33,9 @@ const config = {
         TitleScene,
         WorldMap,
         ScenePause,
+        SimulationScene,
+        DiscussionScene,
+        DescriptionScene,
         FirstGameScene,
         SecondGameScene
     ]

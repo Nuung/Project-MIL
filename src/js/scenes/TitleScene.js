@@ -72,7 +72,7 @@ class TitleScene extends Phaser.Scene {
         playButton.on("pointerup", ()=>{ // starting the game -> to GameScene
             // super.changeScene('FirstGameScene');
             // console.log("open the gates please")
-            this.scene.start('FirstGameScene');    
+            this.scene.start('SecondGameScene');    
         })
 
         OptionButton.on("pointerover", ()=>{

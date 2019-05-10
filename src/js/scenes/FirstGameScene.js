@@ -1,7 +1,6 @@
 import BaseScene from "./BaseScene";
 
 // global game options
-
 var timedEvent;
 var text;
 var scoreText;
@@ -66,7 +65,6 @@ class FirstGameScene extends BaseScene {
                 this.scene.pause();
                 this.scene.launch('sceneP');
             //}
-            
         })
  
         // number of consecutive jumps made by the player
@@ -184,14 +182,9 @@ class FirstGameScene extends BaseScene {
         text.setText(Math.trunc(timedEvent.getProgress().toString().substr(0, 4)*100)).setScale(2);
  
         // game over
-<<<<<<< HEAD
         if(this.player.y > this.game.config.height){    
             this.scene.start('FirstGameScene'); // restart to GameScene
             score=0;
-=======
-        if(this.player.y > this.game.config.height){
-            this.scene.start('FirstGameScene'); // restart to GameScene
->>>>>>> 111c60af84290b071196c1fcf81c1bb1e8bf87eb
         }
         this.player.x = gameOptions.playerStartPosition;
  

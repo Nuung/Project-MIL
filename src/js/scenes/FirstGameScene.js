@@ -64,12 +64,7 @@ class FirstGameScene extends BaseScene {
                 console.log("Lets See");
                 this.scene.pause();
                 this.scene.launch('sceneP');
-<<<<<<< HEAD
-            }  
-=======
             //}
-            
->>>>>>> 11c21577820aa0fbd982778771f34d3284589b8d
         })
  
         // number of consecutive jumps made by the player

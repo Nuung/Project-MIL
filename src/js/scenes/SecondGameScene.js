@@ -18,23 +18,27 @@ class SecondGameScene extends BaseScene {
         this.background.setDisplaySize(this.game.config.width, this.game.config.height);
 
         // player assets
-        this.player = this.physics.add.sprite(this.game.config.width / 2, this.game.config.height / 2, "player");
+        this.player = this.physics.add.sprite(this.game.config.width / 2, this.game.config.height / 2, 'player');
         this.cursors = this.input.keyboard.createCursorKeys();
 
         // enemy assets (Objects to Avoid)
-        enemyGroup = this.game.add.group(); // create group
-
-    }
-
-    createNewEnemy() {
-        if (spawnAllowed) {
-            enemyGroup.create(x, y, cacheKey, frame); // add sprite to group
-            queueEnemy(this.game.rnd.integerInRange(2500, 5000));// call enemy queue for random between 2.5 and 5 seconds
-        }
-    }
-
-    queueEnemy(time) { // to prevent the collision -> using the queue
-        this.game.time.addOnce(time, createNewEnemy); // add a timer that gets called once, then auto disposes to create a new enemy after the time given
+        let hoverSprite = this.add.sprite(100, 100, 'cat'); // add test sprite
+        hoverSprite.setScale(2);
+        hoverSprite.setVisible(false);
+        enemyGroup = this.add.group(); // create group
+        
+        // Phaser.Math.Between(0, this.game.config.width) 
+        // Phaser.Math.Between(0, this.game.config.height)
+        
+        // animation (for test)
+        this.anims.create({
+            key: "walk",
+            frameRate: 4,
+            repeat: -1,   //repeat forever
+            frames: this.anims.generateFrameNumbers('cat', {
+                frames: [0,1,2,3]
+            })
+        })
     }
 
     update(){
@@ -60,10 +64,6 @@ class SecondGameScene extends BaseScene {
             this.player.setVelocityY(0);
             // player.anims.play('turn');
         }
-         
-        // if (cursors.up.isDown && player.body.touching.down) {
-        //     player.setVelocityY(-330);
-        // }
     }
 };
 

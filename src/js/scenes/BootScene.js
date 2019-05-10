@@ -53,11 +53,24 @@ class BootScene extends BaseScene {
         this.load.image("korea","./src/img/koreaflag.png");
         this.load.image("usa","./src/img/usaflag.png");
         this.load.image("france","./src/img/franceflag.png");
+        this.load.image("tabla","./src/img/tabla.png");
         this.load.spritesheet("cat", "./src/img/cat.png", {
             frameHeight: 32,
             frameWidth: 32
         });
-        this.load.audio("title_music", "./src/sounds/shuinvy-childhood.mp3");
+        this.load.spritesheet("bullier", "./src/img/monks.png", {
+            frameHeight: 32,
+            frameWidth: 32
+        });
+        this.load.spritesheet("mar", "./src/img/Girly.png", {
+            frameHeight: 32,
+            frameWidth: 32
+        });
+
+        //this.load.audio("title_music", "./src/sounds/shuinvy-childhood.mp3");
+        this.load.audio("title_music", "./src/sounds/Roots_of_Legend.mp3");
+
+        this.load.audio("hit", "./src/sounds/SFX_Hit01.ogg");
 
         let loadingBar = this.add.graphics({
             fillStyle: {

@@ -5,7 +5,7 @@ var timedEvent;
 var text;
 var scoreText;
 var score = 0;
-var primeravez=0; 
+//var primeravez=0; 
 
 let gameOptions = {
     platformStartSpeed: 350,
@@ -29,21 +29,17 @@ class FirstGameScene extends BaseScene {
             key: 'FirstGameScene'
         });
     }
+
     create(){
 
         // setting the back ground
         this.background = this.add.tileSprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 800, 600, "firstBackground");
 
-        // Ading pause btn and pause scene
-        let PauseButton = this.add.image(750,75,"pause").setScale(0.5).setDepth(1);
+        // Ading pause btn and pause scene and score and Time
+        let PauseButton = this.add.image(750,65,"pause").setScale(0.5).setDepth(1);
         scoreText = this.add.text(50, 50, 'Score: 0').setScale(2);
         timedEvent = this.time.addEvent({ delay: 100000, loop: true });
         text = this.add.text(this.game.config.width / 2, 50);
-
-        //this.timer = 0; // time elapsed in the current level
-        //this.totalTimer = 0; // time elapsed in the whole game
-
-        //this.timerText = this.game.add.text(15, 15, "Time: "+ timedEvent.getProgress().toString().substr(0, 4), this.fontBig);
 
         // group with all active platforms.
         this.platformGroup = this.add.group({
@@ -64,11 +60,16 @@ class FirstGameScene extends BaseScene {
         // to pause the game
         PauseButton.setInteractive();
         PauseButton.on("pointerup", ()=>{ 
-            if(primeravez==0){
+            //if(primeravez==0){
                 console.log("Lets See");
                 this.scene.pause();
                 this.scene.launch('sceneP');
+<<<<<<< HEAD
             }  
+=======
+            //}
+            
+>>>>>>> 11c21577820aa0fbd982778771f34d3284589b8d
         })
  
         // number of consecutive jumps made by the player
@@ -78,12 +79,46 @@ class FirstGameScene extends BaseScene {
         this.addPlatform(this.game.config.width, this.game.config.width / 2);
  
         // adding the player
-        this.player = this.physics.add.sprite(gameOptions.playerStartPosition, this.game.config.height / 2, "player");
+        this.player = this.physics.add.sprite(gameOptions.playerStartPosition, this.game.config.height / 2, "mar");
         this.player.setGravityY(gameOptions.playerGravity);
  
         // adding the enemyBox
-        this.enemyBox = this.physics.add.sprite(gameOptions.playerStartPosition + 320, this.game.config.height / 2 + 150, "enemyBox");
-        this.enemyBox.setGravityX(-20);
+        this.enemyBox = this.physics.add.sprite(gameOptions.playerStartPosition + 320, this.game.config.height / 2, "bullier");
+        this.enemyBox.setGravityX(-10);
+
+        //let hoverSprite = this.enemyBox.add.sprite(100, 100, "bullier");
+        this.enemyBox.setScale(2);
+        this.player.setScale(2);
+        //hoverSprite.setVisible(false);
+
+        this.anims.create({
+            key: "run",
+            frameRate: 4,
+            repeat: -1,   //repeat forever
+            frames: this.anims.generateFrameNumbers("bullier", {
+                frames: [6,7,8,9,10]
+            })
+        })
+        
+        /*this.anims.create({
+            key: "catmove",
+            frameRate: 4,
+            repeat: -1,   //repeat forever
+            frames: this.anims.generateFrameNumbers("cat", {
+                frames: [8,9,10,11]
+            })
+        })*/
+        this.anims.create({
+            key: "marmove",
+            frameRate: 4,
+            repeat: -1,   //repeat forever
+            frames: this.anims.generateFrameNumbers("mar", {
+                frames: [0,1,2,3,4,5]
+            })
+        })
+
+        this.player.play("marmove")
+        this.enemyBox.play("run");
 
         // for limit enemyBox area -> using invisible wall
         {
@@ -148,11 +183,13 @@ class FirstGameScene extends BaseScene {
 
     update(){
 
-        text.setText(timedEvent.getProgress().toString().substr(0, 4)*100).setScale(2);
+        //Time elapsed
+        text.setText(Math.trunc(timedEvent.getProgress().toString().substr(0, 4)*100)).setScale(2);
  
         // game over
-        if(this.player.y > this.game.config.height){
+        if(this.player.y > this.game.config.height){    
             this.scene.start('FirstGameScene'); // restart to GameScene
+            score=0;
         }
         this.player.x = gameOptions.playerStartPosition;
  

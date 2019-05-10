@@ -22,11 +22,11 @@ class SecondGameScene extends BaseScene {
         this.cursors = this.input.keyboard.createCursorKeys();
 
         // enemy assets (Objects to Avoid)
-        let hoverSprite = this.add.sprite(100, 100, 'cat'); // add test sprite
-        hoverSprite.setScale(2);
-        hoverSprite.setVisible(false);
+        this.hoverSprite = this.add.sprite(100, 100, 'cat'); // add test sprite
+        this.hoverSprite.setScale(2);
+        this.hoverSprite.setVisible(false);
         enemyGroup = this.add.group(); // create group
-        
+
         // Phaser.Math.Between(0, this.game.config.width) 
         // Phaser.Math.Between(0, this.game.config.height)
         

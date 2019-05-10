@@ -42,7 +42,8 @@ class BootScene extends BaseScene {
         percentText.setOrigin(0.5, 0.5);
 
         // loading the menu img
-        this.load.image("title_bg", "./src/img/title_bg.jpg");
+        //this.load.image("title_bg", "./src/img/title_bg.jpg");
+        this.load.image("title_bg", "./src/img/urban8.jpg");
         this.load.image("options_button", "./src/img/options_button.png");
         this.load.image("play_button", "./src/img/play_button.png");
         this.load.image("logo", "./src/img/logo.png");
@@ -52,11 +53,24 @@ class BootScene extends BaseScene {
         this.load.image("korea","./src/img/koreaflag.png");
         this.load.image("usa","./src/img/usaflag.png");
         this.load.image("france","./src/img/franceflag.png");
+        this.load.image("tabla","./src/img/tabla.png");
         this.load.spritesheet("cat", "./src/img/cat.png", {
             frameHeight: 32,
             frameWidth: 32
         });
-        this.load.audio("title_music", "./src/sounds/shuinvy-childhood.mp3");
+        this.load.spritesheet("bullier", "./src/img/monks.png", {
+            frameHeight: 32,
+            frameWidth: 32
+        });
+        this.load.spritesheet("mar", "./src/img/Girly.png", {
+            frameHeight: 32,
+            frameWidth: 32
+        });
+
+        //this.load.audio("title_music", "./src/sounds/shuinvy-childhood.mp3");
+        this.load.audio("title_music", "./src/sounds/Roots_of_Legend.mp3");
+
+        this.load.audio("hit", "./src/sounds/SFX_Hit01.ogg");
 
         let loadingBar = this.add.graphics({
             fillStyle: {
@@ -96,6 +110,7 @@ class BootScene extends BaseScene {
         
     }
     create(){
+        // super.changeScene('SimulationScene', "from the BootScene");
         this.scene.start('TitleScene');
     }
 }

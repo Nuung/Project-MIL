@@ -6,7 +6,7 @@ var timedEvent;
 var text;
 var scoreText;
 var score = 0;
-var primeravez=0; 
+//var primeravez=0; 
 
 let gameOptions = {
     platformStartSpeed: 350,
@@ -30,6 +30,7 @@ class FirstGameScene extends BaseScene {
             key: 'FirstGameScene'
         });
     }
+
     create(){
 
         // setting the back ground
@@ -60,11 +61,11 @@ class FirstGameScene extends BaseScene {
         // to pause the game
         PauseButton.setInteractive();
         PauseButton.on("pointerup", ()=>{ 
-            if(primeravez==0){
+            //if(primeravez==0){
                 console.log("Lets See");
                 this.scene.pause();
                 this.scene.launch('sceneP');
-            }
+            //}
             
         })
  
@@ -75,12 +76,46 @@ class FirstGameScene extends BaseScene {
         this.addPlatform(this.game.config.width, this.game.config.width / 2);
  
         // adding the player
-        this.player = this.physics.add.sprite(gameOptions.playerStartPosition, this.game.config.height / 2, "player");
+        this.player = this.physics.add.sprite(gameOptions.playerStartPosition, this.game.config.height / 2, "mar");
         this.player.setGravityY(gameOptions.playerGravity);
  
         // adding the enemyBox
-        this.enemyBox = this.physics.add.sprite(gameOptions.playerStartPosition + 320, this.game.config.height / 2, "enemyBox");
-        this.enemyBox.setGravityX(-20);
+        this.enemyBox = this.physics.add.sprite(gameOptions.playerStartPosition + 320, this.game.config.height / 2, "bullier");
+        this.enemyBox.setGravityX(-10);
+
+        //let hoverSprite = this.enemyBox.add.sprite(100, 100, "bullier");
+        this.enemyBox.setScale(2);
+        this.player.setScale(2);
+        //hoverSprite.setVisible(false);
+
+        this.anims.create({
+            key: "run",
+            frameRate: 4,
+            repeat: -1,   //repeat forever
+            frames: this.anims.generateFrameNumbers("bullier", {
+                frames: [6,7,8,9,10]
+            })
+        })
+        
+        /*this.anims.create({
+            key: "catmove",
+            frameRate: 4,
+            repeat: -1,   //repeat forever
+            frames: this.anims.generateFrameNumbers("cat", {
+                frames: [8,9,10,11]
+            })
+        })*/
+        this.anims.create({
+            key: "marmove",
+            frameRate: 4,
+            repeat: -1,   //repeat forever
+            frames: this.anims.generateFrameNumbers("mar", {
+                frames: [0,1,2,3,4,5]
+            })
+        })
+
+        this.player.play("marmove")
+        this.enemyBox.play("run");
 
         // for limit enemyBox area -> using invisible wall
         {
@@ -149,8 +184,14 @@ class FirstGameScene extends BaseScene {
         text.setText(Math.trunc(timedEvent.getProgress().toString().substr(0, 4)*100)).setScale(2);
  
         // game over
+<<<<<<< HEAD
+        if(this.player.y > this.game.config.height){    
+            this.scene.start('FirstGameScene'); // restart to GameScene
+            score=0;
+=======
         if(this.player.y > this.game.config.height){
             this.scene.start('FirstGameScene'); // restart to GameScene
+>>>>>>> 111c60af84290b071196c1fcf81c1bb1e8bf87eb
         }
         this.player.x = gameOptions.playerStartPosition;
  

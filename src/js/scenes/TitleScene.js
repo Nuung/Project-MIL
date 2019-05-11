@@ -4,7 +4,7 @@ import BaseScene from "./BaseScene";
 var music;
 var prueba = 0;
 
-class TitleScene extends Phaser.Scene {
+class TitleScene extends BaseScene {
     constructor(test) {
         super({
             key: 'TitleScene'
@@ -72,7 +72,7 @@ class TitleScene extends Phaser.Scene {
         playButton.on("pointerup", ()=>{ // starting the game -> to GameScene
             // super.changeScene('FirstGameScene');
             // console.log("open the gates please")
-            this.scene.start('FirstGameScene');    
+            this.changeScene("GameIntroductionScene", {nextDisplayItem:"FirstGameScene"});
         })
 
         OptionButton.on("pointerover", ()=>{

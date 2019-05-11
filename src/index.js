@@ -33,8 +33,8 @@ const config = {
         }
     },
     scene: [
-        GameIntroductionScene,
         BootScene,
+        GameIntroductionScene,
         TitleScene,
         WorldMap,
         ScenePause,

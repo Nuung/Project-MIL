@@ -6,6 +6,7 @@ import ScenePause from './js/scenes/ScenePause';
 import SimulationScene from './js/scenes/SimulationScene';
 import DiscussionScene from './js/scenes/DiscussionScene';
 import DescriptionScene from './js/scenes/DescriptionScene';
+import GameIntroductionScene from './js/scenes/GameIntroductionScene';
 
 // For Mini Game Scenes
 import WorldMap from './js/scenes/WorldMap';
@@ -22,6 +23,9 @@ const config = {
     width: 800,
     height: 595,
     backgroundColor: 0x444444,
+    dom: {
+        createContainer: true
+    },
     physics: {
         default: 'arcade',
         arcade: {
@@ -29,6 +33,7 @@ const config = {
         }
     },
     scene: [
+        GameIntroductionScene,
         BootScene,
         TitleScene,
         WorldMap,

@@ -71,7 +71,6 @@ class TitleScene extends BaseScene {
 
         playButton.on("pointerup", ()=>{ // starting the game -> to GameScene
             // super.changeScene('FirstGameScene');
-            // console.log("open the gates please")
             this.changeScene("GameIntroductionScene", {nextDisplayItem:"FirstGameScene"});
         })
 

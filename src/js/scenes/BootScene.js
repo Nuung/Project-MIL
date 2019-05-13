@@ -54,6 +54,7 @@ class BootScene extends BaseScene {
         this.load.image("usa","./src/img/usaflag.png");
         this.load.image("france","./src/img/franceflag.png");
         this.load.image("tabla","./src/img/tabla.png");
+        this.load.image("exit","./src/img/exitLeft.png");
         this.load.spritesheet("cat", "./src/img/cat.png", {
             frameHeight: 32,
             frameWidth: 32
@@ -103,9 +104,10 @@ class BootScene extends BaseScene {
         this.load.image("platform", "./src/img/testPlatform6432.png");
         this.load.image("player", "./src/img/testPlayer3232.png");
         this.load.image("enemyBox","./src/img/testEnemy3232.png");
-        this.load.image("pause", "./src/img/pause.png");
+        this.load.image("pause", "./src/img/pause2.png");
         this.load.image("invisible_wall","./src/img/invisible_wall.png")
-        this.load.image("firstBackground", "./src/img/Background_Level_1.bmp")
+        //this.load.image("firstBackground", "./src/img/Background_Level_1.bmp")
+        this.load.image("firstBackground", "./src/img/Blue.bmp")
         this.load.image("secondBackground", "./src/img/Background_Level_2.bmp")
         
     }

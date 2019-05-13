@@ -2,7 +2,7 @@
 {"frames": [
 
     {
-        "filename": "brick",
+        "filename": "stop",
         "frame": {"x":0,"y":0,"w":9,"h":5},
         "rotated": false,
         "trimmed": false,

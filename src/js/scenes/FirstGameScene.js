@@ -1,7 +1,6 @@
 import BaseScene from "./BaseScene";
 
 // global game options
-
 var timedEvent;
 var text;
 var scoreText;

@@ -6,6 +6,8 @@ var timedEvent;
 var text;
 var scoreText;
 var score = 0;
+var spacebar;
+var PButton;
 //var primeravez=0; 
 
 let gameOptions = {
@@ -33,11 +35,18 @@ class FirstGameScene extends BaseScene {
 
     create(){
 
+        //set sound effect when player hit enemy
+        let hitten = this.sound.add('hit',{loop:false});
+
+        //create the spacebar key
+        spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        PButton = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+
         // setting the back ground
         this.background = this.add.tileSprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 800, 600, "firstBackground");
 
         // Ading pause btn and pause scene and score and Time
-        let PauseButton = this.add.image(750,65,"pause").setScale(0.5).setDepth(1);
+        let PauseButton = this.add.image(750,65,"pause").setScale(0.8).setDepth(1);
         scoreText = this.add.text(50, 50, 'Score: 0').setScale(2);
         timedEvent = this.time.addEvent({ delay: 100000, loop: true });
         text = this.add.text(this.game.config.width / 2, 50);
@@ -61,12 +70,8 @@ class FirstGameScene extends BaseScene {
         // to pause the game
         PauseButton.setInteractive();
         PauseButton.on("pointerup", ()=>{ 
-            //if(primeravez==0){
-                console.log("Lets See");
-                this.scene.pause();
-                this.scene.launch('sceneP');
-            //}
-            
+            this.scene.pause();
+            this.scene.launch('sceneP');
         })
  
         // number of consecutive jumps made by the player
@@ -88,6 +93,7 @@ class FirstGameScene extends BaseScene {
         this.player.setScale(2);
         //hoverSprite.setVisible(false);
 
+        /////Animate the girl/boy and bullier
         this.anims.create({
             key: "run",
             frameRate: 4,
@@ -107,7 +113,7 @@ class FirstGameScene extends BaseScene {
         })*/
         this.anims.create({
             key: "marmove",
-            frameRate: 4,
+            frameRate: 5,
             repeat: -1,   //repeat forever
             frames: this.anims.generateFrameNumbers("mar", {
                 frames: [0,1,2,3,4,5]
@@ -137,6 +143,7 @@ class FirstGameScene extends BaseScene {
             console.log("collision event");
             score += 10;
             scoreText.setText('Points: '+score);
+            hitten.play();
         });
         this.enemyBox.setBounce(1.0);
         this.physics.add.collider(this.enemyBox, this.invisible_wallTop);
@@ -180,18 +187,26 @@ class FirstGameScene extends BaseScene {
 
     update(){
 
+        if (Phaser.Input.Keyboard.JustDown(spacebar)){
+            if(this.player.body.touching.down){
+                this.playerJumps = 0;
+            }
+            this.player.setVelocityY(gameOptions.jumpForce * -1);
+            this.playerJumps ++;
+        }
+
+        if (Phaser.Input.Keyboard.JustDown(PButton)){
+            this.scene.pause();
+            this.scene.launch('sceneP');
+        }
+
         //Time elapsed
         text.setText(Math.trunc(timedEvent.getProgress().toString().substr(0, 4)*100)).setScale(2);
  
         // game over
-<<<<<<< HEAD
         if(this.player.y > this.game.config.height){    
             this.scene.start('FirstGameScene'); // restart to GameScene
             score=0;
-=======
-        if(this.player.y > this.game.config.height){
-            this.scene.start('FirstGameScene'); // restart to GameScene
->>>>>>> 111c60af84290b071196c1fcf81c1bb1e8bf87eb
         }
         this.player.x = gameOptions.playerStartPosition;
  

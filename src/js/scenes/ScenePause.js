@@ -1,8 +1,10 @@
+import BaseScene from "./BaseScene";
+
 var ResumeText;
 
 var ScenePause = new Phaser.Class({
 
-    Extends: Phaser.Scene,
+    Extends: BaseScene,
 
     initialize:
 
@@ -18,17 +20,42 @@ var ScenePause = new Phaser.Class({
 
     create: function ()
     {
-        console.log("YA ENTRE WE")
+        //console.log("YA ENTRE WE")
         //this.add.image(400, 300, 'face').setAlpha(0.5);
-        ResumeText = this.add.text(this.game.config.width / 2 - 250, this.game.config.height / 2, 'Pulse anywhere to continue').setScale(2);
+        var W=this.game.config.width / 2;
+        var H=this.game.config.height / 2;
+        let ResumeText = this.add.text( W- 250, H+100, 'Pulse anywhere to continue').setScale(2);
 
-        this.add.image(10,10,'tabla').setScale(3);
+        let exitB= this.add.image(W,H,'exit');
 
-        this.input.once('pointerdown', function () {
-            this.scene.resume('FirstGameScene');
-            this.scene.stop();
-        }, this);
-        
+        exitB.setInteractive();
+        exitB.on("pointerdown", () => {
+            //this.scene.remove('FirstGameScene');
+            //this.scene.stop();
+            //this.scene.launch('TitleScene');
+            // this.changeScene('TitleScene');
+            console.log("Lets See");
+            
+            // this.scene.launch('TitleScene');
+        });
+
+        let pause = this.add.image(W,H,'tabla').setScale(3);
+
+        let contenedor = this.add.container(0,-300);
+        contenedor.add([ResumeText,pause,exitB]);
+
+        this.tweens.add({
+            targets: contenedor,
+            duration: 600,
+            ease: 'Power1',
+            y: 0
+        });
+
+         this.input.once('pointerdown', function () {
+             this.scene.resume('FirstGameScene');
+             this.scene.stop();
+         }, this);
+
         this.scene.bringToTop();
     }
 

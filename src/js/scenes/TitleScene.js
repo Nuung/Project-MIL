@@ -40,9 +40,9 @@ class TitleScene extends Phaser.Scene {
             seek: 0,
             loop: true,
             delay: 0,
-            //loop: true
         })
         music.play();
+
         //ANIMATION
         this.anims.create({
             key: "walk",
@@ -69,7 +69,7 @@ class TitleScene extends Phaser.Scene {
             console.log("out of here")
         })
 
-        playButton.on("pointerup", ()=>{ // starting the game -> to GameScene
+        playButton.on("pointerdown", ()=>{ // starting the game -> to GameScene
             // super.changeScene('FirstGameScene');
             // console.log("open the gates please")
             this.scene.start('SecondGameScene');    

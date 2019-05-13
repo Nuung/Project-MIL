@@ -1,4 +1,6 @@
 import StoryFactory from "./story/StoryFactory";
+import StoryMarkUp from "./story/StoryMarkup";
+
 
 class SimGameController{
     constructor(scene){
@@ -6,24 +8,39 @@ class SimGameController{
         this.initialId = 1;
         this.isStopped = false;
         this.scene = scene;
-        this.storyFact = null;
+        this.markup = new StoryMarkUp();
+        this.storyFact = new StoryFactory();
     }
     
     index(){
-        this.storyFact = new StoryFactory();
-        //this.loadChapter();
-        console.log("Booh");
-        //console.log(this.scene.cache.json.get("descriptions"));
         this.startStory();
     }
 
     startStory(){
         console.log("Start the Game");
+        this.loadNextChapter();
         
+        this.markup.setSimulationViewVisible("Discussion");
+        this.markup.setSimulationViewVisible("Description");
     }
 
-    loadChapter(){
-        //this.storyFact.createChapter(this.initialChapter,this.initialId);
+    loadNextChapter(){
+
+        // Create callback for the next chapter.
+        // load description or discussion;
+        // call back to load new chapter
+
+        // if(this.isStopped){
+        //     this.hasEnded();
+        // }else{
+        //     this.loadNextChapter();
+        // }
+        
+
+    }
+
+    hasEnded(){
+        this.scene.changeScene("BootScene");
     }
 }
 export default SimGameController;

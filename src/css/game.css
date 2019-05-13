@@ -1,0 +1,13 @@
+/*Game css*/
+#game_content{
+    color:white;
+}
+
+#game_content .introduction
+{
+    background-color:greenyellow;
+}
+/*
+button{
+    color:r;
+}*/

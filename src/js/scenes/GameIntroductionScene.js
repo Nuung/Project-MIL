@@ -2,7 +2,6 @@ import BaseScene from "./BaseScene";
 import StoryMarkUp from "../simulationGame/story/StoryMarkup";
 
 class GameIntroductionScene extends BaseScene{
-    
     constructor(){
         super("GameIntroductionScene");
         this.nextScene = "";
@@ -25,7 +24,7 @@ class GameIntroductionScene extends BaseScene{
         var element = this.add.dom(200, 100).createFromCache('intro');
         var paragraph = document.querySelector(".introduction p");
         element.setPerspective(0);
-        this.markUpStory.typeEffect(paragraph, 75, "This is the best story in the world!");
+        this.markUpStory.typeEffect(paragraph, 50, "This is the best story in the world!");
         
         element.addListener('click');
         element.on('click', (event) =>{

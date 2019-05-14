@@ -109,6 +109,7 @@ class BootScene extends BaseScene {
         //this.load.image("firstBackground", "./src/img/Background_Level_1.bmp")
         this.load.image("firstBackground", "./src/img/Blue.bmp")
         this.load.image("secondBackground", "./src/img/Background_Level_2.bmp")
+        this.load.image("worldmapBackground", "./src/img/V2World.png")
         
     }
     create(){

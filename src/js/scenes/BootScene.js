@@ -46,6 +46,11 @@ class BootScene extends BaseScene {
         this.load.image("title_bg", "./src/img/urban8.jpg");
         this.load.image("options_button", "./src/img/options_button.png");
         this.load.image("play_button", "./src/img/play_button.png");
+        
+        this.load.image("green3", "./src/img/greenbar3.png");
+        this.load.image("green2", "./src/img/greenbar2.png");
+        this.load.image("rect", "./src/img/start.jpg");
+
         this.load.image("logo", "./src/img/logo.png");
         this.load.image("on", "./src/img/icon_nofree.png");
         this.load.image("off", "./src/img/icon_nofree2.png");

@@ -1,8 +1,16 @@
 import BaseScene from "./BaseScene";
+import { setInterval } from "timers";
 
 // global game options
 var spawnAllowed = true; // check the value for spawn 
 var spawnTimer = 0;
+
+var timedEvent2;
+var text2;
+var scoreText2;
+
+var touch;
+var ResumeText;
 
 class SecondGameScene extends BaseScene {
 
@@ -13,6 +21,11 @@ class SecondGameScene extends BaseScene {
     }
 
     create(){
+
+        var W=this.game.config.width / 2;
+        var H=this.game.config.height / 2;
+
+        touch=0;
         // setting the back ground
         this.background = this.add.sprite(this.game.config.width / 2, this.game.config.height / 2, 'secondBackground');
         this.background.setDisplaySize(this.game.config.width, this.game.config.height);
@@ -20,6 +33,18 @@ class SecondGameScene extends BaseScene {
         // player assets
         this.player = this.physics.add.sprite(this.game.config.width / 2, this.game.config.height / 2, 'player');
         this.cursors = this.input.keyboard.createCursorKeys();
+
+        // Ading pause btn and pause scene and score and Time /// AKA HUD
+        let PauseButton2 = this.add.image(625,65,"pause").setScale(0.8).setDepth(1);
+        this.add.image(275,95, "green3").setScale(2); //original
+        //this.add.image(275,195, "green3").setScale(2);
+        this.Green = this.add.image(275,125, "green2").setScale(2);
+        scoreText2 = this.add.text(150, 100, 'Score: 0').setScale(2);
+        timedEvent2 = this.time.addEvent({ delay: 100000, loop: true });
+        text2 = this.add.text(this.game.config.width / 2, 50);
+        var start = this.add.image(400,300, "rect").setScale(0.6);
+
+        start.alpha = 0.5;
 
         // enemy assets (Objects to Avoid)
         // group with all active platforms.
@@ -37,6 +62,14 @@ class SecondGameScene extends BaseScene {
                 platform.scene.enemyGroup.add(platform);
             }
         });
+
+        // to pause the game
+        PauseButton2.setInteractive();
+        PauseButton2.on("pointerup", ()=>{ 
+            this.scene.pause();
+            //this.scene.start('sceneP', "hola");
+            this.scene.launch('sceneP', "2");
+        })
         
         // animation (for test)
         this.anims.create({
@@ -81,6 +114,25 @@ class SecondGameScene extends BaseScene {
         platform.play("walk");
     }
 
+    setPercent(percent){
+        percent=percent/100;
+        this.Green.setDisplaySize(300*percent*2, 145*2);
+        if(percent==0){
+        //    this.scene.pause();
+        //    ResumeText = this.add.text( this.game.config.width - 250, this.game.config.height+100, 'Pulse anywhere to continue').setScale(2);
+        //    this.input.once('pointerdown', function () {
+                this.scene.start('SecondGameScene');
+        //    }, this);
+   
+           //this.scene.bringToTop();
+            
+        }
+        //this.Green.width=145*percent;
+        //this.Green.rotation += 0.01;
+        //this.GreenW.update();
+        console.log(percent)
+    }
+
     update(){
         // char moving actions and Animations (keyboard isDown)
         if (this.cursors.left.isDown) {
@@ -105,6 +157,10 @@ class SecondGameScene extends BaseScene {
             // player.anims.play('turn');
         }
 
+
+        //Time elapsed
+        text2.setText(Math.trunc(timedEvent2.getProgress().toString().substr(0, 4)*100)).setScale(2);
+
         // recycling platforms
         this.enemyGroup.getChildren().forEach(function(platform){
             if(platform.x < - platform.displayWidth / 2 || platform.y < - platform.displayHeight / 2 ){
@@ -115,6 +171,9 @@ class SecondGameScene extends BaseScene {
             if(this.physics.overlap(this.player, platform, null, null, this)){
                 this.enemyGroup.killAndHide(platform);
                 this.enemyGroup.remove(platform);
+                touch++;
+                this.setPercent(50-touch*5);
+                console.log(touch);
             }
         }, this);
     

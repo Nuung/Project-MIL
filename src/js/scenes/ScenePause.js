@@ -1,6 +1,7 @@
 import BaseScene from "./BaseScene";
 
 var ResumeText;
+var recieved;
 
 var ScenePause = new Phaser.Class({
 
@@ -13,6 +14,11 @@ var ScenePause = new Phaser.Class({
         console.log("this is sceneP");
     },
 
+    init: function(data){
+        console.log('init', data);
+        recieved=data;
+    },
+
     preload: function ()
     {
         //this.load.image('face', 'assets/pics/bw-face.png');
@@ -20,7 +26,7 @@ var ScenePause = new Phaser.Class({
 
     create: function ()
     {
-        //console.log("YA ENTRE WE")
+        //console.log('Im good', recieved);
         //this.add.image(400, 300, 'face').setAlpha(0.5);
         var W=this.game.config.width / 2;
         var H=this.game.config.height / 2;
@@ -52,7 +58,11 @@ var ScenePause = new Phaser.Class({
         });
 
          this.input.once('pointerdown', function () {
-             this.scene.resume('FirstGameScene');
+             if(recieved=='1'){
+                this.scene.resume('FirstGameScene');
+             }else{
+                this.scene.resume('SecondGameScene');
+             }   
              this.scene.stop();
          }, this);
 

@@ -109,7 +109,7 @@ class SecondGameScene extends BaseScene {
             'cat'
         );
         
-        this.physics.moveTo(platform, this.player.x, this.player.y, Phaser.Math.Between(120, 240));
+        this.physics.moveTo(platform, this.player.x, this.player.y, Phaser.Math.Between(120, 200));
         this.enemyGroup.add(platform);
         platform.play("walk");
     }
@@ -143,11 +143,11 @@ class SecondGameScene extends BaseScene {
             this.player.setVelocityX(160);
             // player.anims.play('right', true);
         }
-        else if (this.cursors.up.isDown) {
+        else if (this.cursors.up.isDown && this.player.y > 0) {
             this.player.setVelocityY(-160);
             // player.anims.play('right', true);
         }
-        else if (this.cursors.down.isDown) {
+        else if (this.cursors.down.isDown && this.player.y < this.game.config.height) {
             this.player.setVelocityY(160);
             // player.anims.play('right', true);
         }

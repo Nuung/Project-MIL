@@ -30,7 +30,7 @@ class SecondGameScene extends BaseScene {
         this.background.setDisplaySize(this.game.config.width, this.game.config.height);
 
         // player assets
-        this.player = this.physics.add.sprite(this.game.config.width / 2, this.game.config.height / 2, 'player');
+        this.player = this.physics.add.sprite(this.game.config.width / 2, this.game.config.height / 2, 'person');
         this.cursors = this.input.keyboard.createCursorKeys();
 
         // Ading pause btn and pause scene and score and Time /// AKA HUD
@@ -40,9 +40,48 @@ class SecondGameScene extends BaseScene {
         scoreText2 = this.add.text(150, 100, 'Score: 0').setScale(2);
         timedEvent2 = this.time.addEvent({ delay: 100000, loop: true });
         text2 = this.add.text(this.game.config.width / 2, 50);
-        var start = this.add.image(400,300, "rect").setScale(0.6);
 
-        start.alpha = 0.5;
+        ////ANIMATE THE PERSON
+        ///front
+        this.anims.create({
+            key: "front",
+            frameRate: 5,
+            repeat: -1,   //repeat forever
+            frames: this.anims.generateFrameNumbers("person", {
+                frames: [0,1,2]
+            })
+        })
+        ///left
+        this.anims.create({
+            key: "left",
+            frameRate: 5,
+            repeat: -1,   //repeat forever
+            frames: this.anims.generateFrameNumbers("person", {
+                frames: [3,4,5]
+            })
+        })
+        ///right
+        this.anims.create({
+            key: "right",
+            frameRate: 5,
+            repeat: -1,   //repeat forever
+            frames: this.anims.generateFrameNumbers("person", {
+                frames: [6,7,8]
+            })
+        })
+        ///behind
+        this.anims.create({
+            key: "behind",
+            frameRate: 5,
+            repeat: -1,   //repeat forever
+            frames: this.anims.generateFrameNumbers("person", {
+                frames: [9,10,11]
+            })
+        })
+
+        //var start = this.add.image(400,300, "rect").setScale(0.6);
+
+        //start.alpha = 0.5;
 
         // enemy assets (Objects to Avoid)
         // group with all active platforms.
@@ -113,18 +152,22 @@ class SecondGameScene extends BaseScene {
         if (this.cursors.left.isDown) {
             this.player.setVelocityX(-160);
             // player.anims.play('left', true);
+            this.player.play("left");
         }
         else if (this.cursors.right.isDown) {
             this.player.setVelocityX(160);
             // player.anims.play('right', true);
+            this.player.play("right");
         }
         else if (this.cursors.up.isDown && this.player.y > 0) {
             this.player.setVelocityY(-160);
             // player.anims.play('right', true);
+            this.player.play("behind");
         }
         else if (this.cursors.down.isDown && this.player.y < this.game.config.height) {
             this.player.setVelocityY(160);
             // player.anims.play('right', true);
+            this.player.play("front");
         }
         else {
             this.player.setVelocityX(0);

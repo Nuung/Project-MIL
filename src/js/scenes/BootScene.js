@@ -64,12 +64,16 @@ class BootScene extends BaseScene {
             frameHeight: 32,
             frameWidth: 32
         });
-        this.load.spritesheet("bullier", "./src/img/monks.png", {
+        this.load.spritesheet("bullier", "./src/img/Hat1.png", {
             frameHeight: 32,
             frameWidth: 32
         });
         this.load.spritesheet("mar", "./src/img/Girly.png", {
             frameHeight: 32,
+            frameWidth: 32
+        });
+        this.load.spritesheet("person", "./src/img/ch2.png", {
+            frameHeight: 48,
             frameWidth: 32
         });
 

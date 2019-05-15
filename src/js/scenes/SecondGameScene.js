@@ -22,10 +22,9 @@ class SecondGameScene extends BaseScene {
 
     create(){
 
-        var W=this.game.config.width / 2;
-        var H=this.game.config.height / 2;
+        // for the HP bar
+        touch = 0;
 
-        touch=0;
         // setting the back ground
         this.background = this.add.sprite(this.game.config.width / 2, this.game.config.height / 2, 'secondBackground');
         this.background.setDisplaySize(this.game.config.width, this.game.config.height);
@@ -37,7 +36,6 @@ class SecondGameScene extends BaseScene {
         // Ading pause btn and pause scene and score and Time /// AKA HUD
         let PauseButton2 = this.add.image(625,65,"pause").setScale(0.8).setDepth(1);
         this.add.image(275,95, "green3").setScale(2); //original
-        //this.add.image(275,195, "green3").setScale(2);
         this.Green = this.add.image(275,125, "green2").setScale(2);
         scoreText2 = this.add.text(150, 100, 'Score: 0').setScale(2);
         timedEvent2 = this.time.addEvent({ delay: 100000, loop: true });
@@ -106,19 +104,8 @@ class SecondGameScene extends BaseScene {
         PauseButton2.setInteractive();
         PauseButton2.on("pointerup", ()=>{ 
             this.scene.pause();
-            //this.scene.start('sceneP', "hola");
             this.scene.launch('sceneP', "2");
-        })
-        
-        // animation (for test)
-        this.anims.create({
-            key: "walk",
-            frameRate: 4,
-            repeat: -1,   //repeat forever
-            frames: this.anims.generateFrameNumbers('cat', {
-                frames: [0,1,2,3]
-            })
-        })
+        });
 
         // to limit player area
         {
@@ -132,7 +119,6 @@ class SecondGameScene extends BaseScene {
             this.invisible_wallRight.fixedToCamera = true;
             this.invisible_wallRight.body.immovable = true;
             this.invisible_wallRight.body.allowGravity = false;
-        
             this.physics.add.collider(this.player, this.invisible_wallLeft);
             this.physics.add.collider(this.player, this.invisible_wallRight);
         }
@@ -145,31 +131,20 @@ class SecondGameScene extends BaseScene {
         
         platform = this.physics.add.sprite(Phaser.Math.Between(0, this.game.config.width), 
             Phaser.Math.Between(0, this.game.config.height), 
-            'cat'
-        );
+            'badWords'+ Phaser.Math.Between(1, 18)
+        ).setScale(0.5);
         
+        // the last parameter is speed
         this.physics.moveTo(platform, this.player.x, this.player.y, Phaser.Math.Between(120, 200));
         this.enemyGroup.add(platform);
-        platform.play("walk");
     }
 
     setPercent(percent){
-        percent=percent/100;
+        percent = percent/100;
         this.Green.setDisplaySize(300*percent*2, 145*2);
-        if(percent==0){
-        //    this.scene.pause();
-        //    ResumeText = this.add.text( this.game.config.width - 250, this.game.config.height+100, 'Pulse anywhere to continue').setScale(2);
-        //    this.input.once('pointerdown', function () {
-                this.scene.start('SecondGameScene');
-        //    }, this);
-   
-           //this.scene.bringToTop();
-            
+        if(percent == 0){
+            this.scene.start('SecondGameScene');            
         }
-        //this.Green.width=145*percent;
-        //this.Green.rotation += 0.01;
-        //this.GreenW.update();
-        console.log(percent)
     }
 
     update(){
@@ -199,7 +174,6 @@ class SecondGameScene extends BaseScene {
             this.player.setVelocityY(0);
             // player.anims.play('turn');
         }
-
 
         //Time elapsed
         text2.setText(Math.trunc(timedEvent2.getProgress().toString().substr(0, 4)*100)).setScale(2);

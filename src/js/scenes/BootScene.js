@@ -82,7 +82,7 @@ class BootScene extends BaseScene {
             fillStyle: {
                 color: 0xffffff  //white
             }
-        })
+        });
 
         this.load.on("progress", (percent)=>{
             //loadingBar.fillRect(0, this.game.renderer.height / 2, this.game.renderer.width * percent, 50);
@@ -91,11 +91,11 @@ class BootScene extends BaseScene {
             progressBar.clear();
             progressBar.fillStyle(0xffffff, 1);
             progressBar.fillRect(250, 280, 300 * percent, 30);
-        })
+        });
 
         this.load.on('fileprogress', function (file) {
             console.log(file.src);
-        })
+        });
 
         this.load.on("complete", ()=>{
             progressBar.destroy();
@@ -103,18 +103,23 @@ class BootScene extends BaseScene {
             loadingText.destroy();
             percentText.destroy();
             //this.scene.start(CST.SCENES.MENU, "hello from LoadScene");
-        })
+        });
 
-        // for FirstGameScene img
         this.load.image("platform", "./src/img/testPlatform6432.png");
         this.load.image("player", "./src/img/testPlayer3232.png");
         this.load.image("enemyBox","./src/img/testEnemy3232.png");
         this.load.image("pause", "./src/img/pause2.png");
-        this.load.image("invisible_wall","./src/img/invisible_wall.png")
-        //this.load.image("firstBackground", "./src/img/Background_Level_1.bmp")
-        this.load.image("firstBackground", "./src/img/Blue.bmp")
-        this.load.image("secondBackground", "./src/img/Background_Level_2.bmp")
-        this.load.image("worldmapBackground", "./src/img/V2World.png")
+        this.load.image("invisible_wall","./src/img/invisible_wall.png");
+        this.load.image("firstBackground", "./src/img/Blue.bmp");
+        this.load.image("secondBackground", "./src/img/Background_Level_2.bmp");
+        this.load.image("worldmapBackground", "./src/img/V2World.png");
+        this.load.image("badwordsprite", "./src/img/Word_Game_2.png");
+
+        // for ch2 game's bad words
+        for (let index = 1; index < 19; index++) {
+            this.load.image("badWords" + index, "./src/img/badWords/Artboard" + index + ".png");
+        }
+        
         
     }
     create(){

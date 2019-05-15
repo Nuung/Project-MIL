@@ -11,7 +11,7 @@ var PButton;
 
 let gameOptions = {
     platformStartSpeed: 350,
-    spawnRange: [100, 150], // Range of blocks (platform group)
+    spawnRange: [100, 140], // Range of blocks (platform group)
     platformSizeRange: [50, 250],
     playerGravity: 900,
     jumpForce: 400,
@@ -84,15 +84,12 @@ class FirstGameScene extends BaseScene {
         this.player.setGravityY(gameOptions.playerGravity);
  
         // adding the enemyBox
-        this.enemyBox = this.physics.add.sprite(gameOptions.playerStartPosition + 320, this.game.config.height / 2, "bullier");
+        this.enemyBox = this.physics.add.sprite(gameOptions.playerStartPosition + 320, this.game.config.height / 2 + 60, "bullier");
         this.enemyBox.setGravityX(-10);
-
-        //let hoverSprite = this.enemyBox.add.sprite(100, 100, "bullier");
         this.enemyBox.setScale(2);
         this.player.setScale(2);
-        //hoverSprite.setVisible(false);
 
-        /////Animate the girl/boy and bullier
+        // Animate the girl/boy and bullier
         this.anims.create({
             key: "run",
             frameRate: 4,
@@ -101,15 +98,7 @@ class FirstGameScene extends BaseScene {
                 frames: [6,7,8,9,10]
             })
         })
-        
-        /*this.anims.create({
-            key: "catmove",
-            frameRate: 4,
-            repeat: -1,   //repeat forever
-            frames: this.anims.generateFrameNumbers("cat", {
-                frames: [8,9,10,11]
-            })
-        })*/
+
         this.anims.create({
             key: "marmove",
             frameRate: 5,
@@ -144,7 +133,10 @@ class FirstGameScene extends BaseScene {
             scoreText.setText('Points: '+score);
             hitten.play();
         });
-        this.enemyBox.setBounce(1.0);
+
+        this.enemyBox.setBounce(1.5);
+        // this.enemyBox.body.checkCollision.up = false;
+        // this.enemyBox.body.checkCollision.down = false;
         this.physics.add.collider(this.enemyBox, this.invisible_wallTop);
         this.physics.add.collider(this.enemyBox, this.invisible_wallDown);
 
@@ -185,15 +177,26 @@ class FirstGameScene extends BaseScene {
     }
 
     update(){
+        this.player.x = gameOptions.playerStartPosition; // fix the player to the screen
 
-        if (Phaser.Input.Keyboard.JustDown(spacebar)){
-            if(this.player.body.touching.down){
-                this.playerJumps = 0;
-            }
-            this.player.setVelocityY(gameOptions.jumpForce * -1);
-            this.playerJumps ++;
+        // game over
+        if(this.player.y > this.game.config.height){    
+            this.scene.start('FirstGameScene'); // restart to GameScene
+            score=0;    
         }
 
+        // spacebar jump action
+        if (Phaser.Input.Keyboard.JustDown(spacebar)){
+            if(this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps)){
+                if(this.player.body.touching.down){
+                    this.playerJumps = 0;
+                } // most inner if
+                this.player.setVelocityY(gameOptions.jumpForce * -1);
+                this.playerJumps ++;
+            } // inner if
+        } // if
+
+        // when press the pause btn
         if (Phaser.Input.Keyboard.JustDown(PButton)){
             this.scene.pause();
             this.scene.launch('sceneP');
@@ -201,13 +204,6 @@ class FirstGameScene extends BaseScene {
 
         //Time elapsed
         text.setText(Math.trunc(timedEvent.getProgress().toString().substr(0, 4)*100)).setScale(2);
- 
-        // game over
-        if(this.player.y > this.game.config.height){    
-            this.scene.start('FirstGameScene'); // restart to GameScene
-            score=0;
-        }
-        this.player.x = gameOptions.playerStartPosition;
  
         // recycling platforms
         let minDistance = this.game.config.width;
@@ -239,6 +235,7 @@ class FirstGameScene extends BaseScene {
             this.enemyBox.y++;
             gameOptions.testCounter--;
         }
+
         // Limit minmun of Enemy's X position 
         if(this.enemyBox.x < 0){
             this.enemyBox.x += this.game.config.width;
@@ -248,27 +245,5 @@ class FirstGameScene extends BaseScene {
         this.background.tilePositionX += 0.9;
     }
 };
-
-
-
-// resize the canvas's size to fit any user
-/*
-function resize(){
-    let canvas = document.querySelector("canvas");
-    let windowWidth = window.innerWidth;
-    let windowHeight = window.innerHeight;
-    let windowRatio = windowWidth / windowHeight;
-    let gameRatio = game.config.width / game.config.height;
-    if(windowRatio < gameRatio){
-        canvas.style.width = windowWidth + "px";
-        canvas.style.height = (windowWidth / gameRatio) + "px";
-    }
-    else{
-        canvas.style.width = (windowHeight * gameRatio) + "px";
-        canvas.style.height = windowHeight + "px";
-    }
-}
-*/
-
 
 export default FirstGameScene;

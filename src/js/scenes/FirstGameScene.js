@@ -135,7 +135,7 @@ class FirstGameScene extends BaseScene {
             hitten.play();
         });
 
-        this.enemyBox.setBounce(1.5);
+        this.enemyBox.setBounce(0.9);
         // this.enemyBox.body.checkCollision.up = false;
         // this.enemyBox.body.checkCollision.down = false;
         this.physics.add.collider(this.enemyBox, this.invisible_wallTop);

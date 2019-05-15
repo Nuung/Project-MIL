@@ -98,7 +98,8 @@ class FirstGameScene extends BaseScene {
             frameRate: 4,
             repeat: -1,   //repeat forever
             frames: this.anims.generateFrameNumbers("bullier", {
-                frames: [6,7,8,9,10]
+                //frames: [6,7,8,9,10]
+                frames: [0,1,2,3]
             })
         })
         

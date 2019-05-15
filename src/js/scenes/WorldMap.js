@@ -26,9 +26,9 @@ class WorldMap extends BaseScene {
         this.FranceFlag = this.add.image(400, this.game.config.height - 400, "france").setScale(0.2);
 
         // draw the line from lands to flags 
-        line[0] = new Phaser.Curves.Line(0, 0, KoreaFlag.x, KoreaFlag.y);
-        line[1] = new Phaser.Curves.Line(0, 0, UsaFlag.x, UsaFlag.y);
-        line[2] = new Phaser.Curves.Line(0, 0, FranceFlag.x, FranceFlag.y);
+        // line[0] = new Phaser.Curves.Line(0, 0, KoreaFlag.x, KoreaFlag.y);
+        // line[1] = new Phaser.Curves.Line(0, 0, UsaFlag.x, UsaFlag.y);
+        // line[2] = new Phaser.Curves.Line(0, 0, FranceFlag.x, FranceFlag.y);
 
         // action for flags
         this.KoreaFlag.setInteractive();
@@ -43,14 +43,14 @@ class WorldMap extends BaseScene {
             this.scene.switch('SecondGameScene');
         })
     }
-    update(){
-        line[0].fromSprite(this.KoreaFlag, false);
-    }
-    render(){
-        for (let index = 0; index < line.length; index++) {
-            this.game.debug.geom(line[index]);
-        } // for
-    }
+    // update(){
+    //     line[0].fromSprite(this.KoreaFlag, false);
+    // }
+    // render(){
+    //     for (let index = 0; index < line.length; index++) {
+    //         this.game.debug.geom(line[index]);
+    //     } // for
+    // }
 }
 
 export default WorldMap

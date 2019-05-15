@@ -4,6 +4,9 @@ import BaseScene from "./BaseScene";
 var music;
 var prueba = 0;
 
+// for prevent click play in option
+var isOption = false;
+
 class TitleScene extends Phaser.Scene {
     constructor(test) {
         super({
@@ -72,8 +75,10 @@ class TitleScene extends Phaser.Scene {
         playButton.on("pointerdown", ()=>{ // starting the game -> to GameScene
             // super.changeScene('FirstGameScene');
             // console.log("open the gates please")
-            // this.scene.start('SecondGameScene');    
-            this.scene.start('WorldMap');    
+            // this.scene.start('SecondGameScene');
+            if(!isOption){
+                this.scene.start('WorldMap');
+            }
         })
 
         OptionButton.on("pointerover", ()=>{
@@ -90,6 +95,7 @@ class TitleScene extends Phaser.Scene {
 
         OptionButton.on("pointerup", ()=>{
             this.createWindow(OptionSetting);
+            isOption = true;
         })
     }
 
@@ -125,6 +131,7 @@ class OptionSetting extends Phaser.Scene {
         BackButton.setInteractive();
 
         BackButton.on("pointerup", ()=>{
+            isOption = false;
             this.scene.remove(this.handle);
         })
 

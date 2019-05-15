@@ -11,7 +11,7 @@ var PButton;
 
 let gameOptions = {
     platformStartSpeed: 350,
-    spawnRange: [100, 140], // Range of blocks (platform group)
+    spawnRange: [0, 10], // Range of blocks (platform group) 100 ~ 140 is good
     platformSizeRange: [50, 250],
     playerGravity: 900,
     jumpForce: 400,
@@ -135,7 +135,7 @@ class FirstGameScene extends BaseScene {
             hitten.play();
         });
 
-        this.enemyBox.setBounce(1.5);
+        this.enemyBox.setBounce(0.9);
         // this.enemyBox.body.checkCollision.up = false;
         // this.enemyBox.body.checkCollision.down = false;
         this.physics.add.collider(this.enemyBox, this.invisible_wallTop);

@@ -117,14 +117,16 @@ class BootScene extends BaseScene {
         this.load.image("firstBackground", "./src/img/Blue.bmp");
         this.load.image("secondBackground", "./src/img/Background_Level_2.bmp");
         this.load.image("worldmapBackground", "./src/img/V2World.png");
-        this.load.image("badwordsprite", "./src/img/Word_Game_2.png");
 
         // for ch2 game's bad words
         for (let index = 1; index < 19; index++) {
             this.load.image("badWords" + index, "./src/img/badWords/Artboard" + index + ".png");
         }
-        
-        
+
+        // for ch2 game's good words
+        for (let index = 1; index < 8; index++) {
+            this.load.image("goodWords" + index, "./src/img/goodWords/Artboard2" + index + ".png");
+        }        
     }
     create(){
         // super.changeScene('SimulationScene', "from the BootScene");

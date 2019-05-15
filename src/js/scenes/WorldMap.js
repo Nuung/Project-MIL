@@ -15,6 +15,14 @@ class WorldMap extends BaseScene {
     }
     create(){
 
+        let exitM= this.add.image(750,545,'exit');
+
+        // to go back to main menu
+        exitM.setInteractive();
+        exitM.on("pointerup", ()=>{
+            this.scene.switch('TitleScene');
+        })
+
         // setting the back ground
         this.cameras.main.setBackgroundColor('#add8e6');
         this.background = this.add.sprite(this.game.config.width / 2, this.game.config.height / 2, 'worldmapBackground');

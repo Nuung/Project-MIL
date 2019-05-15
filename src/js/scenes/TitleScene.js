@@ -73,7 +73,7 @@ class TitleScene extends Phaser.Scene {
             // super.changeScene('FirstGameScene');
             // console.log("open the gates please")
             // this.scene.start('SecondGameScene');    
-            this.scene.start('WorldMap');    
+            this.scene.switch('WorldMap');    
         })
 
         OptionButton.on("pointerover", ()=>{
@@ -119,7 +119,7 @@ class OptionSetting extends Phaser.Scene {
 
         // It should be changed relative to the window size.
         var MusicButton = this.add.image(730,530,"on").setScale(0.15).setDepth(1);
-        var BackButton = this.add.image(50,530,"back").setScale(0.2).setDepth(1);
+        var BackButton = this.add.image(70,530,"back").setScale(0.2).setDepth(1);
 
         MusicButton.setInteractive();
         BackButton.setInteractive();

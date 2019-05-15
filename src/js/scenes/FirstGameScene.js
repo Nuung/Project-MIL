@@ -44,7 +44,7 @@ class FirstGameScene extends BaseScene {
         // setting the back ground
         this.background = this.add.tileSprite(this.cameras.main.width / 2, this.cameras.main.height / 2, 800, 600, "firstBackground");
 
-        // Ading pause btn and pause scene and score and Time
+        // Ading pause btn and pause scene and score and Time /// AKA HUD
         let PauseButton = this.add.image(750,65,"pause").setScale(0.8).setDepth(1);
         scoreText = this.add.text(50, 50, 'Score: 0').setScale(2);
         timedEvent = this.time.addEvent({ delay: 100000, loop: true });
@@ -70,7 +70,7 @@ class FirstGameScene extends BaseScene {
         PauseButton.setInteractive();
         PauseButton.on("pointerup", ()=>{ 
             this.scene.pause();
-            this.scene.launch('sceneP');
+            this.scene.launch('sceneP', "1");
         })
  
         // number of consecutive jumps made by the player

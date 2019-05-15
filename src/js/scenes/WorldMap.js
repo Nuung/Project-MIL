@@ -1,5 +1,8 @@
 import BaseScene from "./BaseScene";
 
+// line drawing setting
+var line = new Array(3);
+
 class WorldMap extends BaseScene {
     constructor(test) {
         super({
@@ -8,6 +11,7 @@ class WorldMap extends BaseScene {
         //console.log("TitleScene Constructor Data : RECIEVED data ; "+test);
     }
     init(data){
+
     }
     create(){
 
@@ -17,23 +21,35 @@ class WorldMap extends BaseScene {
         this.background.setDisplaySize(this.game.config.width, this.game.config.height);
 
         // setting the interactive flags
-        let KoreaFlag = this.add.image(this.game.config.width - 120, this.game.config.height - 350, "korea").setScale(0.05);
-        let UsaFlag = this.add.image(100, this.game.config.height - 350, "usa").setScale(0.06);
-        let FranceFlag = this.add.image(400, this.game.config.height - 400, "france").setScale(0.2);
+        this.KoreaFlag = this.add.image(this.game.config.width - 120, this.game.config.height - 350, "korea").setScale(0.05);
+        this.UsaFlag = this.add.image(100, this.game.config.height - 350, "usa").setScale(0.06);
+        this.FranceFlag = this.add.image(400, this.game.config.height - 400, "france").setScale(0.2);
+
+        // draw the line from lands to flags 
+        line[0] = new Phaser.Curves.Line(0, 0, KoreaFlag.x, KoreaFlag.y);
+        line[1] = new Phaser.Curves.Line(0, 0, UsaFlag.x, UsaFlag.y);
+        line[2] = new Phaser.Curves.Line(0, 0, FranceFlag.x, FranceFlag.y);
 
         // action for flags
-        KoreaFlag.setInteractive();
-        UsaFlag.setInteractive();
-        FranceFlag.setInteractive();
-        Text = this.add.text(80, 100, 'Choose the country you want to go').setScale(2);
+        this.KoreaFlag.setInteractive();
+        this.UsaFlag.setInteractive();
+        this.FranceFlag.setInteractive();
+        this.infoText = this.add.text(80, 100, 'Choose the country you want to go').setScale(2);
 
-        KoreaFlag.on("pointerup", () => {
+        this.KoreaFlag.on("pointerup", () => {
             this.scene.switch('FirstGameScene');
         })
-        UsaFlag.on("pointerup", () => {
+        this.UsaFlag.on("pointerup", () => {
             this.scene.switch('SecondGameScene');
         })
-        
+    }
+    update(){
+        line[0].fromSprite(this.KoreaFlag, false);
+    }
+    render(){
+        for (let index = 0; index < line.length; index++) {
+            this.game.debug.geom(line[index]);
+        } // for
     }
 }
 

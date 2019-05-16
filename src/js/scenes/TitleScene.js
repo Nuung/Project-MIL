@@ -75,15 +75,10 @@ class TitleScene extends Phaser.Scene {
         playButton.on("pointerdown", ()=>{ // starting the game -> to GameScene
             // super.changeScene('FirstGameScene');
             // console.log("open the gates please")
-<<<<<<< HEAD
-            // this.scene.start('SecondGameScene');    
-            this.scene.switch('WorldMap');    
-=======
             // this.scene.start('SecondGameScene');
             if(!isOption){
-                this.scene.start('WorldMap');
+                this.scene.switch('WorldMap');
             }
->>>>>>> 7a3a76e70cd8cd554a5b06214f7609d5447b7d1b
         })
 
         OptionButton.on("pointerover", ()=>{

@@ -98,13 +98,6 @@ class SecondGameScene extends BaseScene {
             }
         });
 
-<<<<<<< HEAD
-        // to go back to world
-        exitD.setInteractive();
-        exitD.on("pointerup", ()=>{
-            this.scene.start('WorldMap');
-        })
-=======
         // team assets (Objects to get -> for score, good words) group with all active platforms.
         this.teamGroup = this.add.group({
             // once a platform is removed, it's added to the pool
@@ -120,7 +113,12 @@ class SecondGameScene extends BaseScene {
                 platform.scene.teamGroup.add(platform);
             }
         });
->>>>>>> 7a3a76e70cd8cd554a5b06214f7609d5447b7d1b
+
+        // to go back to world
+        exitD.setInteractive();
+        exitD.on("pointerup", ()=>{
+            this.scene.start('WorldMap');
+        })
 
         // to pause the game
         PauseButton2.setInteractive();

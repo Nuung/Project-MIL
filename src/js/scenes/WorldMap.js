@@ -45,7 +45,8 @@ class WorldMap extends BaseScene {
         this.infoText = this.add.text(80, 100, 'Choose the country you want to go').setScale(2);
 
         this.KoreaFlag.on("pointerup", () => {
-            this.scene.switch('FirstGameScene');
+            //this.scene.switch('FirstGameScene');
+            this.scene.switch('PreFirst');
         })
         this.UsaFlag.on("pointerup", () => {
             this.scene.switch('SecondGameScene');

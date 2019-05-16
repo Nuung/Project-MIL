@@ -11,6 +11,7 @@ import DescriptionScene from './js/scenes/DescriptionScene';
 import WorldMap from './js/scenes/WorldMap';
 import FirstGameScene from './js/scenes/FirstGameScene';
 import SecondGameScene from './js/scenes/SecondGameScene';
+import PreFirst from './js/scenes/PreFirst';
 
 
 const config = {
@@ -25,7 +26,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true
+            debug: false//true
         }
     },
     scene: [
@@ -37,7 +38,8 @@ const config = {
         DiscussionScene,
         DescriptionScene,
         FirstGameScene,
-        SecondGameScene
+        SecondGameScene,
+        PreFirst
     ]
 };
 

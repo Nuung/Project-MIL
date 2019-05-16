@@ -1,14 +1,22 @@
+import BaseScene from "./BaseScene";
+
 var ResumeText;
+var recieved;
 
 var ScenePause = new Phaser.Class({
 
-    Extends: Phaser.Scene,
+    Extends: BaseScene,
 
     initialize:
 
     function ScenePause (){
         Phaser.Scene.call(this, { key: 'sceneP' });
         console.log("this is sceneP");
+    },
+
+    init: function(data){
+        console.log('init', data);
+        recieved=data;
     },
 
     preload: function ()
@@ -18,14 +26,47 @@ var ScenePause = new Phaser.Class({
 
     create: function ()
     {
-        //console.log("YA ENTRE WE")
+        //console.log('Im good', recieved);
         //this.add.image(400, 300, 'face').setAlpha(0.5);
-        ResumeText = this.add.text(this.game.config.width / 2 - 250, this.game.config.height / 2, 'Pulse anywhere to continue').setScale(2);
+        var W=this.game.config.width / 2;
+        var H=this.game.config.height / 2;
+        let ResumeText = this.add.text( W- 250, H+100, 'Pulse anywhere to continue').setScale(2);
 
-        this.input.once('pointerdown', function () {
-            this.scene.resume('FirstGameScene');
-            this.scene.stop();
-        }, this);
+        let exitB= this.add.image(W,H,'exit');
+
+        exitB.setInteractive();
+        exitB.on("pointerdown", () => {
+            //this.scene.remove('FirstGameScene');
+            //this.scene.stop();
+            //this.scene.launch('TitleScene');
+            // this.changeScene('TitleScene');
+            console.log("Lets See");
+            
+            // this.scene.launch('TitleScene');
+        });
+
+        let pause = this.add.image(W,H,'tabla').setScale(3);
+
+        let contenedor = this.add.container(0,-300);
+        contenedor.add([ResumeText,pause,exitB]);
+
+        this.tweens.add({
+            targets: contenedor,
+            duration: 600,
+            ease: 'Power1',
+            y: 0
+        });
+
+         this.input.once('pointerdown', function () {
+             if(recieved=='1'){
+                this.scene.resume('FirstGameScene');
+             }else{
+                this.scene.resume('SecondGameScene');
+             }   
+             this.scene.stop();
+         }, this);
+
+        this.scene.bringToTop();
     }
 
 });

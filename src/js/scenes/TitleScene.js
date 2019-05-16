@@ -4,6 +4,9 @@ import BaseScene from "./BaseScene";
 var music;
 var prueba = 0;
 
+// for prevent click play in option
+var isOption = false;
+
 class TitleScene extends BaseScene {
     constructor(test) {
         super({
@@ -40,9 +43,9 @@ class TitleScene extends BaseScene {
             seek: 0,
             loop: true,
             delay: 0,
-            //loop: true
         })
         music.play();
+
         //ANIMATION
         this.anims.create({
             key: "walk",
@@ -69,26 +72,31 @@ class TitleScene extends BaseScene {
             console.log("out of here")
         })
 
-        playButton.on("pointerup", ()=>{ // starting the game -> to GameScene
+        playButton.on("pointerdown", ()=>{ // starting the game -> to GameScene
             // super.changeScene('FirstGameScene');
-            this.changeScene("GameIntroductionScene", {nextDisplayItem:"FirstGameScene"});
-        })
+            // console.log("open the gates please")
+            // this.scene.start('SecondGameScene');
+            if(!isOption){
+                this.changeScene("GameIntroductionScene", {nextDisplayItem:"WorldMap"});
+            }
+        });
 
         OptionButton.on("pointerover", ()=>{
             hoverSprite.setVisible(true);
             hoverSprite.play("walk");
             hoverSprite.x = playButton.x - playButton.width;
             hoverSprite.y = playButton.y + 100;
-        })
+        });
 
         OptionButton.on("pointerout", ()=>{
             hoverSprite.setVisible(false);
             console.log("out of here")
-        })
+        });
 
         OptionButton.on("pointerup", ()=>{
             this.createWindow(OptionSetting);
-        })
+            isOption = true;
+        });
     }
 
     createWindow(func) {
@@ -123,6 +131,7 @@ class OptionSetting extends Phaser.Scene {
         BackButton.setInteractive();
 
         BackButton.on("pointerup", ()=>{
+            isOption = false;
             this.scene.remove(this.handle);
         })
 

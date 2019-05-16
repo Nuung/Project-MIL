@@ -35,13 +35,14 @@ class SecondGameScene extends BaseScene {
         this.player = this.physics.add.sprite(this.game.config.width / 2, this.game.config.height / 2, 'person');
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        // Ading pause btn and pause scene and score and Time /// AKA HUD
+        // Ading pause btn and pause scene and score and Time and exit/// AKA HUD
         let PauseButton2 = this.add.image(625,65,"pause").setScale(0.8).setDepth(1);
         this.add.image(275,95, "green3").setScale(2); //original
         this.Green = this.add.image(275,125, "green2").setScale(2);
         scoreText2 = this.add.text(150, 100, "Score: " + scorePoint).setScale(2);
         timedEvent2 = this.time.addEvent({ delay: 100000, loop: true });
         text2 = this.add.text(this.game.config.width / 2, 50);
+        let exitD= this.add.image(625,105,'exit');
 
         ////ANIMATE THE PERSON
         ///front
@@ -112,6 +113,12 @@ class SecondGameScene extends BaseScene {
                 platform.scene.teamGroup.add(platform);
             }
         });
+
+        // to go back to world
+        exitD.setInteractive();
+        exitD.on("pointerup", ()=>{
+            this.scene.start('WorldMap');
+        })
 
         // to pause the game
         PauseButton2.setInteractive();

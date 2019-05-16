@@ -77,27 +77,26 @@ class TitleScene extends BaseScene {
             // console.log("open the gates please")
             // this.scene.start('SecondGameScene');
             if(!isOption){
-                this.scene.start('WorldMap');
+                this.changeScene("GameIntroductionScene", {nextDisplayItem:"WorldMap"});
             }
-            this.changeScene("GameIntroductionScene", {nextDisplayItem:"FirstGameScene"});
-        })
+        });
 
         OptionButton.on("pointerover", ()=>{
             hoverSprite.setVisible(true);
             hoverSprite.play("walk");
             hoverSprite.x = playButton.x - playButton.width;
             hoverSprite.y = playButton.y + 100;
-        })
+        });
 
         OptionButton.on("pointerout", ()=>{
             hoverSprite.setVisible(false);
             console.log("out of here")
-        })
+        });
 
         OptionButton.on("pointerup", ()=>{
             this.createWindow(OptionSetting);
             isOption = true;
-        })
+        });
     }
 
     createWindow(func) {

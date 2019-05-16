@@ -31,7 +31,6 @@ const config = {
         }
     },
     scene: [
-        SimulationScene,
         BootScene,
         GameIntroductionScene,
         TitleScene,

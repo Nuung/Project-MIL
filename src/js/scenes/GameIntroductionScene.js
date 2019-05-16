@@ -21,17 +21,23 @@ class GameIntroductionScene extends BaseScene{
 
     create(){
         //var paragraph = document.createElement('p');
-        var element = this.add.dom(200, 100).createFromCache('intro');
-        var paragraph = document.querySelector(".introduction p");
-        element.setPerspective(0);
-        this.markUpStory.typeEffect(paragraph, 50, "This is the best story in the world!");
-        
-        element.addListener('click');
-        element.on('click', (event) =>{
-        if(event.target.name === "skipbutton"){
+        this.add.dom(400,300).createFromCache('intro');
+        var paragraph = document.querySelector("#introduction p");
+        var tex = "Lorem ipsum dolor sit amet, consectetur adipiscing elit."+
+        "Aenean vel accumsan dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus." +
+        "Fusce nunc nibh, auctor tincidunt sollicitudin eu, fringilla vitae sapien. Nunc quis feugiat ex, ut faucibus enim. Morbi lectus eros, pulvinar a cursus a, aliquet at diam. Integer sit amet finibus diam, ut volutpat quam. Duis maximus molestie leo, in laoreet sem facilisis at. Proin nec pulvinar felis. Sed fringilla quis sapien sed placerat. Aenean turpis sem, auctor vel luctus ut, laoreet a velit. Aenean eget sodales arcu. Vivamus luctus, sapien in hendrerit ultrices, %lorem ante ultrices libero, eu aliquet orci quam eget quam."+
+        "Aenean vel accumsan dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus." +
+        "Aenean vel accumsan dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus." +
+        "%Aenean vel accumsan dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus." +
+        "Aenean vel accumsan dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus." +
+        "Aenean vel accumsan dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus." +
+        "Aenean vel accumsan dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus." +
+        "Aenean vel accumsan dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus." +
+        "Aenean vel accumsan dolor. Interdum et malesuada fames ac ante ipsum primis in faucibus.";
+        this.markUpStory.typeEffect(paragraph, 1 , tex);
+        document.querySelector("#introduction button").addEventListener("click", ()=>{
             this.changeScene("FirstGameScene");
-        }   
-        });
+        }); 
     }
 }
 export default GameIntroductionScene;

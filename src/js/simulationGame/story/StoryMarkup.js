@@ -1,22 +1,34 @@
 class StoryMarkUp{
     typeEffect(paragraphElement = null, speed = 0, insertText = ""){
+        const skippingSign = "%";
         var text = "";
-        paragraphElement.innerText = "";
+        paragraphElement.innerHTML = "";
         if(insertText.length > 0){
             text = insertText;
         }else{
             text = "Text is not found";
         }
-        console.log(text);
-        var i = 0;
-        var timer = setInterval(function(){
-            if(i < text.length){
-                paragraphElement.innerHTML += text.charAt(i);
-                i++;
-            }else{
-                clearInterval(timer);
-            }
-        }, speed);
+        var button = document.querySelector("#introduction button");
+        if(speed === 0){
+            text = text.replace("%", '');
+            button.disabled = false;
+            paragraphElement.innerHTML += text;
+        }else{
+            var i = 0;
+            var timer = setInterval(function(){
+                if(text.charAt(i) === skippingSign || i === insertText.length-2){
+                    button.disabled = false;
+                    i++;
+                }
+                if(i < text.length){
+                    paragraphElement.innerHTML += text.charAt(i);
+                    i++;
+                }else{
+                        clearInterval(timer);
+                }            
+            }, speed);
+        }
+
     }
 
 

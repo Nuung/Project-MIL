@@ -9,8 +9,9 @@ import WorldMap from './js/scenes/WorldMap';
 import GameIntroductionScene from './js/scenes/GameIntroductionScene';
 import FirstGameScene from './js/scenes/FirstGameScene';
 import SecondGameScene from './js/scenes/SecondGameScene';
-import SimulationScene from './js/scenes/SimulationScene';
 
+import SimulationScene from './js/scenes/SimulationScene';
+import PreFirst from './js/scenes/PreFirst';
 
 const config = {
     // For more settings see <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
@@ -27,7 +28,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true
+            debug: false//true
         }
     },
     scene: [
@@ -37,7 +38,8 @@ const config = {
         WorldMap,
         ScenePause,
         FirstGameScene,
-        SecondGameScene
+        SecondGameScene,
+        PreFirst
     ]
 };
 

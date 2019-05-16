@@ -51,6 +51,10 @@ class BootScene extends BaseScene {
         this.load.image("green2", "./src/img/greenbar2.png");
         this.load.image("rect", "./src/img/start.jpg");
 
+        this.load.image("font", "./src/font/font.png");
+        this.load.json("fontJSON","./src/font/font.json");
+
+
         this.load.image("logo", "./src/img/logo.png");
         this.load.image("on", "./src/img/icon_nofree.png");
         this.load.image("off", "./src/img/icon_nofree2.png");
@@ -60,6 +64,7 @@ class BootScene extends BaseScene {
         this.load.image("france","./src/img/franceflag.png");
         this.load.image("tabla","./src/img/tabla.png");
         this.load.image("exit","./src/img/exitLeft.png");
+        this.load.image("exitR","./src/img/exitRight.png");
         this.load.spritesheet("cat", "./src/img/cat.png", {
             frameHeight: 32,
             frameWidth: 32
@@ -130,6 +135,8 @@ class BootScene extends BaseScene {
     }
     create(){
         // super.changeScene('SimulationScene', "from the BootScene");
+        const configFont = this.cache.json.get('fontJSON');
+        this.cache.bitmapFont.add('font', Phaser.GameObjects.RetroFont.Parse(this, configFont));
         this.scene.start('TitleScene');
     }
 }

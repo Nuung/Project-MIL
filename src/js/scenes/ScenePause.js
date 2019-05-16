@@ -40,7 +40,7 @@ var ScenePause = new Phaser.Class({
             //this.scene.stop();
             //this.scene.launch('TitleScene');
             // this.changeScene('TitleScene');
-            console.log("Lets See");
+            console.log("Lets See from pause scene");
             
             // this.scene.launch('TitleScene');
         });

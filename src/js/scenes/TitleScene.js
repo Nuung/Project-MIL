@@ -8,11 +8,13 @@ var prueba = 0;
 // for prevent click play in option
 var isOption = false;
 
-class TitleScene extends Phaser.Scene {
+
+class TitleScene extends BaseScene {
     constructor(test) {
         super({
             key: 'TitleScene'
         });
+
       //  console.log("TitleScene Constructor Data : RECIEVED data ; "+test);
     }
     init(data){
@@ -20,9 +22,7 @@ class TitleScene extends Phaser.Scene {
        // console.log(data);
     }
     create(){
-        console.log("Hey hey!");
-        console.log(i18next.t('title'));
-        console.log(i18next.t('play'));
+
 
         //CREATE IMAGES
         this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.20, "logo").setDepth(1);
@@ -37,6 +37,33 @@ class TitleScene extends Phaser.Scene {
         hoverSprite.setScale(2);
         hoverSprite.setVisible(false);
 
+        var loc =  [
+            {
+                "country":"unitedKingdom",
+                "language":"en"
+            },{
+                "country":"netherlands",
+                "language":"nl"
+            },{
+                "country":"korea",
+                "language":"ko"
+            }
+        ];
+
+        var i;
+        for(i = 0; i < loc.length; i++){
+            var localButton = this.add.image(300 + (i*100), this.game.config.height - 75, loc[i].country).setScale(0.06);
+            localButton.setInteractive();
+            var variable = loc[i].language;
+            var id = i18next;
+            var langCallback = function(locStr,i18n){
+                return function(){
+                    i18n.changeLanguage(locStr);
+                    console.log(locStr);
+                }
+            }(variable,id);
+            localButton.on("pointerup",langCallback);
+        }
         //SOUND!
         //this.sound.pauseOnBlur = false; //only to keep playing music
         music = this.sound.add("title_music", {
@@ -100,7 +127,7 @@ class TitleScene extends Phaser.Scene {
         OptionButton.on("pointerup", ()=>{
             this.createWindow(OptionSetting);
             isOption = true;
-        })
+        });
     }
 
     createWindow(func) {

@@ -1,4 +1,5 @@
 import BaseScene from "./BaseScene";
+import i18next from "i18next";
 
 class BootScene extends BaseScene {
     constructor(test) {
@@ -22,7 +23,7 @@ class BootScene extends BaseScene {
         var loadingText = this.make.text({
             x: width / 2,
             y: height / 2 - 50,
-            text: 'Loading...',
+            text: i18next.t("loading")+"...",
             style: {
                 font: '20px monospace',
                 fill: '#ffffff'
@@ -60,6 +61,8 @@ class BootScene extends BaseScene {
         this.load.image("off", "./src/img/icon_nofree2.png");
         this.load.image("back", "./src/img/Back_b.png");
         this.load.image("korea","./src/img/koreaflag.png");
+        this.load.image("netherlands","./src/img/netherlandsflag.png");
+        this.load.image("unitedKingdom","./src/img/unitedkingdomflag.png");
         this.load.image("usa","./src/img/usaflag.png");
         this.load.image("france","./src/img/franceflag.png");
         this.load.image("tabla","./src/img/tabla.png");

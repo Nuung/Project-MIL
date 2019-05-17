@@ -16,7 +16,6 @@ import SecondGameScene from './js/scenes/SecondGameScene';
 import PreFirst from './js/scenes/PreFirst';
 
 
-
 const config = {
     // For more settings see <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
     type: Phaser.AUTO,
@@ -49,7 +48,7 @@ const config = {
 const game = new Phaser.Game(config); // eslint-disable-line no-unused-vars
 
 let i18nOptions ={
-    lng: 'nl',
+    lng: 'en',
     fallbackLng: ["en", "nl",'es','ko'],
     //load:['nl','en'],
     loadPath: '/locales/{{lng}}/{{ns}}.json',
@@ -61,6 +60,6 @@ i18next
     .init(i18nOptions, (err, t) => {
         if (err) return console.log('something went wrong loading', err);
         t('key'); // -> same as i18next.t
-      });
+    });
 
 

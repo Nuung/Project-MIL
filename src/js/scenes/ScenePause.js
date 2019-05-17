@@ -1,4 +1,5 @@
 import BaseScene from "./BaseScene";
+import i18next from "i18next";
 
 var ResumeText;
 var recieved;
@@ -30,7 +31,8 @@ var ScenePause = new Phaser.Class({
         //this.add.image(400, 300, 'face').setAlpha(0.5);
         var W=this.game.config.width / 2;
         var H=this.game.config.height / 2;
-        let ResumeText = this.add.text( W- 250, H+100, 'Pulse anywhere to continue').setScale(2);
+        
+        let ResumeText = this.add.text( W- 250, H+100, i18next.t('exitpause')).setScale(2);
 
         let exitB= this.add.image(W,H,'exit');
 

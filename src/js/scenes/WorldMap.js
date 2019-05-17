@@ -1,4 +1,5 @@
 import BaseScene from "./BaseScene";
+import i18next from 'i18next';
 
 // line drawing setting
 var line = new Array(3);
@@ -42,7 +43,7 @@ class WorldMap extends BaseScene {
         this.KoreaFlag.setInteractive();
         this.UsaFlag.setInteractive();
         this.FranceFlag.setInteractive();
-        this.infoText = this.add.text(80, 100, 'Choose the country you want to go').setScale(2);
+        this.infoText = this.add.text(80, 100, i18next.t('visitCountry')).setScale(2);
 
         this.KoreaFlag.on("pointerup", () => {
             //this.scene.switch('FirstGameScene');

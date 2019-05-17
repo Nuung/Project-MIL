@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import Phaser from "phaser";
+import i18next from 'i18next';
+import XHR from 'i18next-xhr-backend';
 import BootScene from './js/scenes/BootScene';
 import TitleScene from './js/scenes/TitleScene';
 import ScenePause from './js/scenes/ScenePause';
@@ -44,3 +46,20 @@ const config = {
 };
 
 const game = new Phaser.Game(config); // eslint-disable-line no-unused-vars
+
+let i18nOptions ={
+    lng: 'en',
+    fallbackLng: ["en", "nl",'es','ko'],
+    //load:['nl','en'],
+    loadPath: '/locales/{{lng}}/{{ns}}.json',
+    debug: true,
+  };
+
+i18next
+    .use(XHR) // Watch out with XHR because it is async
+    .init(i18nOptions, (err, t) => {
+        if (err) return console.log('something went wrong loading', err);
+        t('key'); // -> same as i18next.t
+    });
+
+

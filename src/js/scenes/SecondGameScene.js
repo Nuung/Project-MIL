@@ -1,5 +1,6 @@
 import BaseScene from "./BaseScene";
 import { setInterval } from "timers";
+import i18next from "i18next";
 
 // global game options
 var spawnAllowed = true; // check the value for spawn 
@@ -39,7 +40,7 @@ class SecondGameScene extends BaseScene {
         let PauseButton2 = this.add.image(625,65,"pause").setScale(0.8).setDepth(1);
         this.add.image(275,95, "green3").setScale(2); //original
         this.Green = this.add.image(275,125, "green2").setScale(2);
-        scoreText2 = this.add.text(150, 100, "Score: " + scorePoint).setScale(2);
+        scoreText2 = this.add.text(150, 100,  i18next.t("score")+": " + scorePoint).setScale(2);
         timedEvent2 = this.time.addEvent({ delay: 100000, loop: true });
         text2 = this.add.text(this.game.config.width / 2, 50);
         let exitD= this.add.image(625,105,'exit');
@@ -235,7 +236,8 @@ class SecondGameScene extends BaseScene {
                 this.teamGroup.remove(platform);
                 // getting point between 100 ~ 200, when we overlap with any good words
                 scorePoint = scorePoint + Phaser.Math.Between(100, 200);
-                scoreText2.setText("Score: " + scorePoint);
+                i18next.t();
+                scoreText2.setText(i18next.t("score")+": " + scorePoint);
             }
         }, this);
 

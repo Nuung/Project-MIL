@@ -1,4 +1,5 @@
 import BaseScene from "./BaseScene";
+import i18next from 'i18next';
 
 // for control of music
 var music;
@@ -19,6 +20,9 @@ class TitleScene extends Phaser.Scene {
        // console.log(data);
     }
     create(){
+        console.log("Hey hey!");
+        console.log(i18next.t('title'));
+        console.log(i18next.t('play'));
 
         //CREATE IMAGES
         this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.20, "logo").setDepth(1);

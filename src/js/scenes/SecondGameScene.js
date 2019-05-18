@@ -180,6 +180,7 @@ class SecondGameScene extends BaseScene {
 
     update(){
         // char moving actions and Animations (keyboard isDown)
+        if(this.player.active === true){
         if (this.cursors.left.isDown) {
             this.player.setVelocityX(-160);
             // player.anims.play('left', true);
@@ -200,11 +201,18 @@ class SecondGameScene extends BaseScene {
             // player.anims.play('right', true);
             this.player.play("front");
         }
-        else {
+        if(this.cursors.left.isUp && this.cursors.right.isUp){
+            this.player.setVelocityX(0);
+        }
+        if(this.cursors.up.isUp && this.cursors.down.isUp){
+            this.player.setVelocityY(0);
+        }
+    }
+        /*else {
             this.player.setVelocityX(0);
             this.player.setVelocityY(0);
             // player.anims.play('turn');
-        }
+        }*/
 
         //Time elapsed
         text2.setText(Math.trunc(timedEvent2.getProgress().toString().substr(0, 4)*100)).setScale(2);

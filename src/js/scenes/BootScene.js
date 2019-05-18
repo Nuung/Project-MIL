@@ -65,7 +65,7 @@ class BootScene extends BaseScene {
         this.load.image("unitedKingdom","./src/img/unitedkingdomflag.png");
         this.load.image("usa","./src/img/usaflag.png");
         this.load.image("france","./src/img/franceflag.png");
-        this.load.image("tabla","./src/img/tabla.png");
+        this.load.image("play_again","./src/img/play_again.png");
         this.load.image("exit","./src/img/exitLeft.png");
         this.load.image("exitR","./src/img/exitRight.png");
         this.load.spritesheet("cat", "./src/img/cat.png", {

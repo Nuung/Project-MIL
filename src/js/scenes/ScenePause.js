@@ -32,25 +32,12 @@ var ScenePause = new Phaser.Class({
         var W=this.game.config.width / 2;
         var H=this.game.config.height / 2;
         
-        let ResumeText = this.add.text( W- 250, H+100, i18next.t('exitpause')).setScale(2);
+       // let ResumeText = this.add.text( W- 250, H+100, i18next.t('exitpause')).setScale(2);
 
-        let exitB= this.add.image(W,H,'exit');
-
-        exitB.setInteractive();
-        exitB.on("pointerdown", () => {
-            //this.scene.remove('FirstGameScene');
-            //this.scene.stop();
-            //this.scene.launch('TitleScene');
-            // this.changeScene('TitleScene');
-            console.log("Lets See from pause scene");
-            
-            // this.scene.launch('TitleScene');
-        });
-
-        let pause = this.add.image(W,H,'tabla').setScale(3);
+        let pause = this.add.image(W,H,'play_again').setScale(3);
 
         let contenedor = this.add.container(0,-300);
-        contenedor.add([ResumeText,pause,exitB]);
+        contenedor.add([pause]);
 
         this.tweens.add({
             targets: contenedor,

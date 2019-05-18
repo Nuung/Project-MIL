@@ -25,11 +25,11 @@ class TitleScene extends BaseScene {
 
 
         //CREATE IMAGES
-        this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.20, "logo").setDepth(1);
+        this.add.image(this.game.renderer.width / 2, this.game.renderer.height * 0.20+50, "logo").setDepth(1);
         this.add.image(0, 0, "title_bg").setOrigin(0).setDepth(0);
 
         //btn setting
-        let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2, "play_button").setDepth(1);
+        let playButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2+20, "play_button").setDepth(1);
         let OptionButton = this.add.image(this.game.renderer.width / 2, this.game.renderer.height / 2 + 100, "options_button").setDepth(1);
 
         //SPRITES

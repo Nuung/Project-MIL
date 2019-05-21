@@ -4,8 +4,9 @@ import i18next from "i18next";
 
 // global game options
 var spawnAllowed = true; // check the value for spawn 
-var spawnTimer = 0;
-var spawnTeamTimer = 0;
+var spawnTimer = 0; // timer for spawn the enemy (bad words)
+var spawnTeamTimer = 0; // timer for spawn the team (good words)
+var spawnItemTimer = 0; // timer for spawn the items
 var scorePoint = 0; // for dispaly of score
 var scoreLevel = 1; // for game levels
 var levelText = 0; // for display game levels 
@@ -118,6 +119,20 @@ class SecondGameScene extends BaseScene {
             }
         });
 
+        // item assets (Objects to get -> for effects)
+        this.itemGroup = this.add.group({
+            removeCallback: function(platform){
+                platform.scene.itemPool.add(platform);
+            }
+        });
+    
+        // pool
+        this.itemPool = this.add.group({
+            removeCallback: function(platform){
+                platform.scene.itemGroup.add(platform);
+            }
+        });
+
         // to go back to world
         exitD.setInteractive();
         exitD.on("pointerup", ()=>{
@@ -175,6 +190,26 @@ class SecondGameScene extends BaseScene {
         }        
     }
 
+    // for spawn the items
+    addItems(){
+        console.log("call addItems");
+
+        let items;
+        items = this.physics.add.sprite(Phaser.Math.Between(0, this.game.config.width), 
+            Phaser.Math.Between(0, this.game.config.height), 
+            "cellphoneIcon"
+        ).setScale(0.15);
+
+        // moveTo items to random position
+        this.physics.moveTo(items, 
+            Phaser.Math.Between(0, this.game.config.width), 
+            Phaser.Math.Between(0, this.game.config.height), 
+            Phaser.Math.Between(120, 200) + scoreLevel*10
+        );
+
+        this.itemGroup.add(items);
+    }
+
     // Hp bar setting
     setPercent(percent){
         percent = percent/100;
@@ -182,11 +217,14 @@ class SecondGameScene extends BaseScene {
 
         // die action
         if(percent == 0){
+            this.scene.pause();
+            this.scene.launch('sceneP', "2"); // alert 'Game over'
+            
+            // make the value go back to first
             scoreLevel = 1;
             scorePoint = 0;
             touch = 0;
-            this.scene.pause();
-            this.scene.launch('sceneP', "2"); // alert 'Game over'
+            this.setPercent(50-touch*5);
             this.scene.start('SecondGameScene');
         }
     }
@@ -263,6 +301,21 @@ class SecondGameScene extends BaseScene {
             }
         }, this);
 
+        // for each items action
+        this.itemGroup.getChildren().forEach(function(items){
+            if(items.x < - items.displayWidth / 2 || items.y < - items.displayHeight / 2 ){
+                this.teamGroup.killAndHide(items);
+                this.teamGroup.remove(items);
+            } // if
+
+            if(this.physics.overlap(this.player, items, null, null, this)){
+                this.itemGroup.killAndHide(items);
+                this.itemGroup.remove(items);
+                touch = 0; // heal the HP point
+                this.setPercent(50-touch*5);
+            }
+        }, this);
+
         // keep displaying the score
         scoreText2.setText(i18next.t("score")+": " + scorePoint);
 
@@ -275,9 +328,16 @@ class SecondGameScene extends BaseScene {
             spawnTimer = 0;
         }
 
+        if(spawnItemTimer > 240 && spawnAllowed){
+            this.addItems();
+            console.log("add the items");
+            spawnItemTimer = 0;
+        }
+
         // spawn Time counter
         spawnTimer++;
         spawnTeamTimer++;
+        spawnItemTimer++;
 
         ////////////////////////////////////////////////////////////////////////////////////
 
@@ -289,6 +349,7 @@ class SecondGameScene extends BaseScene {
             levelText.setText(i18next.t("Level")+": " + scoreLevel);
             scorePoint = 0;
             touch = 0;
+            this.setPercent(50-touch*5);
         }
     }
 };

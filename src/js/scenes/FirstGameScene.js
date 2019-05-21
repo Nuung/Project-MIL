@@ -211,7 +211,7 @@ class FirstGameScene extends BaseScene {
 
         // get items whenever overlap the enemy
         this.physics.add.collider(this.player, this.enemyBox, function(){
-            this.addItems();
+            // this.addItems();
             console.log("collision event");
             score += 10;
             scoreText.setText('Points: '+score);

@@ -7,6 +7,8 @@ var spawnAllowed = true; // check the value for spawn
 var spawnTimer = 0;
 var spawnTeamTimer = 0;
 var scorePoint = 0; // for dispaly of score
+var scoreLevel = 1; // for game levels
+var levelText = 0; // for display game levels 
 
 var timedEvent2;
 var text2;
@@ -40,7 +42,8 @@ class SecondGameScene extends BaseScene {
         let PauseButton2 = this.add.image(625,65,"pause").setScale(0.8).setDepth(1);
         this.add.image(275,95, "green3").setScale(2); //original
         this.Green = this.add.image(275,125, "green2").setScale(2);
-        scoreText2 = this.add.text(150, 100,  i18next.t("score")+": " + scorePoint).setScale(2);
+        scoreText2 = this.add.text(150, 100,  i18next.t("score")+": " + scorePoint).setScale(2); // display score
+        levelText = this.add.text(150, 125,  i18next.t("Level")+": " + scoreLevel).setScale(2); // display levels
         timedEvent2 = this.time.addEvent({ delay: 100000, loop: true });
         text2 = this.add.text(this.game.config.width / 2, 50);
         let exitD= this.add.image(625,105,'exit');
@@ -156,8 +159,9 @@ class SecondGameScene extends BaseScene {
             ).setScale(0.39);
 
             // the last parameter is speed
-            this.physics.moveTo(platform, this.player.x, this.player.y, Phaser.Math.Between(120, 200));
+            this.physics.moveTo(platform, this.player.x, this.player.y, Phaser.Math.Between(120, 200) + scoreLevel*10);
             this.enemyGroup.add(platform);
+
         } else { // when make the goodwords
             platform = this.physics.add.sprite(Phaser.Math.Between(0, this.game.config.width), 
                 Phaser.Math.Between(0, this.game.config.height), 
@@ -165,16 +169,25 @@ class SecondGameScene extends BaseScene {
             ).setScale(0.39);
 
             // the last parameter is speed
-            this.physics.moveTo(platform, this.player.x, this.player.y, Phaser.Math.Between(120, 200));
+            this.physics.moveTo(platform, this.player.x, this.player.y, Phaser.Math.Between(120, 200) + scoreLevel*10);
             this.teamGroup.add(platform);
+
         }        
     }
 
+    // Hp bar setting
     setPercent(percent){
         percent = percent/100;
         this.Green.setDisplaySize(300*percent*2, 145*2);
+
+        // die action
         if(percent == 0){
-            this.scene.start('SecondGameScene');            
+            scoreLevel = 1;
+            scorePoint = 0;
+            touch = 0;
+            this.scene.pause();
+            this.scene.launch('sceneP', "2"); // alert 'Game over'
+            this.scene.start('SecondGameScene');
         }
     }
 
@@ -247,9 +260,11 @@ class SecondGameScene extends BaseScene {
                 // getting point between 100 ~ 200, when we overlap with any good words
                 scorePoint = scorePoint + Phaser.Math.Between(100, 200);
                 i18next.t();
-                scoreText2.setText(i18next.t("score")+": " + scorePoint);
             }
         }, this);
+
+        // keep displaying the score
+        scoreText2.setText(i18next.t("score")+": " + scorePoint);
 
         // adding new platforms
         if(spawnTimer > 40 && spawnAllowed){
@@ -265,10 +280,15 @@ class SecondGameScene extends BaseScene {
         spawnTeamTimer++;
 
         ////////////////////////////////////////////////////////////////////////////////////
-        // clear the game
-        if(scorePoint > 2000) {
+
+        // clear the game and go to next level
+        if(scorePoint > 2000 * (scoreLevel / 2)) {
             this.scene.pause();
             this.scene.launch('sceneP', "2");
+            scoreLevel++;
+            levelText.setText(i18next.t("Level")+": " + scoreLevel);
+            scorePoint = 0;
+            touch = 0;
         }
     }
 };

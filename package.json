@@ -13,12 +13,12 @@
     "i18next": "^15.1.1",
     "i18next-xhr-backend": "^2.0.1",
     "lodash": "^4.17.11",
-    "phaser": "^3.16.2"
+    "phaser": "^3.17.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "babel-loader": "^8.0.5",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "babel-loader": "^8.0.6",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^2.1.1",

@@ -5,16 +5,15 @@ import XHR from 'i18next-xhr-backend';
 import BootScene from './js/scenes/BootScene';
 import TitleScene from './js/scenes/TitleScene';
 import ScenePause from './js/scenes/ScenePause';
-import SimulationScene from './js/scenes/SimulationScene';
-import DiscussionScene from './js/scenes/DiscussionScene';
-import DescriptionScene from './js/scenes/DescriptionScene';
 
 // For Mini Game Scenes
 import WorldMap from './js/scenes/WorldMap';
+import GameIntroductionScene from './js/scenes/GameIntroductionScene';
 import FirstGameScene from './js/scenes/FirstGameScene';
 import SecondGameScene from './js/scenes/SecondGameScene';
-import PreFirst from './js/scenes/PreFirst';
 
+import SimulationScene from './js/scenes/SimulationScene';
+import PreFirst from './js/scenes/PreFirst';
 
 const config = {
     // For more settings see <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
@@ -25,6 +24,9 @@ const config = {
     width: 800,
     height: 595,
     backgroundColor: 0x444444,
+    dom: {
+        createContainer: true
+    },
     physics: {
         default: 'arcade',
         arcade: {
@@ -33,12 +35,10 @@ const config = {
     },
     scene: [
         BootScene,
+        GameIntroductionScene,
         TitleScene,
         WorldMap,
         ScenePause,
-        SimulationScene,
-        DiscussionScene,
-        DescriptionScene,
         FirstGameScene,
         SecondGameScene,
         PreFirst

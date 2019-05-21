@@ -30,7 +30,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: false//true
+            debug: true
         }
     },
     scene: [

@@ -5,21 +5,17 @@ class SimGameController{
         this.initialChapter = "c1";
         this.initialId = 1;
         this.isStopped = false;
-        this.scene = scene;
-        this.storyFact = null;
+        this.viewScene = scene;
+        this.storyFact = new StoryFactory();
     }
     
     index(){
-        this.storyFact = new StoryFactory();
-        //this.loadChapter();
-        console.log("Booh");
-        //console.log(this.scene.cache.json.get("descriptions"));
+        console.log(this.viewScene.cachedJson("intro"));
         this.startStory();
     }
 
     startStory(){
         console.log("Start the Game");
-        
     }
 
     loadChapter(){

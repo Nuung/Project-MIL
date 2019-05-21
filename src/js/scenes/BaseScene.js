@@ -11,4 +11,8 @@ export default class BaseScene extends Phaser.Scene {
        // this.scene.stop(this.sys.config.key);
         this.scene.start(key, data);
     }
+
+    cachedJson(jsonName){
+        return this.cache.json.get(jsonName);
+    }
 }

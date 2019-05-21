@@ -7,7 +7,7 @@ var scoreText;
 var score = 0;
 var spacebar;
 var PButton;
-//var primeravez=0; 
+let hitten; // for global hit sound effect
 
 let gameOptions = {
     platformStartSpeed: 350,
@@ -35,7 +35,7 @@ class FirstGameScene extends BaseScene {
     create(){
 
         //set sound effect when player hit enemy
-        let hitten = this.sound.add('hit',{loop:false});
+        hitten = this.sound.add('hit',{loop:false});
 
         //create the spacebar key
         spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -64,6 +64,20 @@ class FirstGameScene extends BaseScene {
             // once a platform is removed from the pool, it's added to the active platforms group
             removeCallback: function(platform){
                 platform.scene.platformGroup.add(platform);
+            }
+        });
+
+        // item assets (Objects to get -> for effects)
+        this.itemGroup = this.add.group({
+            removeCallback: function(platform){
+                platform.scene.itemPool.add(platform);
+            }
+        });
+    
+        // pool
+        this.itemPool = this.add.group({
+            removeCallback: function(platform){
+                platform.scene.itemGroup.add(platform);
             }
         });
 
@@ -135,13 +149,6 @@ class FirstGameScene extends BaseScene {
 
         // setting collisions between the player and the platform group
         this.physics.add.collider(this.player, this.platformGroup);
-        this.physics.add.collider(this.player, this.enemyBox, function(){
-            console.log("collision event");
-            score += 10;
-            scoreText.setText('Points: '+score);
-            hitten.play();
-        });
-
         this.enemyBox.setBounce(0.9);
         // this.enemyBox.body.checkCollision.up = false;
         // this.enemyBox.body.checkCollision.down = false;
@@ -150,6 +157,15 @@ class FirstGameScene extends BaseScene {
 
         // checking for input
         this.input.on("pointerdown", this.jump, this);
+    }
+
+    addItems(){
+        console.log("call addItems");
+
+        let platform;
+        platform = this.physics.add.sprite(this.enemyBox.x + 30, this.enemyBox.y, "cellphoneIcon").setScale(0.39);
+        platform.setGravityY(gameOptions.playerGravity);
+        this.itemGroup.add(platform);
     }
 
  
@@ -193,6 +209,15 @@ class FirstGameScene extends BaseScene {
             score=0;    
         }
 
+        // get items whenever overlap the enemy
+        this.physics.add.collider(this.player, this.enemyBox, function(){
+            this.addItems();
+            console.log("collision event");
+            score += 10;
+            scoreText.setText('Points: '+score);
+            hitten.play(); // sound effect
+        });
+
         // spacebar jump action
         if (Phaser.Input.Keyboard.JustDown(spacebar)){
             if(this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps)){
@@ -221,6 +246,15 @@ class FirstGameScene extends BaseScene {
             if(platform.x < - platform.displayWidth / 2){
                 this.platformGroup.killAndHide(platform);
                 this.platformGroup.remove(platform);
+            }
+        }, this);
+
+        // recycling platforms and add function
+        this.itemGroup.getChildren().forEach(function(platform){
+            if(this.physics.overlap(this.player, platform, null, null, this)){
+                this.itemGroup.killAndHide(platform);
+                this.itemGroup.remove(platform);
+                console.log("getting items");
             }
         }, this);
  

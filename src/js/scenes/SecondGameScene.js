@@ -181,33 +181,34 @@ class SecondGameScene extends BaseScene {
     update(){
         // char moving actions and Animations (keyboard isDown)
         if(this.player.active === true){
-        if (this.cursors.left.isDown) {
-            this.player.setVelocityX(-160);
-            // player.anims.play('left', true);
-            this.player.play("left");
+            if (this.cursors.left.isDown) {
+                this.player.setVelocityX(-160);
+                // player.anims.play('left', true);
+                this.player.play("left");
+            }
+            else if (this.cursors.right.isDown) {
+                this.player.setVelocityX(160);
+                // player.anims.play('right', true);
+                this.player.play("right");
+            }
+            else if (this.cursors.up.isDown && this.player.y > 0) {
+                this.player.setVelocityY(-160);
+                // player.anims.play('right', true);
+                this.player.play("behind");
+            }
+            else if (this.cursors.down.isDown && this.player.y < this.game.config.height) {
+                this.player.setVelocityY(160);
+                // player.anims.play('right', true);
+                this.player.play("front");
+            }   
+
+            if(this.cursors.left.isUp && this.cursors.right.isUp){
+                this.player.setVelocityX(0);
+            }
+            if(this.cursors.up.isUp && this.cursors.down.isUp){
+                this.player.setVelocityY(0);
+            }
         }
-        else if (this.cursors.right.isDown) {
-            this.player.setVelocityX(160);
-            // player.anims.play('right', true);
-            this.player.play("right");
-        }
-        else if (this.cursors.up.isDown && this.player.y > 0) {
-            this.player.setVelocityY(-160);
-            // player.anims.play('right', true);
-            this.player.play("behind");
-        }
-        else if (this.cursors.down.isDown && this.player.y < this.game.config.height) {
-            this.player.setVelocityY(160);
-            // player.anims.play('right', true);
-            this.player.play("front");
-        }
-        if(this.cursors.left.isUp && this.cursors.right.isUp){
-            this.player.setVelocityX(0);
-        }
-        if(this.cursors.up.isUp && this.cursors.down.isUp){
-            this.player.setVelocityY(0);
-        }
-    }
         /*else {
             this.player.setVelocityX(0);
             this.player.setVelocityY(0);
@@ -242,6 +243,7 @@ class SecondGameScene extends BaseScene {
             if(this.physics.overlap(this.player, platform, null, null, this)){
                 this.teamGroup.killAndHide(platform);
                 this.teamGroup.remove(platform);
+
                 // getting point between 100 ~ 200, when we overlap with any good words
                 scorePoint = scorePoint + Phaser.Math.Between(100, 200);
                 i18next.t();
@@ -261,6 +263,13 @@ class SecondGameScene extends BaseScene {
         // spawn Time counter
         spawnTimer++;
         spawnTeamTimer++;
+
+        ////////////////////////////////////////////////////////////////////////////////////
+        // clear the game
+        if(scorePoint > 2000) {
+            this.scene.pause();
+            this.scene.launch('sceneP', "2");
+        }
     }
 };
 

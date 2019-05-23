@@ -11,6 +11,11 @@ import WorldMap from './js/scenes/WorldMap';
 import GameIntroductionScene from './js/scenes/GameIntroductionScene';
 import FirstGameScene from './js/scenes/FirstGameScene';
 import SecondGameScene from './js/scenes/SecondGameScene';
+<<<<<<< HEAD
+import PreFirst from './js/scenes/PreFirst';
+import PreFirst2 from './js/scenes/PreFirst2';
+=======
+>>>>>>> 9d2c52c40d15547920d8cb1919ca5a15cbe304c5
 
 import SimulationScene from './js/scenes/SimulationScene';
 import PreFirst from './js/scenes/PreFirst';
@@ -41,7 +46,8 @@ const config = {
         ScenePause,
         FirstGameScene,
         SecondGameScene,
-        PreFirst
+        PreFirst,
+        PreFirst2
     ]
 };
 

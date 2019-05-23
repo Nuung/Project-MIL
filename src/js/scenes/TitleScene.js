@@ -37,33 +37,6 @@ class TitleScene extends BaseScene {
         hoverSprite.setScale(2);
         hoverSprite.setVisible(false);
 
-        var loc =  [
-            {
-                "country":"unitedKingdom",
-                "language":"en"
-            },{
-                "country":"netherlands",
-                "language":"nl"
-            },{
-                "country":"korea",
-                "language":"ko"
-            }
-        ];
-
-        var i;
-        for(i = 0; i < loc.length; i++){
-            var localButton = this.add.image(300 + (i*100), this.game.config.height - 75, loc[i].country).setScale(0.06);
-            localButton.setInteractive();
-            var variable = loc[i].language;
-            var id = i18next;
-            var langCallback = function(locStr,i18n){
-                return function(){
-                    i18n.changeLanguage(locStr);
-                    console.log(locStr);
-                }
-            }(variable,id);
-            localButton.on("pointerup",langCallback);
-        }
         //SOUND!
         //this.sound.pauseOnBlur = false; //only to keep playing music
         music = this.sound.add("title_music", {
@@ -164,15 +137,15 @@ class OptionSetting extends Phaser.Scene {
         BackButton.on("pointerup", ()=>{
             isOption = false;
             this.scene.remove(this.handle);
-        })
+        });
 
         MusicButton.on("pointerover", ()=>{
             console.log("want listen to music?")
-        })
+        });
 
         MusicButton.on("pointerout", ()=>{
             console.log("maybe not")
-        })
+        });
 
         MusicButton.on("pointerup", ()=>{
             if(prueba == 0){
@@ -184,7 +157,35 @@ class OptionSetting extends Phaser.Scene {
                 music.resume();
                 prueba = 0;
             }
-        })
+        });
+
+        var loc =  [
+            {
+                "country":"unitedKingdom",
+                "language":"en"
+            },{
+                "country":"netherlands",
+                "language":"nl"
+            },{
+                "country":"korea",
+                "language":"ko"
+            }
+        ];
+
+        var i;
+        for(i = 0; i < loc.length; i++){
+            var localButton = this.add.image(300 + (i*100), this.game.config.height - 75, loc[i].country).setScale(0.06);
+            localButton.setInteractive();
+            var variable = loc[i].language;
+            var id = i18next;
+            var langCallback = function(locStr,i18n){
+                return function(){
+                    i18n.changeLanguage(locStr);
+                    console.log(locStr);
+                }
+            }(variable,id);
+            localButton.on("pointerup",langCallback);
+        }
     }
 
     update ()

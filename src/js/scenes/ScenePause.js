@@ -35,9 +35,28 @@ var ScenePause = new Phaser.Class({
        // let ResumeText = this.add.text( W- 250, H+100, i18next.t('exitpause')).setScale(2);
 
         let pause = this.add.image(W,H,'play_again').setScale(3);
+        let gameover = this.add.image(W,H,'gameoverImg').setScale(3);
+        let levelup = this.add.image(W,H,'levelupImg').setScale(3);
+        pause.visible = false;
+        gameover.visible = false;
+        levelup.visible = false;
 
         let contenedor = this.add.container(0,-300);
-        contenedor.add([pause]);
+
+        if(recieved == '1'){
+            pause.visible = true;
+            contenedor.add([pause]);
+        }else if(recieved == '2'){
+            // (hyeon) change to start, cuz data of game
+            gameover.visible = true;
+            contenedor.add([gameover]);
+        }else if(recieved == '3'){ // '3' is level up
+            levelup.visible = true;
+            contenedor.add([levelup]);
+        }else { // '4' is just pause of SecondGameScene
+            pause.visible = true;
+            contenedor.add([pause]);
+        }
 
         this.tweens.add({
             targets: contenedor,
@@ -46,21 +65,26 @@ var ScenePause = new Phaser.Class({
             y: 0
         });
 
-         this.input.once('pointerdown', function () {
-             if(recieved=='1'){
-                this.scene.resume('FirstGameScene');
-             }else if(recieved == '2'){
-                // (hyeon) change to start, cuz data of game
-                this.scene.start('SecondGameScene');
-             }else {
-                this.scene.resume('SecondGameScene');
-             }
-             this.scene.stop();
-         }, this);
 
+        this.input.once('pointerdown', function () {
+            if(recieved == '1'){
+                pause.visible = false;
+                this.scene.resume('FirstGameScene');
+            }else if(recieved == '2'){
+                // (hyeon) change to start, cuz data of game
+                gameover.visible = false;
+                this.scene.start('SecondGameScene');
+            }else if(recieved == '3'){ // '3' is level up
+                levelup.visible = false;
+                this.scene.resume('SecondGameScene');
+            }else { // '4' is just pause of SecondGameScene
+                pause.visible = false;
+                this.scene.resume('SecondGameScene');
+            }
+            this.scene.stop();
+        }, this);
         this.scene.bringToTop();
     }
-
 });
 
 export default ScenePause;

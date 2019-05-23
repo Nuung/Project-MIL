@@ -144,7 +144,7 @@ class SecondGameScene extends BaseScene {
         PauseButton2.setInteractive();
         PauseButton2.on("pointerup", ()=>{ 
             this.scene.pause();
-            this.scene.launch('sceneP', "2");
+            this.scene.launch('sceneP', "4");
         });
 
         // to limit player area
@@ -169,7 +169,7 @@ class SecondGameScene extends BaseScene {
 
         let platform;
         if(kindofWord == "enemy"){ // when make the badwords
-            platform = this.physics.add.sprite(Phaser.Math.Between(0, this.game.config.width), 
+            platform = this.physics.add.sprite(Phaser.Math.Between(100, this.game.config.width - 100), 
                 Phaser.Math.Between(0, this.game.config.height), 
                 "badWords" + Phaser.Math.Between(1, 18)
             ).setScale(0.39);
@@ -179,7 +179,7 @@ class SecondGameScene extends BaseScene {
             this.enemyGroup.add(platform);
 
         } else { // when make the goodwords
-            platform = this.physics.add.sprite(Phaser.Math.Between(0, this.game.config.width), 
+            platform = this.physics.add.sprite(Phaser.Math.Between(100, this.game.config.width - 100), 
                 Phaser.Math.Between(0, this.game.config.height), 
                 "goodWords" + Phaser.Math.Between(1, 7)
             ).setScale(0.39);
@@ -197,12 +197,12 @@ class SecondGameScene extends BaseScene {
         var kindofItem = Phaser.Math.Between(0, 1); // random number of different types for items
 
         if(kindofItem == 0){ // hp potion
-            items = this.physics.add.sprite(Phaser.Math.Between(0, this.game.config.width), 
+            items = this.physics.add.sprite(Phaser.Math.Between(100, this.game.config.width - 100), 
                 Phaser.Math.Between(0, this.game.config.height), 
                 "hpPotion"
             ).setScale(0.05);
         } else if(kindofItem == 1){ // speed potion
-            items = this.physics.add.sprite(Phaser.Math.Between(0, this.game.config.width), 
+            items = this.physics.add.sprite(Phaser.Math.Between(100, this.game.config.width - 100), 
                 Phaser.Math.Between(0, this.game.config.height), 
                 "speedPotion"
             ).setScale(0.05);            

@@ -10,6 +10,7 @@ var spawnItemTimer = 0; // timer for spawn the items
 var scorePoint = 0; // for dispaly of score
 var scoreLevel = 1; // for game levels
 var levelText = 0; // for display game levels 
+var charVelocity = 160; // setting the speed and plused by speed item(speedPotion)
 
 var timedEvent2;
 var text2;
@@ -192,13 +193,20 @@ class SecondGameScene extends BaseScene {
 
     // for spawn the items
     addItems(){
-        console.log("call addItems");
-
         let items;
-        items = this.physics.add.sprite(Phaser.Math.Between(0, this.game.config.width), 
-            Phaser.Math.Between(0, this.game.config.height), 
-            "cellphoneIcon"
-        ).setScale(0.15);
+        var kindofItem = Phaser.Math.Between(0, 1); // random number of different types for items
+
+        if(kindofItem == 0){ // hp potion
+            items = this.physics.add.sprite(Phaser.Math.Between(0, this.game.config.width), 
+                Phaser.Math.Between(0, this.game.config.height), 
+                "hpPotion"
+            ).setScale(0.05);
+        } else if(kindofItem == 1){ // speed potion
+            items = this.physics.add.sprite(Phaser.Math.Between(0, this.game.config.width), 
+                Phaser.Math.Between(0, this.game.config.height), 
+                "speedPotion"
+            ).setScale(0.05);            
+        }
 
         // moveTo items to random position
         this.physics.moveTo(items, 
@@ -219,13 +227,11 @@ class SecondGameScene extends BaseScene {
         if(percent == 0){
             this.scene.pause();
             this.scene.launch('sceneP', "2"); // alert 'Game over'
-            
             // make the value go back to first
             scoreLevel = 1;
             scorePoint = 0;
             touch = 0;
             this.setPercent(50-touch*5);
-            this.scene.start('SecondGameScene');
         }
     }
 
@@ -233,22 +239,22 @@ class SecondGameScene extends BaseScene {
         // char moving actions and Animations (keyboard isDown)
         if(this.player.active === true){
             if (this.cursors.left.isDown) {
-                this.player.setVelocityX(-160);
+                this.player.setVelocityX(-charVelocity);
                 // player.anims.play('left', true);
                 this.player.play("left");
             }
             else if (this.cursors.right.isDown) {
-                this.player.setVelocityX(160);
+                this.player.setVelocityX(charVelocity);
                 // player.anims.play('right', true);
                 this.player.play("right");
             }
             else if (this.cursors.up.isDown && this.player.y > 0) {
-                this.player.setVelocityY(-160);
+                this.player.setVelocityY(-charVelocity);
                 // player.anims.play('right', true);
                 this.player.play("behind");
             }
             else if (this.cursors.down.isDown && this.player.y < this.game.config.height) {
-                this.player.setVelocityY(160);
+                this.player.setVelocityY(charVelocity);
                 // player.anims.play('right', true);
                 this.player.play("front");
             }   
@@ -309,10 +315,18 @@ class SecondGameScene extends BaseScene {
             } // if
 
             if(this.physics.overlap(this.player, items, null, null, this)){
-                this.itemGroup.killAndHide(items);
-                this.itemGroup.remove(items);
-                touch = 0; // heal the HP point
-                this.setPercent(50-touch*5);
+                
+                if(items.texture.key == 'hpPotion'){ // hp healing potion
+                    this.itemGroup.killAndHide(items);
+                    this.itemGroup.remove(items);
+                    touch = 0; // heal the HP point
+                    this.setPercent(50-touch*5);
+                }
+                else { // speed up potion
+                    this.itemGroup.killAndHide(items);
+                    this.itemGroup.remove(items);
+                    charVelocity += 10;
+                }
             }
         }, this);
 
@@ -330,7 +344,6 @@ class SecondGameScene extends BaseScene {
 
         if(spawnItemTimer > 240 && spawnAllowed){
             this.addItems();
-            console.log("add the items");
             spawnItemTimer = 0;
         }
 
@@ -344,7 +357,7 @@ class SecondGameScene extends BaseScene {
         // clear the game and go to next level
         if(scorePoint > 2000 * (scoreLevel / 2)) {
             this.scene.pause();
-            this.scene.launch('sceneP', "2");
+            this.scene.launch('sceneP', "3"); // "2" is over, "3" is level up
             scoreLevel++;
             levelText.setText(i18next.t("Level")+": " + scoreLevel);
             scorePoint = 0;

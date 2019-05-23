@@ -50,7 +50,7 @@ class WorldMap extends BaseScene {
             this.scene.switch('PreFirst');
         })
         this.UsaFlag.on("pointerup", () => {
-            this.scene.switch('SecondGameScene');
+            this.scene.switch('PreSecond');
         })
     }
     // update(){

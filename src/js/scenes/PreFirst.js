@@ -27,6 +27,4 @@ class PreFirst extends BaseScene {
 
 };
 
-
-
 export default PreFirst;

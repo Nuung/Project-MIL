@@ -12,8 +12,11 @@ import GameIntroductionScene from './js/scenes/GameIntroductionScene';
 import FirstGameScene from './js/scenes/FirstGameScene';
 import SecondGameScene from './js/scenes/SecondGameScene';
 
-import SimulationScene from './js/scenes/SimulationScene';
 import PreFirst from './js/scenes/PreFirst';
+import PreFirst2 from './js/scenes/PreFirst2';
+
+
+import SimulationScene from './js/scenes/SimulationScene';
 
 const config = {
     // For more settings see <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
@@ -41,7 +44,8 @@ const config = {
         ScenePause,
         FirstGameScene,
         SecondGameScene,
-        PreFirst
+        PreFirst,
+        PreFirst2
     ]
 };
 

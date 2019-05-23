@@ -69,6 +69,12 @@ class BootScene extends BaseScene {
         this.load.image("exit","./src/img/exitLeft.png");
         this.load.image("exitR","./src/img/exitRight.png");
 
+        this.load.image("first_intro_1","./src/img/first_intro_1.png");
+        this.load.image("continue","./src/img/continue_y.png");
+        this.load.image("first_intro_2","./src/img/first_intro_2.png");
+        this.load.image("go","./src/img/go.png");
+
+
         this.load.spritesheet("cat", "./src/img/cat.png", {
             frameHeight: 32,
             frameWidth: 32
@@ -131,8 +137,7 @@ class BootScene extends BaseScene {
         this.load.image("hpPotion", "./src/img/hp_potion.png");
         this.load.image("speedPotion", "./src/img/speed_potion.png");
         this.load.image("levelupImg", "./src/img/Levelup.png");
-        this.load.image("gameoverImg", "./src/img/Game_over.png");
-        
+        this.load.image("gameoverImg", "./src/img/Game_over.png");        
 
         // for ch2 game's bad words
         for (let index = 1; index < 19; index++) {

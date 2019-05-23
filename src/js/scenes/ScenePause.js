@@ -17,7 +17,7 @@ var ScenePause = new Phaser.Class({
 
     init: function(data){
         console.log('init', data);
-        recieved=data;
+        recieved = data;
     },
 
     preload: function ()
@@ -49,9 +49,12 @@ var ScenePause = new Phaser.Class({
          this.input.once('pointerdown', function () {
              if(recieved=='1'){
                 this.scene.resume('FirstGameScene');
-             }else{
+             }else if(recieved == '2'){
+                // (hyeon) change to start, cuz data of game
+                this.scene.start('SecondGameScene');
+             }else {
                 this.scene.resume('SecondGameScene');
-             }   
+             }
              this.scene.stop();
          }, this);
 

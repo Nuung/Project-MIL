@@ -68,6 +68,11 @@ class BootScene extends BaseScene {
         this.load.image("play_again","./src/img/play_again.png");
         this.load.image("exit","./src/img/exitLeft.png");
         this.load.image("exitR","./src/img/exitRight.png");
+        this.load.image("first_intro_1","./src/img/first_intro_1.png");
+        this.load.image("continue","./src/img/continue_y.png");
+        this.load.image("first_intro_2","./src/img/first_intro_2.png");
+        this.load.image("go","./src/img/go.png");
+
         this.load.spritesheet("cat", "./src/img/cat.png", {
             frameHeight: 32,
             frameWidth: 32
@@ -85,9 +90,8 @@ class BootScene extends BaseScene {
             frameWidth: 32
         });
 
-        //this.load.audio("title_music", "./src/sounds/shuinvy-childhood.mp3");
+        // sound effects
         this.load.audio("title_music", "./src/sounds/Roots_of_Legend.mp3");
-
         this.load.audio("hit", "./src/sounds/SFX_Hit01.ogg");
 
         let loadingBar = this.add.graphics({
@@ -125,6 +129,11 @@ class BootScene extends BaseScene {
         this.load.image("firstBackground", "./src/img/Blue.bmp");
         this.load.image("secondBackground", "./src/img/Background_Level_2.bmp");
         this.load.image("worldmapBackground", "./src/img/V2World.png");
+
+        // for ch2 game's items 
+        this.load.image("hpPotion", "./src/img/hp_potion.png");
+        this.load.image("speedPotion", "./src/img/speed_potion.png");
+        
 
         // for ch2 game's bad words
         for (let index = 1; index < 19; index++) {

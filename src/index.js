@@ -14,6 +14,7 @@ import WorldMap from './js/scenes/WorldMap';
 import FirstGameScene from './js/scenes/FirstGameScene';
 import SecondGameScene from './js/scenes/SecondGameScene';
 import PreFirst from './js/scenes/PreFirst';
+import PreFirst2 from './js/scenes/PreFirst2';
 
 
 const config = {
@@ -41,7 +42,8 @@ const config = {
         DescriptionScene,
         FirstGameScene,
         SecondGameScene,
-        PreFirst
+        PreFirst,
+        PreFirst2
     ]
 };
 

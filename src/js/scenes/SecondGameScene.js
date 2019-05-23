@@ -230,6 +230,7 @@ class SecondGameScene extends BaseScene {
             // make the value go back to first
             scoreLevel = 1;
             scorePoint = 0;
+            charVelocity = 160;
             touch = 0;
             this.setPercent(50-touch*5);
         }

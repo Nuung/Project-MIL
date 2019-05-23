@@ -123,7 +123,8 @@ class BootScene extends BaseScene {
         this.load.image("pause", "./src/img/pause2.png");
         this.load.image("invisible_wall","./src/img/invisible_wall.png");
         this.load.image("firstBackground", "./src/img/Blue.bmp");
-        this.load.image("secondBackground", "./src/img/Background_Level_2.bmp");
+        //this.load.image("secondBackground", "./src/img/Background_Level_2.bmp");
+        this.load.image("secondBackground", "./src/img/BackgroundV2.bmp");
         this.load.image("worldmapBackground", "./src/img/V2World.png");
 
         // for ch2 game's items 

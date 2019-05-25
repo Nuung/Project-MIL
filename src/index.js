@@ -15,6 +15,9 @@ import SecondGameScene from './js/scenes/SecondGameScene';
 import PreFirst from './js/scenes/PreFirst';
 import PreFirst2 from './js/scenes/PreFirst2';
 
+import PreSecond from './js/scenes/PreSecond';
+import PreSecond2 from './js/scenes/PreSecond2';
+
 
 import SimulationScene from './js/scenes/SimulationScene';
 
@@ -45,7 +48,9 @@ const config = {
         FirstGameScene,
         SecondGameScene,
         PreFirst,
-        PreFirst2
+        PreFirst2,
+        PreSecond,
+        PreSecond2
     ]
 };
 

@@ -60,6 +60,8 @@ class BootScene extends BaseScene {
         this.load.image("on", "./src/img/icon_nofree.png");
         this.load.image("off", "./src/img/icon_nofree2.png");
         this.load.image("back", "./src/img/Back_b.png");
+        
+        this.load.atlas('flags', './src/img/flags16_ce.gif','./src/data/imagesets/megaset.json');
         this.load.image("korea","./src/img/koreaflag.png");
         this.load.image("netherlands","./src/img/netherlandsflag.png");
         this.load.image("unitedKingdom","./src/img/unitedkingdomflag.png");
@@ -73,7 +75,8 @@ class BootScene extends BaseScene {
         this.load.image("continue","./src/img/continue_y.png");
         this.load.image("first_intro_2","./src/img/first_intro_2.png");
         this.load.image("go","./src/img/go.png");
-
+        this.load.image("second_intro_1","./src/img/second_intro_1.png");
+        this.load.image("second_intro_2","./src/img/second_intro_2.png");
 
         this.load.spritesheet("cat", "./src/img/cat.png", {
             frameHeight: 32,
@@ -137,7 +140,8 @@ class BootScene extends BaseScene {
         this.load.image("hpPotion", "./src/img/hp_potion.png");
         this.load.image("speedPotion", "./src/img/speed_potion.png");
         this.load.image("levelupImg", "./src/img/Levelup.png");
-        this.load.image("gameoverImg", "./src/img/Game_over.png");        
+        this.load.image("gameoverImg", "./src/img/Game_over.png");
+        
 
         // for ch2 game's bad words
         for (let index = 1; index < 19; index++) {

@@ -241,7 +241,7 @@ class FirstGameScene extends BaseScene {
         // recycling platforms
         let minDistance = this.game.config.width;
         this.platformGroup.getChildren().forEach(function(platform){
-            let platformDistance = this.game.config.width - platform.x - platform.displayWidth / 2;
+            let platformDistance = this.game.config.width - platform.x - platform.displayWidth / 2 - 100;///change the width of platform
             minDistance = Math.min(minDistance, platformDistance);
             if(platform.x < - platform.displayWidth / 2){
                 this.platformGroup.killAndHide(platform);

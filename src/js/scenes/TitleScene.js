@@ -129,6 +129,7 @@ class OptionSetting extends Phaser.Scene {
 
         // It should be changed relative to the window size.
         var MusicButton = this.add.image(730,530,"on").setScale(0.15).setDepth(1);
+        var MusicButtonOff = this.add.image(730,530,"off").setScale(0.15).setDepth(1).setVisible(false);
         var BackButton = this.add.image(70,530,"back").setScale(0.2).setDepth(1);
 
         MusicButton.setInteractive();
@@ -147,15 +148,23 @@ class OptionSetting extends Phaser.Scene {
             console.log("maybe not")
         });
 
+        if(prueba == 1){
+            MusicButtonOff.setVisible(true);
+        }else{
+            MusicButtonOff.setVisible(false);
+        }
+
         MusicButton.on("pointerup", ()=>{
             if(prueba == 0){
                 console.log("turn off")
                 music.pause();
+                MusicButtonOff.setVisible(true);
                 prueba = 1;
             }else{
                 console.log("turn on")
                 music.resume();
                 prueba = 0;
+                MusicButtonOff.setVisible(false);
             }
         });
 

@@ -57,8 +57,8 @@ class BootScene extends BaseScene {
 
 
         this.load.image("logo", "./src/img/logo.png");
-        this.load.image("on", "./src/img/icon_nofree.png");
-        this.load.image("off", "./src/img/icon_nofree2.png");
+        this.load.image("on", "./src/img/audioOn.png");
+        this.load.image("off", "./src/img/audioOff.png");
         this.load.image("back", "./src/img/Back_b.png");
         
         this.load.atlas('flags', './src/img/flags16_ce.gif','./src/data/imagesets/megaset.json');

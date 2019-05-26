@@ -128,12 +128,19 @@ class OptionSetting extends Phaser.Scene {
         this.add.image(0, 0, "title_bg").setOrigin(0).setDepth(0);
 
         // It should be changed relative to the window size.
-        var MusicButton = this.add.image(730,530,"on").setScale(0.15).setDepth(1);
-        var MusicButtonOff = this.add.image(730,530,"off").setScale(0.15).setDepth(1).setVisible(false);
-        var BackButton = this.add.image(70,530,"back").setScale(0.2).setDepth(1);
+        var MusicButton = this.add.image(730,520,"on").setScale(1).setDepth(1);//original 0.15
+        var MusicButtonOff = this.add.image(730,520,"off").setScale(1).setDepth(1).setVisible(false);//original 0.15
+        var BackButton = this.add.image(70,520,"exit").setScale(2).setDepth(1);//original 0.2
 
         MusicButton.setInteractive();
+        MusicButtonOff.setInteractive();
         BackButton.setInteractive();
+
+        const lanTextFlags = [
+            'LANGUAGE'
+        ];
+
+        const lanText = this.add.bitmapText(270, 440, 'font', lanTextFlags).setScale(2);
 
         BackButton.on("pointerup", ()=>{
             isOption = false;
@@ -148,24 +155,27 @@ class OptionSetting extends Phaser.Scene {
             console.log("maybe not")
         });
 
+        //make it appear mute when you get out of the window and come back
         if(prueba == 1){
             MusicButtonOff.setVisible(true);
+            MusicButton.setVisible(false);
         }else{
             MusicButtonOff.setVisible(false);
         }
 
         MusicButton.on("pointerup", ()=>{
-            if(prueba == 0){
-                console.log("turn off")
-                music.pause();
-                MusicButtonOff.setVisible(true);
-                prueba = 1;
-            }else{
-                console.log("turn on")
-                music.resume();
-                prueba = 0;
-                MusicButtonOff.setVisible(false);
-            }
+            console.log("turn off")
+            music.pause();
+            MusicButtonOff.setVisible(true);
+            MusicButton.setVisible(false);
+            prueba=1;
+        });
+
+        MusicButtonOff.on("pointerup", ()=>{
+            music.resume();
+            MusicButtonOff.setVisible(false);
+            MusicButton.setVisible(true);
+            prueba=0;
         });
 
         var loc =  [

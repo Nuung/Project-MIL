@@ -57,8 +57,8 @@ class BootScene extends BaseScene {
 
 
         this.load.image("logo", "./src/img/logo.png");
-        this.load.image("on", "./src/img/icon_nofree.png");
-        this.load.image("off", "./src/img/icon_nofree2.png");
+        this.load.image("on", "./src/img/audioOn.png");
+        this.load.image("off", "./src/img/audioOff.png");
         this.load.image("back", "./src/img/Back_b.png");
         
         this.load.atlas('flags', './src/img/flags16_ce.gif','./src/data/imagesets/megaset.json');
@@ -132,7 +132,8 @@ class BootScene extends BaseScene {
         this.load.image("pause", "./src/img/pause2.png");
         this.load.image("invisible_wall","./src/img/invisible_wall.png");
         this.load.image("firstBackground", "./src/img/Blue.bmp");
-        this.load.image("secondBackground", "./src/img/Background_Level_2.bmp");
+        //this.load.image("secondBackground", "./src/img/Background_Level_2.bmp");
+        this.load.image("secondBackground", "./src/img/BackgroundV2.bmp");
         this.load.image("worldmapBackground", "./src/img/V2World.png");
 
         // for ch2 game's items 

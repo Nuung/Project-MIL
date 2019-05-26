@@ -48,10 +48,10 @@ class WorldMap extends BaseScene {
 
         this.KoreaFlag.on("pointerup", () => {
             //this.scene.switch('FirstGameScene');
-            this.scene.switch('PreFirst');
+            this.scene.launch('PreFirst',"1");
         })
         this.UsaFlag.on("pointerup", () => {
-            this.scene.switch('PreSecond');
+            this.scene.launch('PreFirst',"2");
         })
     }
     // update(){

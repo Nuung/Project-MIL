@@ -31,7 +31,9 @@ class FirstGameScene extends BaseScene {
             key: 'FirstGameScene'
         });
     }
-
+    init(){
+        console.log("im running");
+    }
     create(){
 
         //set sound effect when player hit enemy

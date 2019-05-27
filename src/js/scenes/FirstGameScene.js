@@ -1,4 +1,5 @@
 import BaseScene from "./BaseScene";
+import i18next from "i18next";
 
 // global game options
 var timedEvent;
@@ -48,7 +49,7 @@ class FirstGameScene extends BaseScene {
 
         // Ading pause btn and pause scene and score and Time and exit /// AKA HUD
         let PauseButton = this.add.image(750,65,"pause").setScale(0.8).setDepth(1);
-        scoreText = this.add.text(50, 50, 'Score: 0').setScale(2);
+        scoreText = this.add.text(50, 50, i18next.t("score")+': 0').setScale(2);
         timedEvent = this.time.addEvent({ delay: 100000, loop: true });
         text = this.add.text(this.game.config.width / 2, 50);
         let exitC= this.add.image(750,105,'exit');

@@ -30,9 +30,9 @@ class WorldMap extends BaseScene {
         this.background.setDisplaySize(this.game.config.width, this.game.config.height);
 
         // setting the interactive flags
-        const flagSize = 4.5;
-        this.KoreaFlag = this.add.image(this.game.config.width - 120, this.game.config.height - 350,"flags","koreaFlag").setScale(flagSize);
-        this.UsaFlag = this.add.image(100, this.game.config.height - 350,"flags", "unitedStatesFlag").setScale(flagSize);
+        const flagSize = 4;
+        this.KoreaFlag = this.add.image(this.game.config.width - 193, this.game.config.height - 365,"flags","koreaFlag").setScale(flagSize);
+        this.UsaFlag = this.add.image(180, this.game.config.height - 370,"flags", "unitedStatesFlag").setScale(flagSize);
         this.FranceFlag = this.add.image(400, this.game.config.height - 400,"flags", "franceFlag").setScale(flagSize);
 
         // draw the line from lands to flags 

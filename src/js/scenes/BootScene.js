@@ -152,7 +152,7 @@ class BootScene extends BaseScene {
 
         // for ch2 game's good words
         for (let index = 1; index < 8; index++) {
-            this.load.image("goodWords" + index, "./src/img/goodWords/Artboard2" + index + ".png");
+            this.load.image("goodWords" + index, "./src/img/goodWords/good2" + index + ".png");
         }        
     }
     create(){

@@ -185,15 +185,12 @@ class OptionSetting extends Phaser.Scene {
             },{
                 "country":"netherlands",
                 "language":"nl"
-            },{
-                "country":"korea",
-                "language":"ko"
             }
         ];
 
         var i;
         for(i = 0; i < loc.length; i++){
-            var localButton = this.add.image(300 + (i*100), this.game.config.height - 75, loc[i].country).setScale(0.06);
+            var localButton = this.add.image(350 + (i*100), this.game.config.height - 75, loc[i].country).setScale(0.06);
             localButton.setInteractive();
             var variable = loc[i].language;
             var id = i18next;

@@ -108,8 +108,9 @@ class FirstGameScene extends BaseScene {
         this.player.setGravityY(gameOptions.playerGravity);
  
         // adding the enemyBox
-        this.enemyBox = this.physics.add.sprite(gameOptions.playerStartPosition + 320, this.game.config.height / 2 + 60, "bullier");
-        this.enemyBox.setGravityX(-10);
+        this.enemyBox = this.physics.add.sprite(gameOptions.playerStartPosition + 320, this.game.config.height / 2, "bullier");
+        this.enemyBox.setGravityY(gameOptions.playerGravity);
+        this.enemyBox.setGravityX(-15);
         this.enemyBox.setScale(2);
         this.player.setScale(2);
 
@@ -139,7 +140,7 @@ class FirstGameScene extends BaseScene {
         // for limit enemyBox area -> using invisible wall
         {
         this.invisible_wallTop = this.physics.add.sprite(0, 100, 'invisible_wall');
-        this.invisible_wallDown = this.physics.add.sprite(0, this.game.config.height - 100, 'invisible_wall');
+        this.invisible_wallDown = this.physics.add.sprite(0, this.game.config.height - 50, 'invisible_wall');
         this.invisible_wallTop.setDisplaySize(this.game.config.width * 2, 30);
         this.invisible_wallDown.setDisplaySize(this.game.config.width * 2, 30);
         this.invisible_wallTop.fixedToCamera = true;
@@ -152,8 +153,6 @@ class FirstGameScene extends BaseScene {
 
         // setting collisions between the player and the platform group
         this.physics.add.collider(this.player, this.platformGroup);
-        this.enemyBox.setBounce(0.9);
-        // this.enemyBox.body.checkCollision.up = false;
         // this.enemyBox.body.checkCollision.down = false;
         this.physics.add.collider(this.enemyBox, this.invisible_wallTop);
         this.physics.add.collider(this.enemyBox, this.invisible_wallDown);
@@ -212,14 +211,14 @@ class FirstGameScene extends BaseScene {
             score=0;    
         }
 
-        // get items whenever overlap the enemy
-        this.physics.add.collider(this.player, this.enemyBox, function(){
-            // this.addItems();
-            console.log("collision event");
+        // get items whenever overlap the enemy and sound effect
+        if(this.physics.overlap(this.player, this.enemyBox, null, null, this)){
+            this.enemyBox.setVelocityX(80);
             score += 10;
             scoreText.setText('Points: '+score);
             hitten.play(); // sound effect
-        });
+        }
+
 
         // spacebar jump action
         if (Phaser.Input.Keyboard.JustDown(spacebar)){
@@ -265,20 +264,6 @@ class FirstGameScene extends BaseScene {
         if(minDistance > this.nextPlatformDistance){
             var nextPlatformWidth = Phaser.Math.Between(gameOptions.platformSizeRange[0], gameOptions.platformSizeRange[1]);
             this.addPlatform(nextPlatformWidth, this.game.config.width + nextPlatformWidth / 2);
-        }
-
-        // Enemy Actions ~ first, move top to down
-        if(gameOptions.testCounter == 52){
-            gameOptions.testBool = false;
-        } else if(gameOptions.testCounter == 0){
-            gameOptions.testBool = true;
-        }
-        if(gameOptions.testBool == true){
-            this.enemyBox.y--;
-            gameOptions.testCounter++;
-        } else {
-            this.enemyBox.y++;
-            gameOptions.testCounter--;
         }
 
         // Limit minmun of Enemy's X position 

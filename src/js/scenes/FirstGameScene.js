@@ -161,13 +161,25 @@ class FirstGameScene extends BaseScene {
         this.input.on("pointerdown", this.jump, this);
     }
 
-    addItems(){
-        console.log("call addItems");
+    // for spawn the items
+    addItems(posX, posY){
+        let items;
+        var kindofItem = 0;
+        // var kindofItem = Phaser.Math.Between(0, 1); // random number of different types for items
 
-        let platform;
-        platform = this.physics.add.sprite(this.enemyBox.x + 30, this.enemyBox.y, "cellphoneIcon").setScale(0.39);
-        platform.setGravityY(gameOptions.playerGravity);
-        this.itemGroup.add(platform);
+        if(kindofItem == 0){ // cellphone
+            items = this.physics.add.sprite(posX + 60, posY - 10,"cellphoneIcon").setScale(0.2);
+        } else if(kindofItem == 1){ // speed potion
+            items = this.physics.add.sprite(Phaser.Math.Between(100, this.game.config.width - 100), 
+                Phaser.Math.Between(0, this.game.config.height), 
+                "speedPotion"
+            ).setScale(0.05);            
+        }
+
+        items.setGravityY(gameOptions.playerGravity);
+        items.setGravityX(-15);
+        this.physics.add.collider(items, this.invisible_wallDown);
+        this.itemGroup.add(items);
     }
 
  
@@ -211,15 +223,6 @@ class FirstGameScene extends BaseScene {
             score=0;    
         }
 
-        // get items whenever overlap the enemy and sound effect
-        if(this.physics.overlap(this.player, this.enemyBox, null, null, this)){
-            this.enemyBox.setVelocityX(80);
-            score += 10;
-            scoreText.setText('Points: '+score);
-            hitten.play(); // sound effect
-        }
-
-
         // spacebar jump action
         if (Phaser.Input.Keyboard.JustDown(spacebar)){
             if(this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps)){
@@ -250,15 +253,6 @@ class FirstGameScene extends BaseScene {
                 this.platformGroup.remove(platform);
             }
         }, this);
-
-        // recycling platforms and add function
-        this.itemGroup.getChildren().forEach(function(platform){
-            if(this.physics.overlap(this.player, platform, null, null, this)){
-                this.itemGroup.killAndHide(platform);
-                this.itemGroup.remove(platform);
-                console.log("getting items");
-            }
-        }, this);
  
         // adding new platforms
         if(minDistance > this.nextPlatformDistance){
@@ -270,6 +264,36 @@ class FirstGameScene extends BaseScene {
         if(this.enemyBox.x < 0){
             this.enemyBox.x += this.game.config.width;
         }
+
+        // get items whenever overlap the enemy and sound effect
+        if(this.physics.overlap(this.player, this.enemyBox, null, null, this)){
+            this.enemyBox.setVelocityX(80); // make enemyBox move to right
+            this.addItems(this.enemyBox.x, this.enemyBox.y); // addItems (randomly)
+            score += 10;
+            scoreText.setText('Points: '+score);
+            hitten.play(); // sound effect
+        }
+
+        // for each items action
+        this.itemGroup.getChildren().forEach(function(items){
+            // Delete it when it is off the screen.
+            if(items.x < 0 || items.y >= this.game.config.width ){
+                this.teamGroup.killAndHide(items);
+                this.teamGroup.remove(items);
+            } // if
+
+            if(this.physics.overlap(this.player, items, null, null, this)){
+                
+                if(items.texture.key == 'cellphoneIcon'){ // hp healing potion
+                    this.itemGroup.killAndHide(items);
+                    this.itemGroup.remove(items);
+                }
+                else { // speed up potion
+                    this.itemGroup.killAndHide(items);
+                    this.itemGroup.remove(items);
+                }
+            }
+        }, this);
 
         // endless setting of Background Img
         this.background.tilePositionX += 0.9;

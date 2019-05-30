@@ -12,8 +12,8 @@ let hitten; // for global hit sound effect
 
 let gameOptions = {
     platformStartSpeed: 350,
-    spawnRange: [0, 10], // Range of blocks (platform group) 100 ~ 140 is good
-    platformSizeRange: [50, 250],
+    spawnRange: [100, 140], // Range of blocks (platform group) 100 ~ 140 is good
+    platformSizeRange: [50, 200],
     playerGravity: 900,
     jumpForce: 400,
     playerStartPosition: 200,
@@ -108,8 +108,9 @@ class FirstGameScene extends BaseScene {
         this.player.setGravityY(gameOptions.playerGravity);
  
         // adding the enemyBox
-        this.enemyBox = this.physics.add.sprite(gameOptions.playerStartPosition + 320, this.game.config.height / 2 + 60, "bullier");
-        this.enemyBox.setGravityX(-10);
+        this.enemyBox = this.physics.add.sprite(gameOptions.playerStartPosition + 320, this.game.config.height / 2, "bullier");
+        this.enemyBox.setGravityY(gameOptions.playerGravity);
+        this.enemyBox.setGravityX(-15);
         this.enemyBox.setScale(2);
         this.player.setScale(2);
 
@@ -139,7 +140,7 @@ class FirstGameScene extends BaseScene {
         // for limit enemyBox area -> using invisible wall
         {
         this.invisible_wallTop = this.physics.add.sprite(0, 100, 'invisible_wall');
-        this.invisible_wallDown = this.physics.add.sprite(0, this.game.config.height - 100, 'invisible_wall');
+        this.invisible_wallDown = this.physics.add.sprite(0, this.game.config.height - 50, 'invisible_wall');
         this.invisible_wallTop.setDisplaySize(this.game.config.width * 2, 30);
         this.invisible_wallDown.setDisplaySize(this.game.config.width * 2, 30);
         this.invisible_wallTop.fixedToCamera = true;
@@ -152,9 +153,6 @@ class FirstGameScene extends BaseScene {
 
         // setting collisions between the player and the platform group
         this.physics.add.collider(this.player, this.platformGroup);
-        this.enemyBox.setBounce(0.9);
-        // this.enemyBox.body.checkCollision.up = false;
-        // this.enemyBox.body.checkCollision.down = false;
         this.physics.add.collider(this.enemyBox, this.invisible_wallTop);
         this.physics.add.collider(this.enemyBox, this.invisible_wallDown);
 
@@ -162,13 +160,21 @@ class FirstGameScene extends BaseScene {
         this.input.on("pointerdown", this.jump, this);
     }
 
-    addItems(){
-        console.log("call addItems");
+    // for spawn the items
+    addItems(posX, posY){
+        let items;
+        var kindofItem = Phaser.Math.Between(0, 1); // random number of different types for items
 
-        let platform;
-        platform = this.physics.add.sprite(this.enemyBox.x + 30, this.enemyBox.y, "cellphoneIcon").setScale(0.39);
-        platform.setGravityY(gameOptions.playerGravity);
-        this.itemGroup.add(platform);
+        if(kindofItem == 0){ // cellphone
+            items = this.physics.add.sprite(posX + 60, posY - 10,"cellphoneIcon").setScale(0.2);
+        } else if(kindofItem == 1){ // paper
+            items = this.physics.add.sprite(posX + 60, posY - 10,"paperIcon").setScale(0.05);
+        }
+
+        items.setGravityY(gameOptions.playerGravity);
+        items.setGravityX(-15);
+        this.physics.add.collider(items, this.invisible_wallDown);
+        this.itemGroup.add(items);
     }
 
  
@@ -212,15 +218,6 @@ class FirstGameScene extends BaseScene {
             score=0;    
         }
 
-        // get items whenever overlap the enemy
-        this.physics.add.collider(this.player, this.enemyBox, function(){
-            // this.addItems();
-            console.log("collision event");
-            score += 10;
-            scoreText.setText('Points: '+score);
-            hitten.play(); // sound effect
-        });
-
         // spacebar jump action
         if (Phaser.Input.Keyboard.JustDown(spacebar)){
             if(this.player.body.touching.down || (this.playerJumps > 0 && this.playerJumps < gameOptions.jumps)){
@@ -251,15 +248,6 @@ class FirstGameScene extends BaseScene {
                 this.platformGroup.remove(platform);
             }
         }, this);
-
-        // recycling platforms and add function
-        this.itemGroup.getChildren().forEach(function(platform){
-            if(this.physics.overlap(this.player, platform, null, null, this)){
-                this.itemGroup.killAndHide(platform);
-                this.itemGroup.remove(platform);
-                console.log("getting items");
-            }
-        }, this);
  
         // adding new platforms
         if(minDistance > this.nextPlatformDistance){
@@ -267,24 +255,41 @@ class FirstGameScene extends BaseScene {
             this.addPlatform(nextPlatformWidth, this.game.config.width + nextPlatformWidth / 2);
         }
 
-        // Enemy Actions ~ first, move top to down
-        if(gameOptions.testCounter == 52){
-            gameOptions.testBool = false;
-        } else if(gameOptions.testCounter == 0){
-            gameOptions.testBool = true;
-        }
-        if(gameOptions.testBool == true){
-            this.enemyBox.y--;
-            gameOptions.testCounter++;
-        } else {
-            this.enemyBox.y++;
-            gameOptions.testCounter--;
-        }
-
         // Limit minmun of Enemy's X position 
         if(this.enemyBox.x < 0){
             this.enemyBox.x += this.game.config.width;
         }
+
+        // get items whenever overlap the enemy and sound effect
+        if(this.physics.overlap(this.player, this.enemyBox, null, null, this)){
+            this.enemyBox.setVelocityX(85); // make enemyBox move to right
+            this.enemyBox.x += 23;
+            this.addItems(this.enemyBox.x, this.enemyBox.y); // addItems (randomly)
+            score += 10;
+            scoreText.setText('Points: '+score);
+            hitten.play(); // sound effect
+        }
+
+        // for each items action
+        this.itemGroup.getChildren().forEach(function(items){
+            // Delete it when it is off the screen.
+            if(items.x < 0 || items.y >= this.game.config.width ){
+                this.itemGroup.killAndHide(items);
+                this.itemGroup.remove(items);
+            } // if
+
+            if(this.physics.overlap(this.player, items, null, null, this)){
+                score += 10; // add score whenever eat items
+                if(items.texture.key == 'cellphoneIcon'){ // cellphoneIcon
+                    this.itemGroup.killAndHide(items);
+                    this.itemGroup.remove(items);
+                }
+                else { // paperIcon
+                    this.itemGroup.killAndHide(items);
+                    this.itemGroup.remove(items);
+                }
+            }
+        }, this);
 
         // endless setting of Background Img
         this.background.tilePositionX += 0.9;

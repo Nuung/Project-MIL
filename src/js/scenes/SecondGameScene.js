@@ -359,6 +359,7 @@ class SecondGameScene extends BaseScene {
         if(scorePoint > 2000 * (scoreLevel / 2)) {
             this.scene.pause();
             this.scene.launch('sceneP', "3"); // "2" is over, "3" is level up
+
             scoreLevel++;
             levelText.setText(i18next.t("Level")+": " + scoreLevel);
             scorePoint = 0;

@@ -12,7 +12,7 @@ let hitten; // for global hit sound effect
 
 let gameOptions = {
     platformStartSpeed: 350,
-    spawnRange: [0, 10], // Range of blocks (platform group) 100 ~ 140 is good
+    spawnRange: [100, 140], // Range of blocks (platform group) 100 ~ 140 is good
     platformSizeRange: [50, 250],
     playerGravity: 900,
     jumpForce: 400,
@@ -153,7 +153,6 @@ class FirstGameScene extends BaseScene {
 
         // setting collisions between the player and the platform group
         this.physics.add.collider(this.player, this.platformGroup);
-        // this.enemyBox.body.checkCollision.down = false;
         this.physics.add.collider(this.enemyBox, this.invisible_wallTop);
         this.physics.add.collider(this.enemyBox, this.invisible_wallDown);
 
@@ -164,16 +163,12 @@ class FirstGameScene extends BaseScene {
     // for spawn the items
     addItems(posX, posY){
         let items;
-        var kindofItem = 0;
-        // var kindofItem = Phaser.Math.Between(0, 1); // random number of different types for items
+        var kindofItem = Phaser.Math.Between(0, 1); // random number of different types for items
 
         if(kindofItem == 0){ // cellphone
             items = this.physics.add.sprite(posX + 60, posY - 10,"cellphoneIcon").setScale(0.2);
-        } else if(kindofItem == 1){ // speed potion
-            items = this.physics.add.sprite(Phaser.Math.Between(100, this.game.config.width - 100), 
-                Phaser.Math.Between(0, this.game.config.height), 
-                "speedPotion"
-            ).setScale(0.05);            
+        } else if(kindofItem == 1){ // paper
+            items = this.physics.add.sprite(posX + 60, posY - 10,"paperIcon").setScale(0.05);
         }
 
         items.setGravityY(gameOptions.playerGravity);
@@ -267,7 +262,8 @@ class FirstGameScene extends BaseScene {
 
         // get items whenever overlap the enemy and sound effect
         if(this.physics.overlap(this.player, this.enemyBox, null, null, this)){
-            this.enemyBox.setVelocityX(80); // make enemyBox move to right
+            this.enemyBox.setVelocityX(85); // make enemyBox move to right
+            this.enemyBox.x += 23;
             this.addItems(this.enemyBox.x, this.enemyBox.y); // addItems (randomly)
             score += 10;
             scoreText.setText('Points: '+score);
@@ -278,17 +274,17 @@ class FirstGameScene extends BaseScene {
         this.itemGroup.getChildren().forEach(function(items){
             // Delete it when it is off the screen.
             if(items.x < 0 || items.y >= this.game.config.width ){
-                this.teamGroup.killAndHide(items);
-                this.teamGroup.remove(items);
+                this.itemGroup.killAndHide(items);
+                this.itemGroup.remove(items);
             } // if
 
             if(this.physics.overlap(this.player, items, null, null, this)){
-                
-                if(items.texture.key == 'cellphoneIcon'){ // hp healing potion
+                score += 10; // add score whenever eat items
+                if(items.texture.key == 'cellphoneIcon'){ // cellphoneIcon
                     this.itemGroup.killAndHide(items);
                     this.itemGroup.remove(items);
                 }
-                else { // speed up potion
+                else { // paperIcon
                     this.itemGroup.killAndHide(items);
                     this.itemGroup.remove(items);
                 }

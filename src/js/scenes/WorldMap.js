@@ -40,6 +40,8 @@ class WorldMap extends BaseScene {
         // line[1] = new Phaser.Curves.Line(0, 0, UsaFlag.x, UsaFlag.y);
         // line[2] = new Phaser.Curves.Line(0, 0, FranceFlag.x, FranceFlag.y);
 
+        this.FranceFlag.alpha = 0.5;
+
         // action for flags
         this.KoreaFlag.setInteractive();
         this.UsaFlag.setInteractive();

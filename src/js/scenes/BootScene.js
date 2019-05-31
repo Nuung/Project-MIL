@@ -102,6 +102,7 @@ class BootScene extends BaseScene {
         this.load.audio("hit", "./src/sounds/SFX_Hit01.ogg");
         this.load.audio("healthp", "./src/sounds/fastS.ogg");
         this.load.audio("fastp", "./src/sounds/healthS.ogg");
+        this.load.audio("item", "./src/sounds/item.ogg");
 
         let loadingBar = this.add.graphics({
             fillStyle: {

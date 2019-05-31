@@ -8,6 +8,7 @@ var scoreText;
 var spacebar;
 var PButton;
 let hitten; // for global hit sound effect
+let item; //for global item collect
 
 let gameOptions = {
     platformStartSpeed: 350,
@@ -36,6 +37,8 @@ class FirstGameScene extends BaseScene {
 
         //set sound effect when player hit enemy
         hitten = this.sound.add('hit',{loop:false});
+
+        item = this.sound.add('item',{loop:false});
 
         //create the spacebar key
         spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -315,6 +318,7 @@ class FirstGameScene extends BaseScene {
             } // if
 
             if(this.physics.overlap(this.player, items, null, null, this)){
+                item.play();
                 gameOptions.score += 10; // add score whenever eat items
                 scoreText.setText(i18next.t("score")+': ' + gameOptions.score);
                 if(items.texture.key == 'cellphoneIcon'){ // cellphoneIcon

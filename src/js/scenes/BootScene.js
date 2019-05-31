@@ -143,6 +143,8 @@ class BootScene extends BaseScene {
         // for ch1 game's items 
         this.load.image("cellphoneIcon", "./src/img/ch1_items/cellphoneIcon.png");
         this.load.image("paperIcon", "./src/img/ch1_items/paperIcon.png");
+        this.load.image("polaroid", "./src/img/ch1_items/polaroid.png");
+        this.load.image("personal_info", "./src/img/ch1_items/personal_info.png");
 
         // for ch2 game's items 
         this.load.image("hpPotion", "./src/img/ch2_items/hp_potion.png");

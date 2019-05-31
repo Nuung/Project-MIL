@@ -5,7 +5,6 @@ import i18next from "i18next";
 var timedEvent;
 var text;
 var scoreText;
-var score = 0;
 var spacebar;
 var PButton;
 let hitten; // for global hit sound effect
@@ -19,10 +18,9 @@ let gameOptions = {
     playerStartPosition: 200,
     enemyStartPosition: 400,
     jumps: 2,
-
-    // just for testing
-    testCounter: 0,
-    testBool: true
+    items: [false, false, false, false],
+    itemRender: [true, true, true, true],
+    score: 0 // game score
 };
 
 // playGame scene
@@ -33,7 +31,6 @@ class FirstGameScene extends BaseScene {
         });
     }
     init(){
-        console.log("im running");
     }
     create(){
 
@@ -163,12 +160,18 @@ class FirstGameScene extends BaseScene {
     // for spawn the items
     addItems(posX, posY){
         let items;
-        var kindofItem = Phaser.Math.Between(0, 1); // random number of different types for items
+        var kindofItem = Phaser.Math.Between(0, 5); // random number of different types for items
 
         if(kindofItem == 0){ // cellphone
             items = this.physics.add.sprite(posX + 60, posY - 10,"cellphoneIcon").setScale(0.2);
         } else if(kindofItem == 1){ // paper
             items = this.physics.add.sprite(posX + 60, posY - 10,"paperIcon").setScale(0.05);
+        } else if(kindofItem == 2){
+            items = this.physics.add.sprite(posX + 60, posY - 10,"polaroid").setScale(0.05);
+        } else if(kindofItem == 3){
+            items = this.physics.add.sprite(posX + 60, posY - 10,"personal_info").setScale(0.08);
+        } else{
+            return; // losing ticket
         }
 
         items.setGravityY(gameOptions.playerGravity);
@@ -212,10 +215,43 @@ class FirstGameScene extends BaseScene {
     update(){
         this.player.x = gameOptions.playerStartPosition; // fix the player to the screen
 
+        //////////////////////////////////////////////////////////////////////////////
         // game over
         if(this.player.y > this.game.config.height){    
             this.scene.start('FirstGameScene'); // restart to GameScene
-            score=0;    
+            gameOptions.score = 0;
+            scoreText.setText(i18next.t("score")+': ' + gameOptions.score);
+
+            for(var i = 0; i < 4; i++){
+                gameOptions.items[i] = false;
+            } // inner for
+        }
+
+        // game clear
+        if(gameOptions.items[0] == true && gameOptions.items[1] == true 
+            && gameOptions.items[2] == true && gameOptions.items[3] == true){
+                this.scene.pause();
+                this.scene.launch('sceneP', "1");
+        }
+        //////////////////////////////////////////////////////////////////////////////
+
+        
+        // Rendering the items which player got
+        if(gameOptions.items[0] && gameOptions.itemRender[0]) { 
+            this.add.image(this.game.config.width / 2 - 40, 115, 'cellphoneIcon').setScale(0.2); 
+            gameOptions.itemRender[0] = false;
+        }
+        if(gameOptions.items[1] && gameOptions.itemRender[1]) { 
+            this.add.image(this.game.config.width / 2, 115, 'paperIcon').setScale(0.05); 
+            gameOptions.itemRender[1] = false;
+        }
+        if(gameOptions.items[2] && gameOptions.itemRender[2]) { 
+            this.add.image(this.game.config.width / 2 + 45, 115, 'polaroid').setScale(0.05); 
+            gameOptions.itemRender[2] = false;
+        }
+        if(gameOptions.items[3] && gameOptions.itemRender[3]) { 
+            this.add.image(this.game.config.width / 2 + 90, 115, 'personal_info').setScale(0.08); 
+            gameOptions.itemRender[3] = false;
         }
 
         // spacebar jump action
@@ -265,8 +301,8 @@ class FirstGameScene extends BaseScene {
             this.enemyBox.setVelocityX(85); // make enemyBox move to right
             this.enemyBox.x += 23;
             this.addItems(this.enemyBox.x, this.enemyBox.y); // addItems (randomly)
-            score += 10;
-            scoreText.setText('Points: '+score);
+            gameOptions.score += 10;
+            scoreText.setText(i18next.t("score")+': ' + gameOptions.score);
             hitten.play(); // sound effect
         }
 
@@ -279,14 +315,27 @@ class FirstGameScene extends BaseScene {
             } // if
 
             if(this.physics.overlap(this.player, items, null, null, this)){
-                score += 10; // add score whenever eat items
+                gameOptions.score += 10; // add score whenever eat items
+                scoreText.setText(i18next.t("score")+': ' + gameOptions.score);
                 if(items.texture.key == 'cellphoneIcon'){ // cellphoneIcon
                     this.itemGroup.killAndHide(items);
                     this.itemGroup.remove(items);
+                    gameOptions.items[0] = true;
                 }
-                else { // paperIcon
+                else if(items.texture.key == 'paperIcon') { // paperIcon
                     this.itemGroup.killAndHide(items);
                     this.itemGroup.remove(items);
+                    gameOptions.items[1] = true;
+                }
+                else if(items.texture.key == 'polaroid') { // polaroid
+                    this.itemGroup.killAndHide(items);
+                    this.itemGroup.remove(items);
+                    gameOptions.items[2] = true;
+                }
+                else if(items.texture.key == 'personal_info') { // personal_info
+                    this.itemGroup.killAndHide(items);
+                    this.itemGroup.remove(items);
+                    gameOptions.items[3] = true;
                 }
             }
         }, this);

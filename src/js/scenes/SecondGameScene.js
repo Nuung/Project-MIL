@@ -13,6 +13,22 @@ var levelText = 0; // for display game levels
 var charVelocity = 160; // setting the speed and plused by speed item(speedPotion)
 let health; // for global health up sound effect
 let faster; // for global fast potion sound effect 
+var textTimer = 0; // text effect when eat some items
+var itemText; // text effect
+var itemSpawned = false;
+
+var tconfig = { // text config
+    x: 200,
+    y: 50,
+    text: '',
+    style: {
+      fontSize: '22px',
+      fontFamily: 'Arial',
+      color: '#8ED6FF',
+      align: 'center',
+      lineSpacing: 12,
+    }
+  };
 
 var timedEvent2;
 var text2;
@@ -44,6 +60,10 @@ class SecondGameScene extends BaseScene {
         // player assets
         this.player = this.physics.add.sprite(this.game.config.width / 2, this.game.config.height / 2, 'person');
         this.cursors = this.input.keyboard.createCursorKeys();
+
+        // item effect text setting
+        itemText = this.make.text(tconfig);
+        itemText.setWordWrapWidth(100, false);
 
         // Ading pause btn and pause scene and score and Time and exit/// AKA HUD
         let PauseButton2 = this.add.image(625,65,"pause").setScale(0.8).setDepth(1);
@@ -321,8 +341,10 @@ class SecondGameScene extends BaseScene {
             } // if
 
             if(this.physics.overlap(this.player, items, null, null, this)){
-                
+                itemSpawned = true;
+                itemText.x = this.player.x; itemText.y = this.player.y; 
                 if(items.texture.key == 'hpPotion'){ // hp healing potion
+                    itemText.setText(i18next.t("heal the hp!"));
                     this.itemGroup.killAndHide(items);
                     this.itemGroup.remove(items);
                     touch = 0; // heal the HP point
@@ -330,6 +352,7 @@ class SecondGameScene extends BaseScene {
                     health.play();
                 }
                 else { // speed up potion
+                    itemText.setText(i18next.t("speed up!"));
                     this.itemGroup.killAndHide(items);
                     this.itemGroup.remove(items);
                     charVelocity += 10;
@@ -337,6 +360,18 @@ class SecondGameScene extends BaseScene {
                 }
             }
         }, this);
+
+        // text timer (item effect)
+        if(itemSpawned) {
+            textTimer++;
+        }
+
+        // delete text 
+        if(textTimer > 60) {
+            itemText.setText("");
+            itemSpawned = false;
+            textTimer = 0;
+        }
 
         // keep displaying the score
         scoreText2.setText(i18next.t("score")+": " + scorePoint);
@@ -372,7 +407,7 @@ class SecondGameScene extends BaseScene {
             scorePoint = 0;
             touch = 0;
             this.setPercent(50-touch*5);
-        }
+        }        
     }
 };
 

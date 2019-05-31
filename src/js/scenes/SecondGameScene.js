@@ -11,6 +11,8 @@ var scorePoint = 0; // for dispaly of score
 var scoreLevel = 1; // for game levels
 var levelText = 0; // for display game levels 
 var charVelocity = 160; // setting the speed and plused by speed item(speedPotion)
+let health; // for global health up sound effect
+let faster; // for global fast potion sound effect 
 
 var timedEvent2;
 var text2;
@@ -28,6 +30,9 @@ class SecondGameScene extends BaseScene {
     }
 
     create(){
+
+        health = this.sound.add('healthp',{loop:false});
+        faster = this.sound.add('fastp',{loop:false});
 
         // for the HP bar
         touch = 0;
@@ -322,11 +327,13 @@ class SecondGameScene extends BaseScene {
                     this.itemGroup.remove(items);
                     touch = 0; // heal the HP point
                     this.setPercent(50-touch*5);
+                    health.play();
                 }
                 else { // speed up potion
                     this.itemGroup.killAndHide(items);
                     this.itemGroup.remove(items);
                     charVelocity += 10;
+                    faster.play();
                 }
             }
         }, this);

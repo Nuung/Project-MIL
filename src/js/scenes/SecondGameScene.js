@@ -163,6 +163,7 @@ class SecondGameScene extends BaseScene {
         exitD.setInteractive();
         exitD.on("pointerup", ()=>{
             this.scene.start('WorldMap');
+            this.restartGame();
         })
 
         // to pause the game
@@ -243,6 +244,15 @@ class SecondGameScene extends BaseScene {
         this.itemGroup.add(items);
     }
 
+    // make the value go back to first
+    restartGame(){
+        scoreLevel = 1;
+        scorePoint = 0;
+        charVelocity = 160;
+        touch = 0;
+        this.setPercent(50-touch*5);
+    }
+
     // Hp bar setting
     setPercent(percent){
         percent = percent/100;
@@ -252,12 +262,7 @@ class SecondGameScene extends BaseScene {
         if(percent == 0){
             this.scene.pause();
             this.scene.launch('sceneP', "2"); // alert 'Game over'
-            // make the value go back to first
-            scoreLevel = 1;
-            scorePoint = 0;
-            charVelocity = 160;
-            touch = 0;
-            this.setPercent(50-touch*5);
+            this.restartGame();
         }
     }
 

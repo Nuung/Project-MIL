@@ -18,7 +18,7 @@ let gameOptions = {
     jumpForce: 400,
     playerStartPosition: 200,
     enemyStartPosition: 400,
-    jumps: 2,
+    jumps: 2, // how many jumps
     items: [false, false, false, false],
     itemRender: [true, true, true, true],
     score: 0 // game score
@@ -87,6 +87,7 @@ class FirstGameScene extends BaseScene {
         // to go back to world menu
         exitC.setInteractive();
         exitC.on("pointerup", ()=>{
+            this.restartGame();
             this.scene.start('WorldMap');
         })
 
@@ -160,6 +161,17 @@ class FirstGameScene extends BaseScene {
         this.input.on("pointerdown", this.jump, this);
     }
 
+    // reset every assets value
+    restartGame(){
+        gameOptions.score = 0;
+        scoreText.setText(i18next.t("score")+': ' + gameOptions.score);
+
+        for(var i = 0; i < 4; i++){
+            gameOptions.items[i] = false;
+            gameOptions.itemRender[i] = true;
+        } // inner for
+    }
+
     // for spawn the items
     addItems(posX, posY){
         let items;
@@ -221,13 +233,9 @@ class FirstGameScene extends BaseScene {
         //////////////////////////////////////////////////////////////////////////////
         // game over
         if(this.player.y > this.game.config.height){    
-            this.scene.start('FirstGameScene'); // restart to GameScene
-            gameOptions.score = 0;
-            scoreText.setText(i18next.t("score")+': ' + gameOptions.score);
-
-            for(var i = 0; i < 4; i++){
-                gameOptions.items[i] = false;
-            } // inner for
+            this.scene.pause();
+            this.scene.launch('sceneP', "5"); // alert 'Game over'
+            this.restartGame(); // call reset function
         }
 
         // game clear
@@ -271,7 +279,7 @@ class FirstGameScene extends BaseScene {
         // when press the pause btn
         if (Phaser.Input.Keyboard.JustDown(PButton)){
             this.scene.pause();
-            this.scene.launch('sceneP');
+            this.scene.launch('sceneP', "1");
         }
 
         //Time elapsed

@@ -3,6 +3,7 @@ import i18next from "i18next";
 
 var ResumeText;
 var recieved;
+var PButton;
 
 var ScenePause = new Phaser.Class({
 
@@ -34,6 +35,8 @@ var ScenePause = new Phaser.Class({
         
        // let ResumeText = this.add.text( W- 250, H+100, i18next.t('exitpause')).setScale(2);
 
+        PButton = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
+
         let pause = this.add.image(W,H,'play_again').setScale(3);
         let gameover = this.add.image(W,H,'gameoverImg').setScale(3);
         let levelup = this.add.image(W,H,'levelupImg').setScale(3);
@@ -53,9 +56,12 @@ var ScenePause = new Phaser.Class({
         }else if(recieved == '3'){ // '3' is level up
             levelup.visible = true;
             contenedor.add([levelup]);
-        }else { // '4' is just pause of SecondGameScene
+        }else if(recieved == '4'){ // '4' is just pause of SecondGameScene
             pause.visible = true;
             contenedor.add([pause]);
+        }else { // other value is from First game and "Game over"
+            gameover.visible = true;
+            contenedor.add([gameover]);
         }
 
         this.tweens.add({
@@ -65,6 +71,11 @@ var ScenePause = new Phaser.Class({
             y: 0
         });
 
+        // Make can press 'p' button even this pause scene
+        if (Phaser.Input.Keyboard.JustDown(PButton) && recieved == '1'){
+            pause.visible = false;
+            this.scene.resume('FirstGameScene');
+        }
 
         this.input.once('pointerdown', function () {
             if(recieved == '1'){
@@ -77,9 +88,12 @@ var ScenePause = new Phaser.Class({
             }else if(recieved == '3'){ // '3' is level up
                 levelup.visible = false;
                 this.scene.resume('SecondGameScene');
-            }else { // '4' is just pause of SecondGameScene
+            }else if(recieved == '4'){ // '4' is just pause of SecondGameScene
                 pause.visible = false;
                 this.scene.resume('SecondGameScene');
+            }else{ // other value is from First game and "Game over"
+                gameover.visible = false;
+                this.scene.start('FirstGameScene');
             }
             this.scene.stop();
         }, this);

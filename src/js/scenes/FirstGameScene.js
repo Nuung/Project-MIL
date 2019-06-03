@@ -12,8 +12,8 @@ let item; //for global item collect
 
 let gameOptions = {
     platformStartSpeed: 350,
-    spawnRange: [100, 140], // Range of blocks (platform group) 100 ~ 140 is good
-    platformSizeRange: [50, 200],
+    spawnRange: [100, 130], // Range of blocks (platform group) 100 ~ 140 is good
+    platformSizeRange: [90, 200],
     playerGravity: 900,
     jumpForce: 400,
     playerStartPosition: 200,
@@ -175,7 +175,7 @@ class FirstGameScene extends BaseScene {
     // for spawn the items
     addItems(posX, posY){
         let items;
-        var kindofItem = Phaser.Math.Between(0, 5); // random number of different types for items
+        var kindofItem = Phaser.Math.Between(0, 3); // random number of different types for items
 
         if(kindofItem == 0){ // cellphone
             items = this.physics.add.sprite(posX + 60, posY - 10,"cellphoneIcon").setScale(0.2);
@@ -310,7 +310,7 @@ class FirstGameScene extends BaseScene {
 
         // get items whenever overlap the enemy and sound effect
         if(this.physics.overlap(this.player, this.enemyBox, null, null, this)){
-            this.enemyBox.setVelocityX(85); // make enemyBox move to right
+            this.enemyBox.setVelocityX(70); // make enemyBox move to right
             this.enemyBox.x += 23;
             this.addItems(this.enemyBox.x, this.enemyBox.y); // addItems (randomly)
             gameOptions.score += 10;

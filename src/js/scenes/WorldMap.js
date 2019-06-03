@@ -12,7 +12,7 @@ class WorldMap extends BaseScene {
         //console.log("TitleScene Constructor Data : RECIEVED data ; "+test);
     }
     init(data){
-
+        console.log("im worldmap");
     }
     create(){
 
@@ -56,6 +56,7 @@ class WorldMap extends BaseScene {
             this.scene.launch('PreFirst',"2");
         })
     }
+    
     // update(){
     //     line[0].fromSprite(this.KoreaFlag, false);
     // }

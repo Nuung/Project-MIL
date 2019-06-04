@@ -6,5 +6,18 @@
     "visitCountry": "Choose the country you want to visit",
     "exitpause":"Click to exit this pause",
     "score":"Score",
-    "swearWords":{}
+    "KoreaStory":[
+        "Hi. Misun is my name and I am 13 years old. But I have a problem lately, so would you listen to my story?",
+        "I like to upload my daily life onto social networking services, such as Intergram and Facebood. However, a classmate started to be jealous on my life, what made him stealing my bag with phone. Then, he started sending texts as he was me.",
+        "So can you please catch him with my belongings?"
+    ],
+    "usaStory":[
+        "Hi. My Name is Kevin and I am 11 years old. And I do live in the United States of America. Now I have a problem with my classmate, so please listen to my story",
+        "I love to cook at home and often take my self-cooked-meals to school. To Share them with my schoolmates, until the started teasing me on the internet. Because of my cooking they gave me the nicname 'Baker Pig'. Later they started with anonymous phone calls, while call my nickname repeatedly. Therfore I hang up.",
+        "Besides this, can you help me to avoid the bad words."
+    ],
+    "swearWords":{},
+    "move": "Move",
+    "jump": "Jump",
+    "countries":["Korea", "United States", "France"] 
 }

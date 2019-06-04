@@ -23,7 +23,7 @@ class Ending extends BaseScene {
     else if(recieved == '2'){
         this.background = this.add.sprite(this.game.config.width / 2, this.game.config.height / 2, 'secondBackground');
         this.background.setDisplaySize(this.game.config.width, this.game.config.height);
-        this.add.image(0,0,"second_intro_1").setOrigin(0).setDepth(0);
+        this.add.image(0,0,"second_ending").setOrigin(0).setDepth(0);
     }
 
     let promise= this.add.image(400,450,"promise");

@@ -74,12 +74,10 @@ class BootScene extends BaseScene {
         this.load.image("continue","./src/img/continue_y.png");
         this.load.image("first_intro_2","./src/img/ch1_intro/first_intro_2.png");
         this.load.image("go","./src/img/go.png");
-<<<<<<< HEAD
         this.load.image("goWhite","./src/img/goWhite.png");
         this.load.image("question","./src/img/question.png");
         this.load.image("second_intro_1","./src/img/second_intro_1.png");
         this.load.image("second_intro_2","./src/img/second_intro_2.png");
-=======
         this.load.image("first_intro_3","./src/img/ch1_intro/first_intro_3r.png");
         this.load.image("first_ending","./src/img/ch1_intro/first_ending.png");
         this.load.image("second_intro_1","./src/img/ch2_intro/second_intro_1.png");
@@ -87,7 +85,6 @@ class BootScene extends BaseScene {
         this.load.image("second_intro_3","./src/img/ch2_intro/second_intro_3.png");
         this.load.image("second_ending","./src/img/ch2_intro/second_ending.png");
         this.load.image("howcan","./src/img/howcan.png");
->>>>>>> 28132892a4fd5c50a3b8d140b2198d20847b7602
         this.load.image("howto","./src/img/howto.png");
         this.load.image("howtobutton","./src/img/howtobutton.png");
         this.load.image("promise","./src/img/promise.png");

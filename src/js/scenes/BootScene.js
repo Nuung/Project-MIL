@@ -75,6 +75,8 @@ class BootScene extends BaseScene {
         this.load.image("continue","./src/img/continue_y.png");
         this.load.image("first_intro_2","./src/img/first_intro_2.png");
         this.load.image("go","./src/img/go.png");
+        this.load.image("goWhite","./src/img/goWhite.png");
+        this.load.image("question","./src/img/question.png");
         this.load.image("second_intro_1","./src/img/second_intro_1.png");
         this.load.image("second_intro_2","./src/img/second_intro_2.png");
         this.load.image("howto","./src/img/howto.png");

@@ -16,6 +16,7 @@ import PreFirst from './js/scenes/PreFirst';
 
 import PreSecond from './js/scenes/PreSecond';
 import HowtoScene from './js/scenes/HowtoScene';
+import PreWorld from './js/scenes/PreWorld';
 
 
 import SimulationScene from './js/scenes/SimulationScene';
@@ -35,7 +36,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true
+            debug: false//true
         }
     },
     scene: [
@@ -50,7 +51,8 @@ const config = {
     //    PreFirst2,
         PreSecond,
     //    PreSecond2,
-        HowtoScene
+        HowtoScene,
+        PreWorld
     ]
 };
 

@@ -24,6 +24,21 @@ let gameOptions = {
     score: 0 // game score
 };
 
+// text setting for misun's Dialogue
+var misumText;
+var tconfig = { // text config
+    x: 200,
+    y: 50,
+    text: '',
+    style: {
+      fontSize: '22px',
+      fontFamily: 'Arial',
+      color: '#000080',
+      align: 'center',
+      lineSpacing: 12,
+    }
+};
+
 // playGame scene
 class FirstGameScene extends BaseScene {
     constructor(test) {
@@ -34,10 +49,12 @@ class FirstGameScene extends BaseScene {
     init(){
     }
     create(){
+        // item effect text setting
+        misumText = this.make.text(tconfig);
+        misumText.setWordWrapWidth(100, false);
 
         //set sound effect when player hit enemy
         hitten = this.sound.add('hit',{loop:false});
-
         item = this.sound.add('item',{loop:false});
 
         //create the spacebar key
@@ -86,14 +103,14 @@ class FirstGameScene extends BaseScene {
 
         // to go back to world menu
         exitC.setInteractive();
-        exitC.on("pointerup", ()=>{
+        exitC.on("pointerup", ()=> {
             this.restartGame();
             this.scene.start('WorldMap');
         })
 
         // to pause the game
         PauseButton.setInteractive();
-        PauseButton.on("pointerup", ()=>{
+        PauseButton.on("pointerup", ()=> {
             this.scene.pause();
             this.scene.launch('sceneP', "1");
         })

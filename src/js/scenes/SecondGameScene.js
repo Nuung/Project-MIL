@@ -28,7 +28,7 @@ var tconfig = { // text config
       align: 'center',
       lineSpacing: 12,
     }
-  };
+};
 
 var timedEvent2;
 var text2;

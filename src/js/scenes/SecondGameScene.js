@@ -407,7 +407,13 @@ class SecondGameScene extends BaseScene {
             scorePoint = 0;
             touch = 0;
             this.setPercent(50-touch*5);
-        }        
+        }
+
+        // game clear
+        if(scoreLevel == 5){
+            this.scene.launch('Ending', "2");
+            this.scene.stop();
+        }
     }
 };
 

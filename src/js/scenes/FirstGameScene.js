@@ -47,11 +47,16 @@ class FirstGameScene extends BaseScene {
         super({
             key: 'FirstGameScene'
         });
+        
+        this.bullyCries = new Array();
     }
     init(){
-
+        
     }
     create(){
+        //Added bully translation
+        this.bull
+
         // set sound effect when player hit enemy
         hitten = this.sound.add('hit',{loop:false});
         item = this.sound.add('item',{loop:false});
@@ -248,20 +253,12 @@ class FirstGameScene extends BaseScene {
     }
 
     dialogue(){
-        var randomText = Phaser.Math.Between(0, 3);
+        var cries = i18next.t('bullyCries',{ returnObjects: true });
+        var randomCryNum = Phaser.Math.Between(0, cries.length -1);
         // text setting
         isHit = true; // for print
         misunText.x = this.player.x; misunText.y = this.player.y - 60; 
-
-        if(randomText == 0){
-            misunText.setText(i18next.t("give me back my things!"));
-        } else if(randomText == 1){
-            misunText.setText(i18next.t("do not impersonate my information!"));
-        } else if(randomText == 2){
-            misunText.setText(i18next.t("there are consequences for faking people in social media!"));
-        } else{
-            misunText.setText(i18next.t("shame on you!"));
-        }
+        misunText.setText(cries[randomCryNum]);
     }
 
     update(){

@@ -43,7 +43,6 @@ class BootScene extends BaseScene {
         percentText.setOrigin(0.5, 0.5);
 
         // loading the menu img
-        //this.load.image("title_bg", "./src/img/title_bg.jpg");
         this.load.image("title_bg", "./src/img/urban8.jpg");
         this.load.image("options_button", "./src/img/options_button.png");
         this.load.image("play_button", "./src/img/play_button.png");
@@ -71,16 +70,28 @@ class BootScene extends BaseScene {
         this.load.image("exit","./src/img/exitLeft.png");
         this.load.image("exitR","./src/img/exitRight.png");
 
-        this.load.image("first_intro_1","./src/img/first_intro_1.png");
+        this.load.image("first_intro_1","./src/img/ch1_intro/first_intro_1.png");
         this.load.image("continue","./src/img/continue_y.png");
-        this.load.image("first_intro_2","./src/img/first_intro_2.png");
+        this.load.image("first_intro_2","./src/img/ch1_intro/first_intro_2.png");
         this.load.image("go","./src/img/go.png");
+<<<<<<< HEAD
         this.load.image("goWhite","./src/img/goWhite.png");
         this.load.image("question","./src/img/question.png");
         this.load.image("second_intro_1","./src/img/second_intro_1.png");
         this.load.image("second_intro_2","./src/img/second_intro_2.png");
+=======
+        this.load.image("first_intro_3","./src/img/ch1_intro/first_intro_3r.png");
+        this.load.image("first_ending","./src/img/ch1_intro/first_ending.png");
+        this.load.image("second_intro_1","./src/img/ch2_intro/second_intro_1.png");
+        this.load.image("second_intro_2","./src/img/ch2_intro/second_intro_2.png");
+        this.load.image("second_intro_3","./src/img/ch2_intro/second_intro_3.png");
+        this.load.image("second_ending","./src/img/ch2_intro/second_ending.png");
+        this.load.image("howcan","./src/img/howcan.png");
+>>>>>>> 28132892a4fd5c50a3b8d140b2198d20847b7602
         this.load.image("howto","./src/img/howto.png");
         this.load.image("howtobutton","./src/img/howtobutton.png");
+        this.load.image("promise","./src/img/promise.png");
+        this.load.image("comingsoon","./src/img/comingsoon.png"); // comingsoon img
         
         this.load.spritesheet("cat", "./src/img/cat.png", {
             frameHeight: 32,
@@ -113,7 +124,6 @@ class BootScene extends BaseScene {
         });
 
         this.load.on("progress", (percent)=>{
-            //loadingBar.fillRect(0, this.game.renderer.height / 2, this.game.renderer.width * percent, 50);
             console.log(percent);
             percentText.setText(parseInt(percent * 100) + '%');
             progressBar.clear();
@@ -130,7 +140,6 @@ class BootScene extends BaseScene {
             progressBox.destroy();
             loadingText.destroy();
             percentText.destroy();
-            //this.scene.start(CST.SCENES.MENU, "hello from LoadScene");
         });
 
         this.load.image("platform", "./src/img/testPlatform6432.png");
@@ -139,7 +148,6 @@ class BootScene extends BaseScene {
         this.load.image("pause", "./src/img/pause2.png");
         this.load.image("invisible_wall","./src/img/invisible_wall.png");
         this.load.image("firstBackground", "./src/img/Blue.bmp");
-        //this.load.image("secondBackground", "./src/img/Background_Level_2.bmp");
         this.load.image("secondBackground", "./src/img/BackgroundV2.bmp");
         this.load.image("worldmapBackground", "./src/img/V2World.png");
 

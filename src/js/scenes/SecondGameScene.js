@@ -10,7 +10,7 @@ var spawnItemTimer = 0; // timer for spawn the items
 var scorePoint = 0; // for dispaly of score
 var scoreLevel = 1; // for game levels
 var levelText = 0; // for display game levels 
-var charVelocity = 160; // setting the speed and plused by speed item(speedPotion)
+var charVelocity = 180; // setting the speed and plused by speed item(speedPotion)
 let health; // for global health up sound effect
 let faster; // for global fast potion sound effect 
 var textTimer = 0; // text effect when eat some items
@@ -28,7 +28,7 @@ var tconfig = { // text config
       align: 'center',
       lineSpacing: 12,
     }
-  };
+};
 
 var timedEvent2;
 var text2;
@@ -248,7 +248,7 @@ class SecondGameScene extends BaseScene {
     restartGame(){
         scoreLevel = 1;
         scorePoint = 0;
-        charVelocity = 160;
+        charVelocity = 180;
         touch = 0;
         this.setPercent(50-touch*5);
     }
@@ -297,11 +297,6 @@ class SecondGameScene extends BaseScene {
                 this.player.setVelocityY(0);
             }
         }
-        /*else {
-            this.player.setVelocityX(0);
-            this.player.setVelocityY(0);
-            // player.anims.play('turn');
-        }*/
 
         //Time elapsed
         text2.setText(Math.trunc(timedEvent2.getProgress().toString().substr(0, 4)*100)).setScale(2);
@@ -404,15 +399,22 @@ class SecondGameScene extends BaseScene {
 
         // clear the game and go to next level
         if(scorePoint > 2000 * (scoreLevel / 2)) {
+            if(scoreLevel!=3){
             this.scene.pause();
             this.scene.launch('sceneP', "3"); // "2" is over, "3" is level up
-
+            }
             scoreLevel++;
             levelText.setText(i18next.t("Level")+": " + scoreLevel);
             scorePoint = 0;
             touch = 0;
             this.setPercent(50-touch*5);
-        }        
+        }
+
+        // game clear
+        if(scoreLevel == 4){
+            this.scene.launch('Ending', "2");
+            this.scene.stop();
+        }
     }
 };
 

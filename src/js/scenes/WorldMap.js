@@ -1,8 +1,9 @@
 import BaseScene from "./BaseScene";
 import i18next from 'i18next';
 
-// line drawing setting
-var line = new Array(3);
+var isSpawned = false;
+var imgTimer = 0;
+var imgComingsoon;
 
 class WorldMap extends BaseScene {
     constructor(test) {
@@ -12,11 +13,11 @@ class WorldMap extends BaseScene {
         //console.log("TitleScene Constructor Data : RECIEVED data ; "+test);
     }
     init(data){
-
+        console.log("im worldmap");
     }
     create(){
 
-        let exitM= this.add.image(750,545,'exit');
+        let exitM = this.add.image(750,545,'exit');
 
         // to go back to main menu
         exitM.setInteractive();
@@ -34,12 +35,6 @@ class WorldMap extends BaseScene {
         this.KoreaFlag = this.add.image(this.game.config.width - 193, this.game.config.height - 365,"flags","koreaFlag").setScale(flagSize);
         this.UsaFlag = this.add.image(180, this.game.config.height - 370,"flags", "unitedStatesFlag").setScale(flagSize);
         this.FranceFlag = this.add.image(400, this.game.config.height - 400,"flags", "franceFlag").setScale(flagSize);
-
-        // draw the line from lands to flags 
-        // line[0] = new Phaser.Curves.Line(0, 0, KoreaFlag.x, KoreaFlag.y);
-        // line[1] = new Phaser.Curves.Line(0, 0, UsaFlag.x, UsaFlag.y);
-        // line[2] = new Phaser.Curves.Line(0, 0, FranceFlag.x, FranceFlag.y);
-
         this.FranceFlag.alpha = 0.5;
 
         // action for flags
@@ -55,15 +50,24 @@ class WorldMap extends BaseScene {
         this.UsaFlag.on("pointerup", () => {
             this.scene.launch('PreFirst',"2");
         })
+        this.FranceFlag.on("pointerup", () => {
+            imgComingsoon = this.add.image(400, this.game.config.height - 400, "comingsoon").setScale(1.0);
+            isSpawned = true;
+        })
     }
-    // update(){
-    //     line[0].fromSprite(this.KoreaFlag, false);
-    // }
-    // render(){
-    //     for (let index = 0; index < line.length; index++) {
-    //         this.game.debug.geom(line[index]);
-    //     } // for
-    // }
+    update(){
+        // img timer (img effect)
+        if(isSpawned) {
+            imgTimer++;
+        }
+
+        // delete img 
+        if(imgTimer > 60) {
+            imgComingsoon.destroy();
+            isSpawned = false;
+            imgTimer = 0;
+        }
+    }
 }
 
 export default WorldMap

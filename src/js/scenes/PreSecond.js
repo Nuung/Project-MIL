@@ -27,33 +27,18 @@ class PreSecond extends BaseScene {
         this.add.image(0,0,"second_intro_2").setOrigin(0).setDepth(0);
     }
 
-   //start game button
-   let go = this.add.image(500,450,"go");
-
-   go.setInteractive();
-   go.on("pointerup",()=>{
-       if(recieved == '1'){
-        console.log("I recieve"+ recieved);
-        this.scene.switch('FirstGameScene');
-       }
-       else if(recieved == '2'){
-        this.scene.switch('SecondGameScene');
-       }
-       this.scene.stop();
-   })
-
-//start howto scene
-    let howtobutton = this.add.image(300,450,"howtobutton");
+//start PreThird scene
+    let howcan = this.add.image(400,450,"howcan");
    
-    howtobutton.setInteractive();
-    howtobutton.on("pointerup",()=>{
+    howcan.setInteractive();
+    howcan.on("pointerup",()=>{
         if(recieved == '1'){
         //    this.scene.pause();
-            this.scene.launch('HowtoScene',"1");
+            this.scene.launch('PreThird',"1");
         }
         else if(recieved == '2'){
         //    this.scene.pause();
-            this.scene.launch('HowtoScene',"2");
+            this.scene.launch('PreThird',"2");
         }
         
        this.scene.stop(); 

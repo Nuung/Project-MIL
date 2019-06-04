@@ -30,10 +30,10 @@ class HowtoScene extends BaseScene{
        back.setInteractive();
        back.on("pointerup",()=>{
            if(recieved=='1'){
-              this.scene.launch('PreSecond',"1");
+              this.scene.launch('PreThird',"1");
            }
            else if(recieved == '2'){
-               this.scene.launch('PreSecond',"2");
+               this.scene.launch('PreThird',"2");
            }
            this.scene.stop();
        })

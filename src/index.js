@@ -20,6 +20,8 @@ import PreWorld from './js/scenes/PreWorld';
 
 
 import SimulationScene from './js/scenes/SimulationScene';
+import PreThird from './js/scenes/PreThird';
+import Ending from './js/scenes/Ending';
 
 const config = {
     // For more settings see <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
@@ -36,7 +38,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: false//true
+            debug: false
         }
     },
     scene: [
@@ -48,11 +50,13 @@ const config = {
         FirstGameScene,
         SecondGameScene,
         PreFirst,
-    //    PreFirst2,
         PreSecond,
     //    PreSecond2,
         HowtoScene,
-        PreWorld
+        PreWorld,
+        PreThird,
+        Ending,
+        HowtoScene
     ]
 };
 

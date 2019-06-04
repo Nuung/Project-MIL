@@ -28,7 +28,7 @@ var tconfig = { // text config
       align: 'center',
       lineSpacing: 12,
     }
-  };
+};
 
 var timedEvent2;
 var text2;
@@ -297,11 +297,6 @@ class SecondGameScene extends BaseScene {
                 this.player.setVelocityY(0);
             }
         }
-        /*else {
-            this.player.setVelocityX(0);
-            this.player.setVelocityY(0);
-            // player.anims.play('turn');
-        }*/
 
         //Time elapsed
         text2.setText(Math.trunc(timedEvent2.getProgress().toString().substr(0, 4)*100)).setScale(2);
@@ -412,7 +407,13 @@ class SecondGameScene extends BaseScene {
             scorePoint = 0;
             touch = 0;
             this.setPercent(50-touch*5);
-        }        
+        }
+
+        // game clear
+        if(scoreLevel == 5){
+            this.scene.launch('Ending', "2");
+            this.scene.stop();
+        }
     }
 };
 

@@ -8,7 +8,9 @@ var scoreText;
 var spacebar;
 var PButton;
 let hitten; // for global hit sound effect
-let item; //for global item collect
+let item; // for global item collect
+var isHit = false; // for print of text
+var textTimer = 0; // text timer
 
 let gameOptions = {
     platformStartSpeed: 350,
@@ -24,6 +26,21 @@ let gameOptions = {
     score: 0 // game score
 };
 
+// text setting for misun's Dialogue
+var misunText;
+var tconfig = { // text config
+    x: 200,
+    y: 50,
+    text: "", // Default 
+    style: {
+      fontSize: '22px',
+      fontFamily: 'Arial',
+      color: '#FFFFFF',
+      align: 'center',
+      lineSpacing: 12,
+    }
+};
+
 // playGame scene
 class FirstGameScene extends BaseScene {
     constructor(test) {
@@ -32,15 +49,14 @@ class FirstGameScene extends BaseScene {
         });
     }
     init(){
+
     }
     create(){
-
-        //set sound effect when player hit enemy
+        // set sound effect when player hit enemy
         hitten = this.sound.add('hit',{loop:false});
-
         item = this.sound.add('item',{loop:false});
 
-        //create the spacebar key
+        // create the spacebar key
         spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         PButton = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
@@ -86,14 +102,14 @@ class FirstGameScene extends BaseScene {
 
         // to go back to world menu
         exitC.setInteractive();
-        exitC.on("pointerup", ()=>{
+        exitC.on("pointerup", ()=> {
             this.restartGame();
             this.scene.start('WorldMap');
         })
 
         // to pause the game
         PauseButton.setInteractive();
-        PauseButton.on("pointerup", ()=>{
+        PauseButton.on("pointerup", ()=> {
             this.scene.pause();
             this.scene.launch('sceneP', "1");
         })
@@ -159,6 +175,10 @@ class FirstGameScene extends BaseScene {
 
         // checking for input
         this.input.on("pointerdown", this.jump, this);
+
+        // hit effect text setting
+        misunText = this.make.text(tconfig);
+        // misunText.setWordWrapWidth(100, true);
     }
 
     // reset every assets value
@@ -227,6 +247,23 @@ class FirstGameScene extends BaseScene {
         }
     }
 
+    dialogue(){
+        var randomText = Phaser.Math.Between(0, 3);
+        // text setting
+        isHit = true; // for print
+        misunText.x = this.player.x; misunText.y = this.player.y - 60; 
+
+        if(randomText == 0){
+            misunText.setText(i18next.t("give me back my things!"));
+        } else if(randomText == 1){
+            misunText.setText(i18next.t("do not impersonate my information!"));
+        } else if(randomText == 2){
+            misunText.setText(i18next.t("there are consequences for faking people in social media!"));
+        } else{
+            misunText.setText(i18next.t("shame on you!"));
+        }
+    }
+
     update(){
         this.player.x = gameOptions.playerStartPosition; // fix the player to the screen
 
@@ -241,13 +278,11 @@ class FirstGameScene extends BaseScene {
         // game clear
         if(gameOptions.items[0] == true && gameOptions.items[1] == true 
             && gameOptions.items[2] == true && gameOptions.items[3] == true){
-                
                 this.scene.launch('Ending', "1");
                 this.scene.stop();
         }
         //////////////////////////////////////////////////////////////////////////////
 
-        
         // Rendering the items which player got
         if(gameOptions.items[0] && gameOptions.itemRender[0]) { 
             this.add.image(this.game.config.width / 2 - 40, 115, 'cellphoneIcon').setScale(0.2); 
@@ -283,7 +318,7 @@ class FirstGameScene extends BaseScene {
             this.scene.launch('sceneP', "1");
         }
 
-        //Time elapsed
+        // Time elapsed
         text.setText(Math.trunc(timedEvent.getProgress().toString().substr(0, 4)*100)).setScale(2);
  
         // recycling platforms
@@ -310,6 +345,8 @@ class FirstGameScene extends BaseScene {
 
         // get items whenever overlap the enemy and sound effect
         if(this.physics.overlap(this.player, this.enemyBox, null, null, this)){
+            this.dialogue(); // call print dialogue function (print text)
+            // enemy effect
             this.enemyBox.setVelocityX(70); // make enemyBox move to right
             this.enemyBox.x += 23;
             this.addItems(this.enemyBox.x, this.enemyBox.y); // addItems (randomly)
@@ -352,6 +389,18 @@ class FirstGameScene extends BaseScene {
                 }
             }
         }, this);
+
+        // text timer (item effect)
+        if(isHit) {
+            textTimer++;
+        }
+
+        // delete text 
+        if(textTimer > 100) {
+            misunText.setText("");
+            isHit = false;
+            textTimer = 0;
+        }
 
         // endless setting of Background Img
         this.background.tilePositionX += 0.9;

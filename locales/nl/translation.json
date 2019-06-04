@@ -6,5 +6,10 @@
     "visitCountry": "Kies het land dat je wilt bezoeken",
     "exitpause":"Klik om het pauzescherm af te sluiten",
     "score":"Puntentelling",
+    "bullyCries":[
+        "Geef mijn spullen terug!",
+        "Log de telefoon nu uit!",
+        "Schaam jezelf voor het stelen van iemand zijn identiteit."
+    ],
     "swearWords":{}
 }

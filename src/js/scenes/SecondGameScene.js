@@ -297,11 +297,6 @@ class SecondGameScene extends BaseScene {
                 this.player.setVelocityY(0);
             }
         }
-        /*else {
-            this.player.setVelocityX(0);
-            this.player.setVelocityY(0);
-            // player.anims.play('turn');
-        }*/
 
         //Time elapsed
         text2.setText(Math.trunc(timedEvent2.getProgress().toString().substr(0, 4)*100)).setScale(2);

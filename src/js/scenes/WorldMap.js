@@ -17,6 +17,8 @@ class WorldMap extends BaseScene {
     }
     create(){
 
+        this.add.image(110, 490, "happy");
+
         let exitM = this.add.image(750,545,'exit');
 
         // to go back to main menu

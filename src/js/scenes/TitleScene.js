@@ -81,7 +81,8 @@ class TitleScene extends BaseScene {
             // console.log("open the gates please")
             // this.scene.start('SecondGameScene');
             if(!isOption){
-                this.scene.switch('WorldMap');
+               //this.scene.switch('WorldMap');
+               this.scene.switch('PreWorld');
             }
         })
 

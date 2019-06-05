@@ -78,9 +78,8 @@ class TitleScene extends BaseScene {
 
         playButton.on("pointerdown", ()=>{ // starting the game -> to GameScene
             if(!isOption){
-               //this.scene.switch('WorldMap');
-            //    this.scene.switch('PreWorld');
-                this.scene.switch('PopupQuizScene');
+                this.scene.switch('PreWorld');
+                // this.scene.switch('PopupQuizScene');
             }
         })
 

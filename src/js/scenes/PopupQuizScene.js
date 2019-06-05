@@ -15,9 +15,7 @@ class PopupQuizScene extends BaseScene {
         recieved = data;
     }
     create(){
-        // game width and height
-        var gWidth = this.game.config.width / 2;
-        var gHeight = this.game.config.height / 2;
+
 
         // test img
         var teste = this.add.image(gWidth, gHeight, 'howto').setScale(0.8);

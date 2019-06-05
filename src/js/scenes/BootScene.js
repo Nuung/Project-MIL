@@ -141,10 +141,6 @@ class BootScene extends BaseScene {
         this.load.image("player", "./src/img/testPlayer3232.png");
         this.load.image("enemyBox","./src/img/testEnemy3232.png");
         this.load.image("pause", "./src/img/pause2.png");
-        this.load.image("think","./src/img/feelings/think.png");
-        this.load.image("normal","./src/img/feelings/serious.png");
-        this.load.image("happy","./src/img/feelings/smile.png");
-        this.load.image("sad","./src/img/feelings/sad.png");
         this.load.image("invisible_wall","./src/img/invisible_wall.png");
         this.load.image("firstBackground", "./src/img/Blue.bmp");
         this.load.image("secondBackground", "./src/img/BackgroundV2.bmp");
@@ -171,7 +167,14 @@ class BootScene extends BaseScene {
         // for ch2 game's good words
         for (let index = 1; index < 8; index++) {
             this.load.image("goodWords" + index, "./src/img/goodWords/good2" + index + ".png");
-        }        
+        }
+
+        // for popup quiz
+        this.load.image("think","./src/img/feelings/think.png");
+        this.load.image("normal","./src/img/feelings/serious.png");
+        this.load.image("happy","./src/img/feelings/smile.png");
+        this.load.image("sad","./src/img/feelings/sad.png");
+        this.load.image("quiz1","./src/img/popupQuiz/quiz1.jpg");
     }
     create(){
         // super.changeScene('SimulationScene', "from the BootScene");

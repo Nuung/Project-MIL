@@ -13,12 +13,11 @@ import FirstGameScene from './js/scenes/FirstGameScene';
 import SecondGameScene from './js/scenes/SecondGameScene';
 
 import PreFirst from './js/scenes/PreFirst';
-
 import PreSecond from './js/scenes/PreSecond';
 import HowtoScene from './js/scenes/HowtoScene';
 import PreWorld from './js/scenes/PreWorld';
 
-
+import PopupQuizScene from './js/scenes/PopupQuizScene';
 import SimulationScene from './js/scenes/SimulationScene';
 import PreThird from './js/scenes/PreThird';
 import Ending from './js/scenes/Ending';
@@ -46,6 +45,7 @@ const config = {
         GameIntroductionScene,
         TitleScene,
         WorldMap,
+        PopupQuizScene,
         ScenePause,
         FirstGameScene,
         SecondGameScene,

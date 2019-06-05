@@ -34,7 +34,7 @@ var tconfig = { // text config
     text: "", // Default 
     style: {
       fontSize: '22px',
-      fontFamily: 'Arial',
+      fontFamily: 'font',
       color: '#FFFFFF',
       align: 'center',
       lineSpacing: 12,
@@ -257,7 +257,7 @@ class FirstGameScene extends BaseScene {
         var randomCryNum = Phaser.Math.Between(0, cries.length -1);
         // text setting
         isHit = true; // for print
-        misunText.x = this.player.x; misunText.y = this.player.y - 60; 
+        misunText.x = this.player.x - 15; misunText.y = this.player.y - 60; 
         misunText.setText(cries[randomCryNum]);
     }
 
@@ -393,7 +393,7 @@ class FirstGameScene extends BaseScene {
         }
 
         // delete text 
-        if(textTimer > 100) {
+        if(textTimer > 165) {
             misunText.setText("");
             isHit = false;
             textTimer = 0;

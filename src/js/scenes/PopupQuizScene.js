@@ -19,8 +19,12 @@ class PopupQuizScene extends BaseScene {
         var gWidth = this.game.config.width / 2;
         var gHeight = this.game.config.height / 2;
 
-        let exitM = this.add.image(750,545,'exit');
+        // test img
+        var teste = this.add.image(gWidth, gHeight, 'howto').setScale(0.8);
+        let contenedor = this.add.container(0,0);
+        contenedor.add([teste]);
 
+        let exitM = this.add.image(750,545,'exit');
         // to go back to main menu
         exitM.setInteractive();
         exitM.on("pointerup", ()=>{

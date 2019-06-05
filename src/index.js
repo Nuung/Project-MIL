@@ -55,8 +55,7 @@ const config = {
         HowtoScene,
         PreWorld,
         PreThird,
-        Ending,
-        HowtoScene
+        Ending
     ]
 };
 

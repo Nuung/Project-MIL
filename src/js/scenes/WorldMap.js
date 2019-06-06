@@ -12,7 +12,6 @@ class WorldMap extends BaseScene {
         super({
             key: 'WorldMap'
         });
-        //console.log("TitleScene Constructor Data : RECIEVED data ; "+test);
     }
     init(data){
         console.log("im worldmap");
@@ -62,7 +61,7 @@ class WorldMap extends BaseScene {
         })
 
         ///////////////////////////////////////////////////////////////////////////
-
+        /*
         emotionImg[0] = this.add.image(110, 490, "happy"); // pop up quiz emotion
         emotionImg[1] = this.add.image(110, 490, "sad"); // pop up quiz emotion
         emotionImg[2] = this.add.image(110, 490, "think"); // pop up quiz emotion
@@ -80,10 +79,11 @@ class WorldMap extends BaseScene {
             emotionImg[0].setVisible(false);
             emotionImg[1].setVisible(true);
         });        
-        
+
         // this.input.once('pointerdown', function () {   
         //    console.log(emotionImg.texture.key);
         // });
+        */
     }
     update(){
         // img timer (img effect)

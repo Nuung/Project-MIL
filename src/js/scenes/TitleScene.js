@@ -77,12 +77,9 @@ class TitleScene extends BaseScene {
         })
 
         playButton.on("pointerdown", ()=>{ // starting the game -> to GameScene
-            // super.changeScene('FirstGameScene');
-            // console.log("open the gates please")
-            // this.scene.start('SecondGameScene');
             if(!isOption){
-               //this.scene.switch('WorldMap');
-               this.scene.switch('PreWorld');
+                this.scene.switch('PreWorld');
+                // this.scene.switch('PopupQuizScene');
             }
         })
 

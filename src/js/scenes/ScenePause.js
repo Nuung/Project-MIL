@@ -21,19 +21,10 @@ var ScenePause = new Phaser.Class({
         recieved = data;
     },
 
-    preload: function ()
-    {
-        //this.load.image('face', 'assets/pics/bw-face.png');
-    },
-
     create: function ()
     {
-        //console.log('Im good', recieved);
-        //this.add.image(400, 300, 'face').setAlpha(0.5);
         var W=this.game.config.width / 2;
         var H=this.game.config.height / 2;
-        
-       // let ResumeText = this.add.text( W- 250, H+100, i18next.t('exitpause')).setScale(2);
 
         PButton = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 

@@ -4,22 +4,25 @@ import i18next from 'i18next';
 var isSpawned = false;
 var imgTimer = 0;
 var imgComingsoon;
+var emotionImg = new Array(4); // to control emotion img
+var quizImg; // to control pop up quiz
 
 class WorldMap extends BaseScene {
     constructor(test) {
         super({
             key: 'WorldMap'
         });
-        //console.log("TitleScene Constructor Data : RECIEVED data ; "+test);
     }
     init(data){
         console.log("im worldmap");
     }
     create(){
+        // game width and height
+        var gWidth = this.game.config.width / 2;
+        var gHeight = this.game.config.height / 2;
+        // Phaser.Math.Between(0, 1); // random pop quiz
 
-        this.add.image(110, 490, "happy");
-
-        let exitM = this.add.image(750,545,'exit');
+        let exitM = this.add.image(750, 545,'exit');
 
         // to go back to main menu
         exitM.setInteractive();
@@ -56,6 +59,31 @@ class WorldMap extends BaseScene {
             imgComingsoon = this.add.image(400, this.game.config.height - 400, "comingsoon").setScale(1.0);
             isSpawned = true;
         })
+
+        ///////////////////////////////////////////////////////////////////////////
+        /*
+        emotionImg[0] = this.add.image(110, 490, "happy"); // pop up quiz emotion
+        emotionImg[1] = this.add.image(110, 490, "sad"); // pop up quiz emotion
+        emotionImg[2] = this.add.image(110, 490, "think"); // pop up quiz emotion
+        emotionImg[3] = this.add.image(110, 490, "normal"); // pop up quiz emotion
+
+        for(var i = 1; i < 4; i++){
+            emotionImg[i].setVisible(false);
+        }
+
+        quizImg = this.add.image(gWidth, gHeight, "quiz1").setScale(2.0); // pop up quiz
+
+        quizImg.setInteractive();
+        quizImg.on("pointerup", ()=> {
+            quizImg.destroy(); 
+            emotionImg[0].setVisible(false);
+            emotionImg[1].setVisible(true);
+        });        
+
+        // this.input.once('pointerdown', function () {   
+        //    console.log(emotionImg.texture.key);
+        // });
+        */
     }
     update(){
         // img timer (img effect)

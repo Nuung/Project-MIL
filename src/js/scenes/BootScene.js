@@ -47,6 +47,10 @@ class BootScene extends BaseScene {
         this.load.plugin('rexvirtualjoystickplugin', url, true);
 
 
+        // for joystick option 
+        this.load.image("rightStick", "./src/img/rightJoystick.png");
+        this.load.image("leftStick", "./src/img/leftJoystick.png");
+
         // loading the menu img
         this.load.image("title_bg", "./src/img/urban8.jpg");
         this.load.image("options_button", "./src/img/options_button.png");

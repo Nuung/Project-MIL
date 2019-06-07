@@ -135,22 +135,32 @@ class OptionSetting extends Phaser.Scene {
         BackButton.setInteractive();
 
         const lanTextFlags = [
-            'LANGUAGE'
+            'LANGUAGE',
+            'JOY STICK'
         ];
 
-        const lanText = this.add.bitmapText(270, 440, 'font', lanTextFlags).setScale(2);
+        this.add.bitmapText(270, 440, 'font', lanTextFlags[0]).setScale(2);
+        this.add.bitmapText(250, 300, 'font', lanTextFlags[1]).setScale(2);
+        var leftOption = this.add.image(220, 380, 'leftStick').setScale(1.5);
+        var rightOption = this.add.image(580, 380, 'rightStick').setScale(1.5);
+
+        leftOption.setInteractive();
+        rightOption.setInteractive();
+
+        // joystick position setting
+        leftOption.on("pointerup", ()=>{ // make joystick left
+            this.game.global.positionJoystick = true;
+            console.log(this.game.global.positionJoystick);
+        });
+        
+        rightOption.on("pointerup", ()=>{ // make joystick right
+            this.game.global.positionJoystick = false;
+            console.log(this.game.global.positionJoystick);
+        });
 
         BackButton.on("pointerup", ()=>{
             isOption = false;
             this.scene.remove(this.handle);
-        });
-
-        MusicButton.on("pointerover", ()=>{
-            console.log("want listen to music?")
-        });
-
-        MusicButton.on("pointerout", ()=>{
-            console.log("maybe not")
         });
 
         //make it appear mute when you get out of the window and come back

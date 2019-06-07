@@ -123,34 +123,45 @@ class OptionSetting extends Phaser.Scene {
 
     create ()
     {
-        this.add.image(0, 0, "title_bg").setOrigin(0).setDepth(0);
+        this.add.image(0, 0, "title_bg").setOrigin(0).setDepth(0); // background img
 
         // It should be changed relative to the window size.
         var MusicButton = this.add.image(730,520,"on").setScale(1).setDepth(1);//original 0.15
         var MusicButtonOff = this.add.image(730,520,"off").setScale(1).setDepth(1).setVisible(false);//original 0.15
         var BackButton = this.add.image(70,520,"exit").setScale(2).setDepth(1);//original 0.2
+        var hitten = this.sound.add('hit',{loop:false});
 
         MusicButton.setInteractive();
         MusicButtonOff.setInteractive();
         BackButton.setInteractive();
 
         const lanTextFlags = [
-            'LANGUAGE'
+            'LANGUAGE',
+            'JOY STICK'
         ];
 
-        const lanText = this.add.bitmapText(270, 440, 'font', lanTextFlags).setScale(2);
+        this.add.bitmapText(270, 440, 'font', lanTextFlags[0]).setScale(2);
+        this.add.bitmapText(250, 300, 'font', lanTextFlags[1]).setScale(2);
+        var leftOption = this.add.image(220, 380, 'leftStick').setScale(1.5);
+        var rightOption = this.add.image(580, 380, 'rightStick').setScale(1.5);
+
+        leftOption.setInteractive();
+        rightOption.setInteractive();
+
+        // joystick position setting
+        leftOption.on("pointerup", ()=>{ // make joystick left
+            this.game.global.positionJoystick = true;
+            hitten.play(); // sound effect
+        });
+        
+        rightOption.on("pointerup", ()=>{ // make joystick right
+            this.game.global.positionJoystick = false;
+            hitten.play(); // sound effect
+        });
 
         BackButton.on("pointerup", ()=>{
             isOption = false;
             this.scene.remove(this.handle);
-        });
-
-        MusicButton.on("pointerover", ()=>{
-            console.log("want listen to music?")
-        });
-
-        MusicButton.on("pointerout", ()=>{
-            console.log("maybe not")
         });
 
         //make it appear mute when you get out of the window and come back

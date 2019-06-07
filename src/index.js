@@ -60,6 +60,10 @@ const config = {
 };
 
 const game = new Phaser.Game(config); // eslint-disable-line no-unused-vars
+// make most global value
+game.global = {
+    positionJoystick: false // false == right
+}
 
 let i18nOptions ={
     lng: 'en',

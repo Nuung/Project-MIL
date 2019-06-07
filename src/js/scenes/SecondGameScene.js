@@ -62,13 +62,11 @@ class SecondGameScene extends BaseScene {
     }
 
     create(){
+        console.log(this.game.global.checkMoblie);
 
         // sound setting
         health = this.sound.add('healthp',{loop:false});
         faster = this.sound.add('fastp',{loop:false});
-
-        // detect the mobile
-        // isMobile = (this.game.device.iOS || this.game.device.mobileSafari || this.game.device.webApp);
 
         // for the HP bar
         touch = 0;
@@ -210,16 +208,30 @@ class SecondGameScene extends BaseScene {
         }
 
         // joyStick setting
-        this.joyStick = this.plugins.get('rexvirtualjoystickplugin').add(this, {
-            x: this.game.config.width - 650,
-            y: this.game.config.height -110,
-            radius: 30,
-            base: this.add.graphics().fillStyle(0x888888).fillCircle(0, 0, 100),
-            thumb: this.add.graphics().fillStyle(0xcccccc).fillCircle(0, 0,50),
-            // dir: '8dir',   // 'up&down'|0|'left&right'|1|'4dir'|2|'8dir'|3
-            // forceMin: 16,
-            // enable: true
-        }).on('update', this.dumpJoyStickState, this);
+        if(this.game.global.positionJoystick){ // true == left
+            this.joyStick = this.plugins.get('rexvirtualjoystickplugin').add(this, {
+                x: this.game.config.width - 680,
+                y: this.game.config.height - 120,
+                radius: 30,
+                base: this.add.graphics().fillStyle(0x888888).fillCircle(0, 0, 100),
+                thumb: this.add.graphics().fillStyle(0xcccccc).fillCircle(0, 0,50),
+                // dir: '8dir',   // 'up&down'|0|'left&right'|1|'4dir'|2|'8dir'|3
+                // forceMin: 16,
+                // enable: true
+            }).on('update', this.dumpJoyStickState, this);
+        } else { // false == right
+            this.joyStick = this.plugins.get('rexvirtualjoystickplugin').add(this, {
+                x: this.game.config.width - 140,
+                y: this.game.config.height - 120,
+                radius: 30,
+                base: this.add.graphics().fillStyle(0x888888).fillCircle(0, 0, 100),
+                thumb: this.add.graphics().fillStyle(0xcccccc).fillCircle(0, 0,50),
+                // dir: '8dir',   // 'up&down'|0|'left&right'|1|'4dir'|2|'8dir'|3
+                // forceMin: 16,
+                // enable: true
+            }).on('update', this.dumpJoyStickState, this);
+        }
+
         
         // joyStick visible setting
         var visible = this.joyStick.visible;
@@ -236,17 +248,6 @@ class SecondGameScene extends BaseScene {
     } // create()
 
     dumpJoyStickState() {
-        var cursorKeys = this.joyStick.createCursorKeys();
-        var s = 'Key down: ';
-        for (var name in cursorKeys) {
-            if (cursorKeys[name].isDown) {
-                s += name + ' ';
-            } // inner if
-        } // for
-        s += '\n';
-        s += ('Force: ' + Math.floor(this.joyStick.force * 100) / 100 + '\n');
-        s += ('Angle: ' + Math.floor(this.joyStick.angle * 100) / 100 + '\n');
-        this.text.setText(s);
     }
 
     // the core of the script: platform are added from the pool or created on the fly

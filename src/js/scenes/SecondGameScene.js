@@ -210,7 +210,7 @@ class SecondGameScene extends BaseScene {
         // joyStick setting
         if(this.game.global.positionJoystick){ // true == left
             this.joyStick = this.plugins.get('rexvirtualjoystickplugin').add(this, {
-                x: this.game.config.width - 140,
+                x: this.game.config.width - 680,
                 y: this.game.config.height - 120,
                 radius: 30,
                 base: this.add.graphics().fillStyle(0x888888).fillCircle(0, 0, 100),
@@ -221,7 +221,7 @@ class SecondGameScene extends BaseScene {
             }).on('update', this.dumpJoyStickState, this);
         } else { // false == right
             this.joyStick = this.plugins.get('rexvirtualjoystickplugin').add(this, {
-                x: this.game.config.width - 680,
+                x: this.game.config.width - 140,
                 y: this.game.config.height - 120,
                 radius: 30,
                 base: this.add.graphics().fillStyle(0x888888).fillCircle(0, 0, 100),

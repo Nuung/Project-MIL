@@ -123,12 +123,13 @@ class OptionSetting extends Phaser.Scene {
 
     create ()
     {
-        this.add.image(0, 0, "title_bg").setOrigin(0).setDepth(0);
+        this.add.image(0, 0, "title_bg").setOrigin(0).setDepth(0); // background img
 
         // It should be changed relative to the window size.
         var MusicButton = this.add.image(730,520,"on").setScale(1).setDepth(1);//original 0.15
         var MusicButtonOff = this.add.image(730,520,"off").setScale(1).setDepth(1).setVisible(false);//original 0.15
         var BackButton = this.add.image(70,520,"exit").setScale(2).setDepth(1);//original 0.2
+        var hitten = this.sound.add('hit',{loop:false});
 
         MusicButton.setInteractive();
         MusicButtonOff.setInteractive();
@@ -150,12 +151,12 @@ class OptionSetting extends Phaser.Scene {
         // joystick position setting
         leftOption.on("pointerup", ()=>{ // make joystick left
             this.game.global.positionJoystick = true;
-            console.log(this.game.global.positionJoystick);
+            hitten.play(); // sound effect
         });
         
         rightOption.on("pointerup", ()=>{ // make joystick right
             this.game.global.positionJoystick = false;
-            console.log(this.game.global.positionJoystick);
+            hitten.play(); // sound effect
         });
 
         BackButton.on("pointerup", ()=>{

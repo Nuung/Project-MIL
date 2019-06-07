@@ -2,7 +2,24 @@ import BaseScene from "./BaseScene";
 import { setInterval } from "timers";
 import i18next from "i18next";
 
+function detectmob() { 
+    if( navigator.userAgent.match(/Android/i)
+    || navigator.userAgent.match(/webOS/i)
+    || navigator.userAgent.match(/iPhone/i)
+    || navigator.userAgent.match(/iPad/i)
+    || navigator.userAgent.match(/iPod/i)
+    || navigator.userAgent.match(/BlackBerry/i)
+    || navigator.userAgent.match(/Windows Phone/i)
+    ){
+       return true;
+     }
+    else {
+       return false;
+     }
+}
+
 // global game options
+var isMobile = detectmob();
 var spawnAllowed = true; // check the value for spawn 
 var spawnTimer = 0; // timer for spawn the enemy (bad words)
 var spawnTeamTimer = 0; // timer for spawn the team (good words)
@@ -33,7 +50,6 @@ var tconfig = { // text config
 var timedEvent2;
 var text2;
 var scoreText2;
-
 var touch;
 var ResumeText;
 
@@ -47,8 +63,12 @@ class SecondGameScene extends BaseScene {
 
     create(){
 
+        // sound setting
         health = this.sound.add('healthp',{loop:false});
         faster = this.sound.add('fastp',{loop:false});
+
+        // detect the mobile
+        // isMobile = (this.game.device.iOS || this.game.device.mobileSafari || this.game.device.webApp);
 
         // for the HP bar
         touch = 0;
@@ -188,6 +208,45 @@ class SecondGameScene extends BaseScene {
             this.physics.add.collider(this.player, this.invisible_wallLeft);
             this.physics.add.collider(this.player, this.invisible_wallRight);
         }
+
+        // joyStick setting
+        this.joyStick = this.plugins.get('rexvirtualjoystickplugin').add(this, {
+            x: this.game.config.width - 650,
+            y: this.game.config.height -110,
+            radius: 30,
+            base: this.add.graphics().fillStyle(0x888888).fillCircle(0, 0, 100),
+            thumb: this.add.graphics().fillStyle(0xcccccc).fillCircle(0, 0,50),
+            // dir: '8dir',   // 'up&down'|0|'left&right'|1|'4dir'|2|'8dir'|3
+            // forceMin: 16,
+            // enable: true
+        }).on('update', this.dumpJoyStickState, this);
+        
+        // joyStick visible setting
+        var visible = this.joyStick.visible;
+        var invisible = !this.joyStick.visible;
+        
+        if(isMobile){
+            this.joyStick.visible = visible;
+        } else {
+            this.joyStick.visible = invisible;
+        }
+
+        this.text = this.add.text(0, 0);
+        this.dumpJoyStickState();
+    } // create()
+
+    dumpJoyStickState() {
+        var cursorKeys = this.joyStick.createCursorKeys();
+        var s = 'Key down: ';
+        for (var name in cursorKeys) {
+            if (cursorKeys[name].isDown) {
+                s += name + ' ';
+            } // inner if
+        } // for
+        s += '\n';
+        s += ('Force: ' + Math.floor(this.joyStick.force * 100) / 100 + '\n');
+        s += ('Angle: ' + Math.floor(this.joyStick.angle * 100) / 100 + '\n');
+        this.text.setText(s);
     }
 
     // the core of the script: platform are added from the pool or created on the fly
@@ -267,39 +326,54 @@ class SecondGameScene extends BaseScene {
     }
 
     update(){
+        // for joystick
+        var leftKeyDown = this.joyStick.left;
+        var rightKeyDown = this.joyStick.right;
+        var upKeyDown = this.joyStick.up;
+        var downKeyDown = this.joyStick.down;
+        var noKeyDown = this.joyStick.noKey;
+
         // char moving actions and Animations (keyboard isDown)
         if(this.player.active === true){
-            if (this.cursors.left.isDown) {
+            if (this.cursors.left.isDown || leftKeyDown) {
                 this.player.setVelocityX(-charVelocity);
-                // player.anims.play('left', true);
                 this.player.play("left");
             }
-            else if (this.cursors.right.isDown) {
+            else if (this.cursors.right.isDown || rightKeyDown) {
                 this.player.setVelocityX(charVelocity);
-                // player.anims.play('right', true);
                 this.player.play("right");
             }
-            else if (this.cursors.up.isDown && this.player.y > 0) {
+            else if ((this.cursors.up.isDown && this.player.y > 50) 
+                || (upKeyDown && this.player.y > 50)) {
                 this.player.setVelocityY(-charVelocity);
-                // player.anims.play('right', true);
                 this.player.play("behind");
             }
-            else if (this.cursors.down.isDown && this.player.y < this.game.config.height) {
+            else if ((this.cursors.down.isDown && this.player.y < this.game.config.height - 50) 
+                || (downKeyDown && this.player.y < this.game.config.height - 50)) {
                 this.player.setVelocityY(charVelocity);
-                // player.anims.play('right', true);
                 this.player.play("front");
             }   
 
-            if(this.cursors.left.isUp && this.cursors.right.isUp){
-                this.player.setVelocityX(0);
+            // clear moving
+            if(!isMobile){ // not mobile
+                if(this.cursors.left.isUp && this.cursors.right.isUp){
+                    this.player.setVelocityX(0);
+                }
+                if(this.cursors.up.isUp && this.cursors.down.isUp){
+                    this.player.setVelocityY(0);
+                }
+            } else { // mobile
+                if((!leftKeyDown && !rightKeyDown)){
+                    this.player.setVelocityX(0);
+                }
+                if((!upKeyDown && !downKeyDown)){
+                    this.player.setVelocityY(0);
+                }
             }
-            if(this.cursors.up.isUp && this.cursors.down.isUp){
-                this.player.setVelocityY(0);
-            }
-        }
+        } // if
 
         //Time elapsed
-        text2.setText(Math.trunc(timedEvent2.getProgress().toString().substr(0, 4)*100)).setScale(2);
+        text2.setText(Math.trunc(timedEvent2.getProgress().toString().substr(0, 4)*100)).setScale(2);        
 
         // recycling platforms
         this.enemyGroup.getChildren().forEach(function(platform){
@@ -400,8 +474,8 @@ class SecondGameScene extends BaseScene {
         // clear the game and go to next level
         if(scorePoint > 2000 * (scoreLevel / 2)) {
             if(scoreLevel!=3){
-            this.scene.pause();
-            this.scene.launch('sceneP', "3"); // "2" is over, "3" is level up
+                this.scene.pause();
+                this.scene.launch('sceneP', "3"); // "2" is over, "3" is level up
             }
             scoreLevel++;
             levelText.setText(i18next.t("Level")+": " + scoreLevel);
@@ -412,6 +486,7 @@ class SecondGameScene extends BaseScene {
 
         // game clear
         if(scoreLevel == 4){
+            this.restartGame();
             this.scene.launch('Ending', "2");
             this.scene.stop();
         }

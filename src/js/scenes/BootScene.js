@@ -42,6 +42,11 @@ class BootScene extends BaseScene {
         });
         percentText.setOrigin(0.5, 0.5);
 
+        var url; // for joystick plugin  
+        url = 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexvirtualjoystickplugin.min.js';
+        this.load.plugin('rexvirtualjoystickplugin', url, true);
+
+
         // loading the menu img
         this.load.image("title_bg", "./src/img/urban8.jpg");
         this.load.image("options_button", "./src/img/options_button.png");

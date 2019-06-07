@@ -275,6 +275,7 @@ class FirstGameScene extends BaseScene {
         // game clear
         if(gameOptions.items[0] == true && gameOptions.items[1] == true 
             && gameOptions.items[2] == true && gameOptions.items[3] == true){
+                this.restartGame();
                 this.scene.launch('Ending', "1");
                 this.scene.stop();
         }

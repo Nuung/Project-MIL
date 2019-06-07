@@ -16,10 +16,9 @@ module.exports = {
     // ],
     // public: 'ec2-3-16-158-49.us-east-2.compute.amazonaws.com:8080',
     // host: '3.16.158.49',
-    // port: 8080,
-    // contentBase: path.resolve(__dirname, './src'), 
-    disableHostCheck: false, 
-    host: "0.0.0.0" // default : 127.0.0.1
+    // contentBase: path.resolve(__dirname, './src'),  
+    host: "0.0.0.0", // default : 127.0.0.1
+    // port: 80
   },
   module: {
     rules: [

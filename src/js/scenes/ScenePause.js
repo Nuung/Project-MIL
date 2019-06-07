@@ -29,10 +29,12 @@ var ScenePause = new Phaser.Class({
         PButton = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.P);
 
         let pause = this.add.image(W,H,'play_again').setScale(3);
-        let gameover = this.add.image(W,H,'gameoverImg').setScale(3);
+        let gameover = this.add.image(0,0,'gameoverImg').setOrigin(0).setDepth(0);
+        let gameover2 = this.add.image(0,0,'gameoverImg2').setOrigin(0).setDepth(0);
         let levelup = this.add.image(W,H,'levelupImg').setScale(3);
         pause.visible = false;
         gameover.visible = false;
+        gameover2.visible = false;
         levelup.visible = false;
 
         let contenedor = this.add.container(0,-300);
@@ -42,7 +44,7 @@ var ScenePause = new Phaser.Class({
             contenedor.add([pause]);
         }else if(recieved == '2'){
             // (hyeon) change to start, cuz data of game
-            gameover.visible = true;
+            gameover2.visible = true;
             contenedor.add([gameover]);
         }else if(recieved == '3'){ // '3' is level up
             levelup.visible = true;
@@ -74,7 +76,7 @@ var ScenePause = new Phaser.Class({
                 this.scene.resume('FirstGameScene');
             }else if(recieved == '2'){
                 // (hyeon) change to start, cuz data of game
-                gameover.visible = false;
+                gameover2.visible = false;
                 this.scene.start('SecondGameScene');
             }else if(recieved == '3'){ // '3' is level up
                 levelup.visible = false;

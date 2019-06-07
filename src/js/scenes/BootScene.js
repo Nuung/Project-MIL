@@ -156,8 +156,8 @@ class BootScene extends BaseScene {
         this.load.image("hpPotion", "./src/img/ch2_items/hp_potion.png");
         this.load.image("speedPotion", "./src/img/ch2_items/speed_potion.png");
         this.load.image("levelupImg", "./src/img/Levelup.png");
-        this.load.image("gameoverImg", "./src/img/Game_over.png");
-        
+        this.load.image("gameoverImg", "./src/img/gameover1.png");
+        this.load.image("gameoverImg2", "./src/img/gameover2.png");
 
         // for ch2 game's bad words
         for (let index = 1; index < 19; index++) {

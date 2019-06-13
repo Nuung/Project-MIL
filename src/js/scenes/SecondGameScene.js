@@ -77,7 +77,7 @@ class SecondGameScene extends BaseScene {
 
         // player assets
         this.player = this.physics.add.sprite(this.game.config.width / 2, this.game.config.height / 2, 'person');
-        this.cursors = this.input.keyboard.createCursorKeys();
+        this.cursors = this.input.keyboard.addKeys('W,A,S,D');
 
         // item effect text setting
         itemText = this.make.text(tconfig);
@@ -336,20 +336,20 @@ class SecondGameScene extends BaseScene {
 
         // char moving actions and Animations (keyboard isDown)
         if(this.player.active === true){
-            if (this.cursors.left.isDown || leftKeyDown) {
+            if (this.cursors.A.isDown || leftKeyDown) {
                 this.player.setVelocityX(-charVelocity);
                 this.player.play("left");
             }
-            else if (this.cursors.right.isDown || rightKeyDown) {
+            else if (this.cursors.D.isDown || rightKeyDown) {
                 this.player.setVelocityX(charVelocity);
                 this.player.play("right");
             }
-            else if ((this.cursors.up.isDown && this.player.y > 50) 
+            else if ((this.cursors.W.isDown && this.player.y > 50) 
                 || (upKeyDown && this.player.y > 50)) {
                 this.player.setVelocityY(-charVelocity);
                 this.player.play("behind");
             }
-            else if ((this.cursors.down.isDown && this.player.y < this.game.config.height - 50) 
+            else if ((this.cursors.S.isDown && this.player.y < this.game.config.height - 50) 
                 || (downKeyDown && this.player.y < this.game.config.height - 50)) {
                 this.player.setVelocityY(charVelocity);
                 this.player.play("front");
@@ -357,10 +357,10 @@ class SecondGameScene extends BaseScene {
 
             // clear moving
             if(!isMobile){ // not mobile
-                if(this.cursors.left.isUp && this.cursors.right.isUp){
+                if(this.cursors.A.isUp && this.cursors.D.isUp){
                     this.player.setVelocityX(0);
                 }
-                if(this.cursors.up.isUp && this.cursors.down.isUp){
+                if(this.cursors.W.isUp && this.cursors.S.isUp){
                     this.player.setVelocityY(0);
                 }
             } else { // mobile

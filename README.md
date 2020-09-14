@@ -1,3 +1,9 @@
+<div align="center">
+  <img src="https://img.shields.io/appveyor/build/caspervonb/node-browser-process.svg">
+  <img src="https://img.shields.io/badge/license-MIT-green">
+</div>
+
+
 # HHS_Cyberbullying
 
 헤이그 대학교 팀 프로젝트
@@ -31,7 +37,7 @@ Play the game with love.
 
 Initially created by:
 
-* Hyeon Woo Jeong @ [Nuung](https://github.com/Nuung/) Main Programmer :blue_heart:
+* Hyeon Woo Jeong @ [Nuung](https://github.com/Nuung/)
 * Huub van Holsteijn @ [hwpvanholsteijn](https://github.com/hwpvanholsteijn/)
 * JeongUm Lee @ [leahJU](https://github.com/leahJU/)
 * Jeong Min Park @ [miniminiworld](https://github.com/miniminiworld/)

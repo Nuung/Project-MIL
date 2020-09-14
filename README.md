@@ -1,6 +1,13 @@
 <div align="center">
   <img src="https://img.shields.io/appveyor/build/caspervonb/node-browser-process.svg">
   <img src="https://img.shields.io/badge/license-MIT-green">
+  <br/>
+  <p style="font-size: 30px; font-weight: bold;" > In game screen shot </p>
+  <img src="https://github.com/Nuung/Project-MIL/blob/master/public/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202020-09-14%20%EC%98%A4%ED%9B%84%208.59.28.png">
+  <img src="https://github.com/Nuung/Project-MIL/blob/master/public/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202020-09-14%20%EC%98%A4%ED%9B%84%208.59.40.png">
+  <img src="https://github.com/Nuung/Project-MIL/blob/master/public/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202020-09-14%20%EC%98%A4%ED%9B%84%209.00.01.png">
+  <img src="https://github.com/Nuung/Project-MIL/blob/master/public/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202020-09-14%20%EC%98%A4%ED%9B%84%209.00.19.png">
+  <img src="https://github.com/Nuung/Project-MIL/blob/master/public/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202020-09-14%20%EC%98%A4%ED%9B%84%209.00.33.png">
 </div>
 
 

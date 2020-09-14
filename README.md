@@ -1,5 +1,8 @@
 # HHS_Cyberbullying
 
+헤이그 대학교 팀 프로젝트
+Project about Media and Information Literacy
+
 A Role-Playing-Game (RPG) on cyberbullying preventions method. Where a self created story can be followed during the game. Therefore, does the game contain prevention methods on cyberbullying. Proving that teens in the age of 11 til 14 can protected themselfs from online threats.
 
 
@@ -28,8 +31,8 @@ Play the game with love.
 
 Initially created by:
 
+* Hyeon Woo Jeong @ [Nuung](https://github.com/Nuung/) Main Programmer :blue_heart:
 * Huub van Holsteijn @ [hwpvanholsteijn](https://github.com/hwpvanholsteijn/)
-* Hyeon Woo Jeong @ [Nuung](https://github.com/Nuung/)
 * JeongUm Lee @ [leahJU](https://github.com/leahJU/)
 * Jeong Min Park @ [miniminiworld](https://github.com/miniminiworld/)
 * Arturo Iván Sandoval Rodríguez @ [ArD2](https://github.com/ArD2/)

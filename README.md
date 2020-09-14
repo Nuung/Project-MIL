@@ -1,6 +1,6 @@
-<div align=center>
-![build](https://img.shields.io/appveyor/build/caspervonb/node-browser-process.svg)
-![license](https://img.shields.io/badge/license-MIT-green)
+<div align="center">
+  <img src="https://img.shields.io/appveyor/build/caspervonb/node-browser-process.svg">
+  <img src="https://img.shields.io/badge/license-MIT-green">
 </div>
 # HHS_Cyberbullying
 

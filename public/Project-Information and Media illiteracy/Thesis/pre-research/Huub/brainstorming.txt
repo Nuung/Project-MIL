@@ -1,0 +1,45 @@
+Audience
+	Teens
+	Childeren
+
+Literature
+	Books
+	Newspapers
+	Thesis
+	Poster
+	Reference Manager
+	
+Advanced word use
+	Thesaurus
+	RDF (really advanced)
+	
+Media
+	Movies editors
+	Graphics editors
+	Text editors
+	Search Engines
+	Camera's
+	Agendas	
+	Maps
+	E-mail
+	Office
+	Databases
+	Music players
+	Coding
+
+Operating Systems
+	Windows
+	Mac
+	Linux
+	
+Serious Games
+	Not that appealling to kids
+	Maybe a reward system to make it attractive.
+
+Games
+	Wordgame
+	Digital Game
+	Boardgame
+	Role playing game
+	
+

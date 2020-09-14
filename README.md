@@ -37,7 +37,7 @@ Play the game with love.
 
 Initially created by:
 
-* Hyeon Woo Jeong @ [Nuung](https://github.com/Nuung/) Main Programmer :blue_heart:
+* Hyeon Woo Jeong @ [Nuung](https://github.com/Nuung/)
 * Huub van Holsteijn @ [hwpvanholsteijn](https://github.com/hwpvanholsteijn/)
 * JeongUm Lee @ [leahJU](https://github.com/leahJU/)
 * Jeong Min Park @ [miniminiworld](https://github.com/miniminiworld/)

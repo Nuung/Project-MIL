@@ -1,5 +1,7 @@
-![build](https://img.shields.io/appveyor/build/caspervonb/node-browser-process.svg)
-![license](https://img.shields.io/badge/license-MIT-green)
+<p align="center">
+	![build](https://img.shields.io/appveyor/build/caspervonb/node-browser-process.svg)
+	![license](https://img.shields.io/badge/license-MIT-green)
+</p>
 # HHS_Cyberbullying
 
 헤이그 대학교 팀 프로젝트
